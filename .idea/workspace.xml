@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="e450d91f-da7d-4109-9ee3-f6f88fee6531" name="Default Changelist" comment="" />
+    <list default="true" id="e450d91f-da7d-4109-9ee3-f6f88fee6531" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/live2d_models/haruto/haruto.model.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/hello-world.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/test.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/test.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/themes/landscape/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/themes/landscape/_config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/themes/next/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/themes/next/_config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/themes/next/layout/_partials/footer.swig" beforeDir="false" afterPath="$PROJECT_DIR$/themes/next/layout/_partials/footer.swig" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,6 +44,13 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/themes/next/source/images" />
+      <recent name="$PROJECT_DIR$/themes/next/source" />
+      <recent name="$PROJECT_DIR$/themes/next/images" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -33,17 +61,68 @@
       <updated>1606570538995</updated>
       <workItem from="1606570540432" duration="1034000" />
       <workItem from="1606656450557" duration="4855000" />
-      <workItem from="1606661439659" duration="66000" />
+      <workItem from="1606661439659" duration="2721000" />
+      <workItem from="1606701696585" duration="54000" />
+      <workItem from="1606705069200" duration="1000" />
+      <workItem from="1606884106650" duration="1791000" />
+      <workItem from="1606907812945" duration="1149000" />
+      <workItem from="1606995778253" duration="671000" />
+      <workItem from="1607000165005" duration="523000" />
+      <workItem from="1607047137013" duration="603000" />
+      <workItem from="1607056617103" duration="32000" />
+      <workItem from="1607056693711" duration="833000" />
+      <workItem from="1607057947827" duration="235000" />
+      <workItem from="1607058190328" duration="768000" />
+      <workItem from="1607074725804" duration="887000" />
+      <workItem from="1607075618802" duration="1976000" />
+      <workItem from="1607136952199" duration="969000" />
+      <workItem from="1607139861974" duration="621000" />
+      <workItem from="1607140485405" duration="663000" />
     </task>
+    <task id="LOCAL-00001" summary=":tada: 开始写博客～芜湖～起飞">
+      <created>1606662447405</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1606662447406</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value=":tada: 开始写博客～芜湖～起飞" />
+    <option name="LAST_COMMIT_MESSAGE" value=":tada: 开始写博客～芜湖～起飞" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="347" y="118" width="746" height="616" key="find.popup" timestamp="1606658428790">
+    <state x="180" y="81" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606662502866">
       <screen x="0" y="23" width="1440" height="806" />
     </state>
+    <state x="180" y="81" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.806@0.23.1440.806" timestamp="1606662502866" />
+    <state x="974" y="467" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607075557259">
+      <screen x="0" y="23" width="2560" height="1304" />
+    </state>
+    <state x="974" y="467" key="#com.intellij.fileTypes.FileTypeChooser/0.23.2560.1304@0.23.2560.1304" timestamp="1607075557259" />
+    <state x="347" y="118" width="747" height="616" key="find.popup" timestamp="1607140475862">
+      <screen x="0" y="23" width="1440" height="804" />
+    </state>
+    <state x="347" y="118" width="747" height="616" key="find.popup/0.23.1440.804@0.23.1440.804" timestamp="1607140475862" />
     <state x="347" y="118" width="746" height="616" key="find.popup/0.23.1440.806@0.23.1440.806" timestamp="1606658428790" />
+    <state x="347" y="118" width="747" height="620" key="find.popup/0.23.1440.808@0.23.1440.808" timestamp="1607139619174" />
+    <state x="617" y="177" width="1327" height="997" key="find.popup/0.23.2560.1304@0.23.2560.1304" timestamp="1607079980276" />
   </component>
 </project>

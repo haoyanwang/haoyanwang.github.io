@@ -2,6 +2,8 @@
 menu:
   Home: /
   Archives: /archives
+  tags: /tags/ || tags
+  categories: /categories/ || th
 rss: /atom.xml
 
 # Content
