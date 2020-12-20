@@ -11,9 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e450d91f-da7d-4109-9ee3-f6f88fee6531" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/_posts/test.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/TCP-IP读书笔记.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/TCP-IP读书笔记.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +84,7 @@
       <workItem from="1607183291736" duration="10841000" />
       <workItem from="1608117963744" duration="310000" />
       <workItem from="1608434413123" duration="17002000" />
-      <workItem from="1608474808792" duration="7000" />
+      <workItem from="1608474808792" duration="321000" />
     </task>
     <task id="LOCAL-00001" summary=":tada: 开始写博客～芜湖～起飞">
       <created>1606662447405</created>
@@ -102,7 +100,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607148548865</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary=":memo: TCP/IP读书笔记">
+      <created>1608474935624</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1608474935624</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -123,7 +128,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value=":tada: 开始写博客～芜湖～起飞" />
     <MESSAGE value=":lipstick: add theme" />
-    <option name="LAST_COMMIT_MESSAGE" value=":lipstick: add theme" />
+    <MESSAGE value=":memo: TCP/IP读书笔记" />
+    <option name="LAST_COMMIT_MESSAGE" value=":memo: TCP/IP读书笔记" />
   </component>
   <component name="WindowStateProjectService">
     <state x="180" y="81" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607148888031">
