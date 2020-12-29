@@ -28,7 +28,7 @@
 <meta property="og:description" content="TCP&#x2F;IP读书笔记从小学开始就鼓捣电脑，很早就听说了类似ip、mac地址，VLAN,WLAN,猫，子网掩码，DNS地址等技术名词。上学以后也学习了计算机网络，听说了类似OSI七层模型，TCP、UDP等概念。工作以后也接触到了更多的网络知识，但一直是知其然不知其所以然，缺乏比较系统的学习，所以今天就记录一下学习的过程。 网络规则二进制数字到底经过了那些步骤，最后构成了网络世界？ OSI七层模型根据">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-12-20T14:33:19.508Z">
-<meta property="article:modified_time" content="2020-12-28T13:42:51.468Z">
+<meta property="article:modified_time" content="2020-12-29T10:17:30.646Z">
 <meta property="article:author" content="王皓衍">
 <meta name="twitter:card" content="summary">
 
@@ -208,7 +208,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-28 21:42:51" itemprop="dateModified" datetime="2020-12-28T21:42:51+08:00">2020-12-28</time>
+                <time title="修改时间：2020-12-29 18:17:30" itemprop="dateModified" datetime="2020-12-29T18:17:30+08:00">2020-12-29</time>
               </span>
 
           
@@ -296,7 +296,7 @@
 <li>更多可供选择的缓存策略</li>
 <li>带宽优化及网络连接的使用，请求头引入了range头域，它允许只请求资源的某个部分</li>
 <li>Host头处理，应对一个IP上存在的多台虚拟主机</li>
-<li>HTTP长链接，一个TCP连接传送多个HTTP请求，keep-alive</li>
+<li>HTTP长链接，一个TCP连接传送多个HTTP请求，keep-alive<br>采用管道连接：<br>所谓请求管道，就是在HTTP响应到达之前，可以将多条请求放入队列，当第一条HTTP请求通过网络流向服务器时，第二条和第三条请求也可以开始发送了。但是服务端必须按照与请求相同的顺序回送HTTP响应<br>这也就意味着，如果一个响应返回发生了延迟，那么其后续的响应都会被延迟，直到队头的响应送达。这就是所谓的HTTP队头阻塞<br>HTTP队头阻塞的问题在HTTP/2中得到了有效的解决</li>
 </ul>
 <p>SPDY（speedy的昵音，意思是更快，Google开发的基于TCP的应用层协议，用以最小化网络延迟，提升网络速度，优化用户的网络使用体验）：</p>
 <ul>
@@ -310,12 +310,32 @@
 <ul>
 <li>支持HTTP明文传输，而SPDY强制使用HTTPS</li>
 <li>HTTP/2 消息头的压缩算法采用 HPACK，而非 SPDY 采用的 DELEFT</li>
-<li>HTTP1.x是基于文本传送，HTTP2是基于二进制传送<br>应用层(HTTP/2)和传输层(TCP or UDP)之间增加一个二进制分帧层</li>
+<li>HTTP1.x是基于文本传送，HTTP2是基于二进制传送<br>应用层(HTTP/2)和传输层(TCP or UDP)之间增加一个二进制分帧层<br>HTTP/2引入了帧、消息和数据流等概念，把HTTP消息分解为互不依赖的帧，然后乱序发送，最后再在另一端把它们重新组合起来，这样HTTP/2就解决了HTTP的队头阻塞<br>但TCP传输过程中会把数据拆分为一个个按照顺序排列的数据包，接收端再按照顺序将这些数据包组合成原始数据，如果其中的某一个数据包没有按照顺序到达，就会阻塞后续请求，就发生了TCP队头阻塞<br>HTTP/1.1规定一个域名可以有6个TCP连接，而HTTP/2中，同一个域名只是用一个TCP连接，所以，在HTTP/2中，TCP队头阻塞造成的影响会更大</li>
 </ul>
-<p>HTTP3.0<br>因为HTTP/2是基于单个TCP连接的，当这个连接中出现了丢包的情况，整个TCP都要开始等待重传，也就导致了后面的所有数据都被阻塞了，但是对于 HTTP/1.1来说则不会有这个问题<br>所以google搞了一个基于UDP协议的QUIC协议，并且使用在了HTTP/3上（暂时不太懂）</p>
-<p>参考阅读：<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/keva/p/spdy-protocol.html">SPDY协议</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/34074946/answer/108588042">HTTP/2</a><br><a target="_blank" rel="noopener" href="https://my.oschina.net/editorial-story/blog/3031721">HTTP协议这些年经历了些啥</a></p>
+<p>RTT（Round Trip Time，网络延迟）：<br>是指一个请求从客户端浏览器发送一个请求数据包到服务器，再从服务器得到响应数据包的这段时间。RTT 是反映网络性能的一个重要指标<br>一个纯的HTTPS需要3-4个RTT（TCP握手+TLS握手）</p>
+<p>HTTP3.0<br>上面提到的这些问题的根本原因都是因为HTTP/2是基于TPC实现导致的，而TCP协议自身的升级又是很难实现的（因为很多中间设备比较陈旧，更新换代成本巨大，这就导致TCP协议升级或者采用新的协议基本无法实现。）<br>所以google搞了一个基于UDP协议的QUIC（Quick UDP Internet Connections）协议，HTTP over QUIC，重命名为HTTP/3<br>QUIC协议特点：</p>
+<ul>
+<li>基于UDP</li>
+<li>可靠性<br>虽然UDP是不可靠传输协议，但是QUIC在UDP的基础上做了些改造，使得他提供了和TCP类似的可靠性。它提供了数据包重传、拥塞控制、调整传输节奏以及其他一些TCP中存在的特性</li>
+<li>实现了无序、并发字节流<br>单个数据流的传输是按序的，但是多个数据流中接收方收到的顺序可能与发送方的发送顺序不同</li>
+<li>快速握手<br>QUIC提供0-RTT和1-RTT的连接建立<br>QUIC 连接的建立整体流程大致为：<br>初次握手：</li>
+</ul>
+<ol>
+<li>客户端会向服务端发送一个打招呼信息(CHLO)</li>
+<li>因为是初次建立，所以，服务端会返回一个拒绝消息（REJ），表明握手未建立或者密钥已过期，这个拒绝消息中还会包含更多的信息（配置参数）</li>
+<li>在客户端接收到拒绝消息（REJ）之后，客户端会进行数据解析，签名验证等操作，之后会将必要的配置缓存下来</li>
+<li>客户端会打包一个消息包发送给服务端，为了减少RTT，客户端并不会等到服务器的响应，而是立刻会进行数据传输</li>
+<li>为了保证数据的安全性，客户端会自己的密钥和服务器返回的公钥进行运算，得到一个初始密钥（initial keys）将想要传输的信息进行加密，然后把他们安全的传输给服务端了</li>
+<li>另外一面，接收到Complete CHLO请求的服务器，通过运算，服务端就能得到一份和客户端一模一样的初始密钥（initial keys）<br>所以，从开始建立连接一直到数据传送，只消耗了初始连接连接建立的 1 RTT<br>最终（与重复）握手：<br>当下一次要重新创建连接的时候，客户端会从缓存中取出自己之前缓存下来的服务器的公钥，并重新创建一个密钥，重新生成一个初始密钥，再使用这个初始密钥对想要传输的数据进行加密，向服务器发送一个Complete CHLO 请求即可。这样就达到了0 RTT的数据传输<br>所以，如果是有缓存的长期公钥，那么数据传输就会直接进行，准备时间是0 RTT</li>
+</ol>
+<ul>
+<li>多路复用<br>QUIC的单个数据流可以保证有序交付，但多个数据流之间可能乱序。这意味着单个数据流的传输是按序的，但是多个数据流中接收方收到的顺序可能与发送方的发送顺序不同（猜测可能是通过sessionId进行区分？）</li>
+<li>连接迁移<br>对于TCP连接的识别，需要通过服务器和客户端过双方的ip和端口四个参数进行的。在网络切换的场景中，比如手机切换网络，那么自身的ip就会发生变化。这就导致之前的TCP连接就会失效，就需要重新建立<br>QUIC协议使用特有的UUID来标记每一次连接，在网络环境发生变化的时候，只要UUID不变，就能不需要握手，继续传输数据</li>
+<li>可靠性保证<br>诸如流量控制、数据重传、拥塞控制等可靠性保证</li>
+</ul>
+<p>参考阅读：<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/keva/p/spdy-protocol.html">SPDY协议</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/34074946/answer/108588042">HTTP/2</a><br><a target="_blank" rel="noopener" href="https://my.oschina.net/editorial-story/blog/3031721">HTTP协议这些年经历了些啥</a><br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/-sD504t5Ebm0Ubwalos8DA">HTTP3到底是个什么鬼？</a></p>
 <h3 id="安全机制"><a href="#安全机制" class="headerlink" title="安全机制"></a>安全机制</h3><h4 id="IP层的安全机制"><a href="#IP层的安全机制" class="headerlink" title="IP层的安全机制"></a>IP层的安全机制</h4><p>针对IP报文进行加密，有认证头（Authentication Header）以及封装安全有效负荷（Encapsulating Security Payload，ESP）<br>优点：底层加密，上层应用无感知<br>缺点：统一加密，性能下降<br>应用：IP VPN（Virtual Private Network）（在公网上封装加密数据通信隧道）</p>
-<h4 id="传输层的安全机制"><a href="#传输层的安全机制" class="headerlink" title="传输层的安全机制"></a>传输层的安全机制</h4><p>TCP：通信加密和安全认证<br>优点：基于进程和进程之间的加密<br>应用：BSD Sockets，传输层接口（TLI）<br>UDP：很难建立安全机制</p>
+<h4 id="传输层的安全机制"><a href="#传输层的安全机制" class="headerlink" title="传输层的安全机制"></a>传输层的安全机制</h4><p>TCP：通信加密和安全认证<br>优点：基于进程和进程之间的加密<br>应用：BSD Sockets，传输层接口（TLI）<br>UDP：较难建立安全机制</p>
 <h4 id="应用层的安全机制"><a href="#应用层的安全机制" class="headerlink" title="应用层的安全机制"></a>应用层的安全机制</h4><p>IP层与传输层的安全机制之间所有的消息都要加密，无法区分不同文件的安全性要求，所以必须借助应用层的安全机制<br>应用：HTTPS</p>
 <h5 id="HTTPS（HTTP-TLS）"><a href="#HTTPS（HTTP-TLS）" class="headerlink" title="HTTPS（HTTP+TLS）"></a>HTTPS（HTTP+TLS）</h5><p>HTTPS协议通过数据加密、校验数据完整性和身份认证三种机制来保障安全<br>HTTPS协议混合对称密钥加密和非对称加密机制<br>对称加密：<br>传输双方共享相同的秘钥，通用相同的秘钥实现数据的加密和解密过程（同一把锁，传输双方拥有同样的钥匙）<br>优点：算法公开、计算量小、加密速度快、加密效率高<br>缺点：在数据传送前，发送方和接收方必须商定好秘钥，然后使双方都能保存好秘钥。其次如果一方的秘钥被泄露，那么加密信息也就不安全了<br>非对称加密：<br>非对称加密算法需要两个密钥，公钥与私钥是一对，公钥匙可以公开的，私钥需要保密，如果用公钥对数据进行加密，只有用对应的私钥才能解密<br>优点：它的安全性可靠性极高，在非对称体系下可以实现签名认证和加密传输功能<br>缺点：加密代价高<br>签名认证（解决身份认证的问题，确保内容一定是服务器加密发送的）：<br>用私钥加密的密文，只能被公钥解密，如果能解开，就能确保消息是由私钥拥有者加密的，否则消息是被其他人加密的<br>将自己的认证通过私钥加密后，附加在加密正文后，就完成了签名认证的过程</p>
 <p>加密的演变过程：</p>
