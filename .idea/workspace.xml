@@ -11,7 +11,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e450d91f-da7d-4109-9ee3-f6f88fee6531" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/source/_posts/TCP-IP读书笔记.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/TCP-IP读书笔记.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/themes/next/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/themes/next/_config.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +22,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/themes/next" />
   </component>
   <component name="ProjectId" id="1kvA9HkCwxZ02RW5POw550S89lO" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -84,7 +87,14 @@
       <workItem from="1607183291736" duration="10841000" />
       <workItem from="1608117963744" duration="310000" />
       <workItem from="1608434413123" duration="17002000" />
-      <workItem from="1608474808792" duration="321000" />
+      <workItem from="1608474808792" duration="885000" />
+      <workItem from="1608531876515" duration="18000" />
+      <workItem from="1608958072817" duration="1298000" />
+      <workItem from="1609128252493" duration="10165000" />
+      <workItem from="1609150913036" duration="5426000" />
+      <workItem from="1609233750613" duration="3288000" />
+      <workItem from="1609405526097" duration="1848000" />
+      <workItem from="1609412456283" duration="456000" />
     </task>
     <task id="LOCAL-00001" summary=":tada: 开始写博客～芜湖～起飞">
       <created>1606662447405</created>
@@ -107,7 +117,28 @@
       <option name="project" value="LOCAL" />
       <updated>1608474935624</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary=":art: 优化一下格式">
+      <created>1608475155997</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1608475155997</updated>
+    </task>
+    <task id="LOCAL-00005" summary=":memo: update blog">
+      <created>1609163012774</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1609163012774</updated>
+    </task>
+    <task id="LOCAL-00006" summary=":memo: 补充～">
+      <created>1609237116519</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1609237116519</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -129,7 +160,10 @@
     <MESSAGE value=":tada: 开始写博客～芜湖～起飞" />
     <MESSAGE value=":lipstick: add theme" />
     <MESSAGE value=":memo: TCP/IP读书笔记" />
-    <option name="LAST_COMMIT_MESSAGE" value=":memo: TCP/IP读书笔记" />
+    <MESSAGE value=":art: 优化一下格式" />
+    <MESSAGE value=":memo: update blog" />
+    <MESSAGE value=":memo: 补充～" />
+    <option name="LAST_COMMIT_MESSAGE" value=":memo: 补充～" />
   </component>
   <component name="WindowStateProjectService">
     <state x="180" y="81" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607148888031">
@@ -141,16 +175,18 @@
       <screen x="0" y="23" width="2560" height="1304" />
     </state>
     <state x="974" y="467" key="#com.intellij.fileTypes.FileTypeChooser/0.23.2560.1304@0.23.2560.1304" timestamp="1607075557259" />
-    <state x="347" y="118" width="747" height="616" key="find.popup" timestamp="1607180189998">
-      <screen x="0" y="23" width="1440" height="804" />
+    <state x="617" y="170" width="1328" height="1104" key="find.popup" timestamp="1609412743335">
+      <screen x="0" y="0" width="2560" height="1440" />
     </state>
+    <state x="617" y="170" width="1328" height="1104" key="find.popup/0.0.2560.1440@0.0.2560.1440" timestamp="1609412743335" />
     <state x="347" y="118" width="747" height="616" key="find.popup/0.23.1440.804@0.23.1440.804" timestamp="1607180189998" />
     <state x="347" y="118" width="746" height="616" key="find.popup/0.23.1440.806@0.23.1440.806" timestamp="1606658428790" />
     <state x="347" y="118" width="747" height="620" key="find.popup/0.23.1440.808@0.23.1440.808" timestamp="1607139619174" />
     <state x="617" y="177" width="1327" height="997" key="find.popup/0.23.2560.1304@0.23.2560.1304" timestamp="1607079980276" />
-    <state x="301" y="23" width="838" height="1032" key="search.everywhere.popup" timestamp="1607237245586">
-      <screen x="0" y="23" width="1440" height="804" />
+    <state x="535" y="0" width="1490" height="1849" key="search.everywhere.popup" timestamp="1609406304104">
+      <screen x="0" y="0" width="2560" height="1440" />
     </state>
+    <state x="535" y="0" width="1490" height="1849" key="search.everywhere.popup/0.0.2560.1440@0.0.2560.1440" timestamp="1609406304104" />
     <state x="301" y="23" width="838" height="1032" key="search.everywhere.popup/0.23.1440.804@0.23.1440.804" timestamp="1607237245586" />
   </component>
 </project>
