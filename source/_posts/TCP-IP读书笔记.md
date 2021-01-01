@@ -326,5 +326,21 @@ VLAN种类：
 
 无线AP（Access Point）：
 是无线路由器等设备的统称，是无线局域网的一种典型应用，在无线网络中，AP就相当于有线网络的集线器，用来中继和桥接无线信号
+<div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="/js/md5.min.js"></script>
+<script >
+var gitalk = new Gitalk({
+  clientID: '690f7443a587c05ba6f5',
+  clientSecret: '5702fe23820d4464abfd4e2f9a736da2565ae3c9',
+  repo: 'haoyanwang.github.io',
+  owner: 'haoyanwang',
+  admin: ['haoyanwang'],
+  id: md5(location.pathname),  
+  distractionFreeMode: false,
+});
+gitalk.render('gitalk-container')
+</script>
 
 

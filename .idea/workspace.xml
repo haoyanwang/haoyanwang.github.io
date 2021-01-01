@@ -11,10 +11,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e450d91f-da7d-4109-9ee3-f6f88fee6531" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/themes/next/layout/_custom/custom.swig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/next/layout/_partials/post/gitalk.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/next/source/js/cursor/firework.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/next/source/js/md5.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/TCP-IP读书笔记.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/TCP-IP读书笔记.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/next/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/themes/next/_config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/themes/next/layout/_layout.swig" beforeDir="false" afterPath="$PROJECT_DIR$/themes/next/layout/_layout.swig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/themes/next/layout/_third-party/statistics/busuanzi-counter.swig" beforeDir="false" afterPath="$PROJECT_DIR$/themes/next/layout/_third-party/statistics/busuanzi-counter.swig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +99,8 @@
       <workItem from="1609150913036" duration="5426000" />
       <workItem from="1609233750613" duration="3288000" />
       <workItem from="1609405526097" duration="1848000" />
-      <workItem from="1609412456283" duration="456000" />
+      <workItem from="1609412456283" duration="696000" />
+      <workItem from="1609485220359" duration="2100000" />
     </task>
     <task id="LOCAL-00001" summary=":tada: 开始写博客～芜湖～起飞">
       <created>1606662447405</created>
@@ -138,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609237116519</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary=":sparkles: 浏览量统计">
+      <created>1609413010744</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1609413010744</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,7 +176,8 @@
     <MESSAGE value=":art: 优化一下格式" />
     <MESSAGE value=":memo: update blog" />
     <MESSAGE value=":memo: 补充～" />
-    <option name="LAST_COMMIT_MESSAGE" value=":memo: 补充～" />
+    <MESSAGE value=":sparkles: 浏览量统计" />
+    <option name="LAST_COMMIT_MESSAGE" value=":sparkles: 浏览量统计" />
   </component>
   <component name="WindowStateProjectService">
     <state x="180" y="81" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607148888031">
@@ -171,13 +185,15 @@
     </state>
     <state x="180" y="81" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.804@0.23.1440.804" timestamp="1607148888031" />
     <state x="180" y="81" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.806@0.23.1440.806" timestamp="1606662502866" />
-    <state x="974" y="467" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607075557259">
-      <screen x="0" y="23" width="2560" height="1304" />
+    <state x="548" y="306" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1609517102494">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state x="548" y="306" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1609517102494" />
     <state x="974" y="467" key="#com.intellij.fileTypes.FileTypeChooser/0.23.2560.1304@0.23.2560.1304" timestamp="1607075557259" />
-    <state x="617" y="170" width="1328" height="1104" key="find.popup" timestamp="1609412743335">
-      <screen x="0" y="0" width="2560" height="1440" />
+    <state x="347" y="106" width="747" height="690" key="find.popup" timestamp="1609517390896">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state x="347" y="106" width="747" height="690" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1609517390896" />
     <state x="617" y="170" width="1328" height="1104" key="find.popup/0.0.2560.1440@0.0.2560.1440" timestamp="1609412743335" />
     <state x="347" y="118" width="747" height="616" key="find.popup/0.23.1440.804@0.23.1440.804" timestamp="1607180189998" />
     <state x="347" y="118" width="746" height="616" key="find.popup/0.23.1440.806@0.23.1440.806" timestamp="1606658428790" />
