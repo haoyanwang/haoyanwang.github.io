@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="type-fest翻译&amp;源码 TS基本操作符 extends（有条件类型） infer（有条件类型中的类型推断） keyof（获取key） typeof（获取类型）   TS自带类 Exclude（常用于去除联合类型中的一部分） Extract 其他自带类（Pick，Record，Partial等）   type-fest工具类 Except（丢弃object type的某些key">
+  <meta name="description" content="type-fest翻译&amp;源码type-fest是一个typeScript类型的集合 TS基本操作符extends（有条件类型）typescript 2.8引入了条件类型关键字: extends 123&#x2F;&#x2F; extends 关键字既可以来扩展已有的类型，也可以对类型进行条件限定，进行条件限定时，用法如下：&#x2F;&#x2F; 若T能够赋值给U，那么类型是X，否则为Y，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="阅读type-fest源码">
 <meta property="og:url" content="http://example.com/2021/01/18/%E9%98%85%E8%AF%BBtype-fest%E6%BA%90%E7%A0%81/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="type-fest翻译&amp;源码 TS基本操作符 extends（有条件类型） infer（有条件类型中的类型推断） keyof（获取key） typeof（获取类型）   TS自带类 Exclude（常用于去除联合类型中的一部分） Extract 其他自带类（Pick，Record，Partial等）   type-fest工具类 Except（丢弃object type的某些key">
+<meta property="og:description" content="type-fest翻译&amp;源码type-fest是一个typeScript类型的集合 TS基本操作符extends（有条件类型）typescript 2.8引入了条件类型关键字: extends 123&#x2F;&#x2F; extends 关键字既可以来扩展已有的类型，也可以对类型进行条件限定，进行条件限定时，用法如下：&#x2F;&#x2F; 若T能够赋值给U，那么类型是X，否则为Y，">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-18T06:38:34.000Z">
-<meta property="article:modified_time" content="2021-01-18T06:38:57.757Z">
+<meta property="article:modified_time" content="2021-01-18T06:50:39.858Z">
 <meta property="article:author" content="王皓衍">
 <meta name="twitter:card" content="summary">
 
@@ -202,7 +202,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-01-18 14:38:34 / 修改时间：14:38:57" itemprop="dateCreated datePublished" datetime="2021-01-18T14:38:34+08:00">2021-01-18</time>
+              <time title="创建时间：2021-01-18 14:38:34 / 修改时间：14:50:39" itemprop="dateCreated datePublished" datetime="2021-01-18T14:38:34+08:00">2021-01-18</time>
             </span>
 
           
@@ -223,55 +223,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-<ul>
-<li><a href="#type-fest%E7%BF%BB%E8%AF%91%E6%BA%90%E7%A0%81">type-fest翻译&amp;源码</a><ul>
-<li><a href="#ts%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E7%AC%A6">TS基本操作符</a><ul>
-<li><a href="#extends%E6%9C%89%E6%9D%A1%E4%BB%B6%E7%B1%BB%E5%9E%8B">extends（有条件类型）</a></li>
-<li><a href="#infer%E6%9C%89%E6%9D%A1%E4%BB%B6%E7%B1%BB%E5%9E%8B%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD">infer（有条件类型中的类型推断）</a></li>
-<li><a href="#keyof%E8%8E%B7%E5%8F%96key">keyof（获取key）</a></li>
-<li><a href="#typeof%E8%8E%B7%E5%8F%96%E7%B1%BB%E5%9E%8B">typeof（获取类型）</a></li>
-</ul>
-</li>
-<li><a href="#ts%E8%87%AA%E5%B8%A6%E7%B1%BB">TS自带类</a><ul>
-<li><a href="#exclude%E5%B8%B8%E7%94%A8%E4%BA%8E%E5%8E%BB%E9%99%A4%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E9%83%A8%E5%88%86">Exclude（常用于去除联合类型中的一部分）</a></li>
-<li><a href="#extract">Extract</a></li>
-<li><a href="#%E5%85%B6%E4%BB%96%E8%87%AA%E5%B8%A6%E7%B1%BBpickrecordpartial%E7%AD%89">其他自带类（Pick，Record，Partial等）</a></li>
-</ul>
-</li>
-<li><a href="#type-fest%E5%B7%A5%E5%85%B7%E7%B1%BB">type-fest工具类</a><ul>
-<li><a href="#except%E4%B8%A2%E5%BC%83object-type%E7%9A%84%E6%9F%90%E4%BA%9Bkeys%E7%94%9F%E6%88%90%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84type%E6%98%AF%E6%9B%B4%E4%B8%A5%E6%A0%BC%E7%9A%84omit">Except（丢弃object type的某些keys，生成一个新的type。是更严格的Omit）</a></li>
-<li><a href="#mutable%E5%B0%86%E5%8E%9F%E7%B1%BB%E5%9E%8B%E4%B8%AD%E7%9A%84readonly%E5%B1%9E%E6%80%A7%E7%A7%BB%E9%99%A4%E5%92%8Creadonly%E4%BD%9C%E7%94%A8%E7%9B%B8%E5%8F%8D">Mutable（将原类型中的readonly属性移除，和Readonly作用相反）</a></li>
-<li><a href="#mergefirsttype%E4%B8%8Esecondtype%E7%9A%84%E8%9E%8D%E5%90%88secondtype%E4%BC%9A%E8%A6%86%E7%9B%96%E9%87%8D%E5%A4%8D%E7%9A%84%E9%83%A8%E5%88%86">Merge（FirstType与SecondType的融合，SecondType会覆盖重复的部分）</a></li>
-<li><a href="#mergeexclusive%E9%99%90%E5%AE%9A%E6%9B%B4%E7%B4%A7%E7%9A%84type%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B">MergeExclusive（限定更紧的type联合类型）</a></li>
-<li><a href="#requireatleastone%E6%A0%B9%E6%8D%AEkey%E4%BD%BF%E5%8E%9F%E7%B1%BB%E5%9E%8B%E4%B8%AD%E5%B1%9E%E6%80%A7%E4%BB%BB%E6%84%8F%E4%B8%94%E8%87%B3%E5%B0%91%E4%B8%80%E4%B8%AA%E5%8F%98%E4%B8%BA%E5%BF%85%E9%80%89%E5%89%A9%E4%BD%99%E7%9A%84%E5%8F%98%E4%B8%BA%E5%8F%AF%E9%80%89">RequireAtLeastOne（根据key，使原类型中属性，任意且至少一个变为必选，剩余的变为可选）</a></li>
-<li><a href="#requireexactlyone%E6%A0%B9%E6%8D%AEkey%E4%BD%BF%E5%8E%9F%E7%B1%BB%E5%9E%8B%E4%B8%AD%E5%B1%9E%E6%80%A7%E4%BB%BB%E6%84%8F%E4%B8%94%E5%8F%AA%E6%9C%89%E4%B8%80%E4%B8%AA%E5%8F%98%E4%B8%BA%E5%BF%85%E9%80%89%E5%89%A9%E4%BD%99%E7%9A%84%E5%8F%98%E4%B8%BA%E4%B8%8D%E5%8F%AF%E9%80%89">RequireExactlyOne（根据key，使原类型中属性，任意且只有一个变为必选，剩余的变为不可选）</a></li>
-<li><a href="#partialdeep%E6%B7%B1%E5%BA%A6partial%E5%B0%86%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8Bmapset%E7%AD%89%E5%B5%8C%E5%A5%97%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%BF%9B%E8%A1%8Cpartial%E6%93%8D%E4%BD%9C">PartialDeep（深度Partial，将基本数据类型、Map、Set等嵌套数据结构进行Partial操作）</a></li>
-<li><a href="#readonlydeep%E6%B7%B1%E5%BA%A6readonly%E5%B0%86%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8Bmapset%E7%AD%89%E5%B5%8C%E5%A5%97%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%BF%9B%E8%A1%8Creadonly%E6%93%8D%E4%BD%9C">ReadonlyDeep（深度Readonly，将基本数据类型、Map、Set等嵌套数据结构进行Readonly操作）</a></li>
-<li><a href="#literalunion%E5%85%BC%E5%AE%B9-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%AD%97%E9%9D%A2%E9%87%8F%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%81%94%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-ide%E8%87%AA%E5%8A%A8%E6%8F%90%E7%A4%BA%E8%A1%A5%E5%85%A8">LiteralUnion（兼容 基本数据类型与字面量类型的联合数据类型 IDE自动提示补全）</a></li>
-<li><a href="#promisable%E4%BB%A3%E8%A1%A8value%E4%BB%A5%E5%8F%8A%E8%A2%ABpromiselike%E5%8C%85%E8%A3%B9%E7%9A%84value%E7%9A%84type">Promisable（代表value以及被PromiseLike包裹的value的type）</a></li>
-<li><a href="#opaque%E4%B8%8D%E9%80%8F%E6%98%8E%E7%9A%84%E7%B1%BB%E5%9E%8B">Opaque（不透明的类型）</a></li>
-<li><a href="#setoptional%E6%9C%89%E9%80%89%E6%8B%A9%E7%9A%84partial">SetOptional（有选择的Partial）</a></li>
-<li><a href="#somerequiredsetoptional%E7%9A%84%E5%A7%8A%E5%A6%B9%E7%B1%BB%E5%9E%8B%E4%BD%BFtype%E7%9A%84%E9%83%A8%E5%88%86key%E5%8F%98%E5%BE%97%E5%BF%85%E9%A1%BB">SomeRequired（SetOptional的姊妹类型，使type的部分key变得必须）</a></li>
-<li><a href="#valueof%E6%8E%A5%E5%8F%97%E4%B8%80%E4%B8%AA%E7%B1%BB%E5%9E%8B%E8%8C%83%E5%9E%8Bt%E8%BF%94%E5%9B%9Et%E7%9A%84value%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B">ValueOf（接受一个类型范型T，返回T的value联合类型）</a></li>
-<li><a href="#promisevalue%E8%8E%B7%E5%8F%96promise%E5%80%BC%E7%9A%84type">PromiseValue(获取promise值的type)</a></li>
-<li><a href="#asyncreturntype%E8%8E%B7%E5%8F%96%E5%BC%82%E6%AD%A5%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC%E7%9A%84type">AsyncReturnType（获取异步函数返回值的type）</a></li>
-<li><a href="#conditionalkeys%E8%BF%94%E5%9B%9E%E7%AC%A6%E5%90%88%E6%9D%A1%E4%BB%B6%E7%9A%84key">ConditionalKeys（返回符合条件的key）</a></li>
-<li><a href="#conditionalpick%E8%BF%94%E5%9B%9E%E7%AC%A6%E5%90%88%E6%9D%A1%E4%BB%B6%E7%9A%84key%E7%BB%84%E6%88%90%E7%9A%84type">ConditionalPick（返回符合条件的key组成的type）</a></li>
-<li><a href="#conditionalexcept%E8%BF%94%E5%9B%9E%E4%B8%8D%E7%AC%A6%E5%90%88%E6%9D%A1%E4%BB%B6%E7%9A%84key%E7%BB%84%E6%88%90%E7%9A%84type">ConditionalExcept（返回不符合条件的key组成的type）</a></li>
-<li><a href="#uniontointersection%E5%B0%86%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B%E5%8F%98%E4%B8%BA%E4%BA%A4%E5%8F%89%E7%B1%BB%E5%9E%8B">UnionToIntersection（将联合类型变为交叉类型）</a></li>
-<li><a href="#stringified%E5%B0%86type%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%85%A8%E9%83%A8%E5%8F%98%E4%B8%BAstring">Stringified（将type中的类型全部变为string）</a></li>
-<li><a href="#fixedlengtharray%E9%95%BF%E5%BA%A6%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%9A%84%E6%95%B0%E7%BB%84">FixedLengthArray（长度不可变的数组）</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-<h1 id="type-fest翻译-amp-源码"><a href="#type-fest翻译-amp-源码" class="headerlink" title="type-fest翻译&amp;源码"></a>type-fest翻译&amp;源码</h1><p>type-fest是一个typeScript类型的集合</p>
+        <h1 id="type-fest翻译-amp-源码"><a href="#type-fest翻译-amp-源码" class="headerlink" title="type-fest翻译&amp;源码"></a>type-fest翻译&amp;源码</h1><p>type-fest是一个typeScript类型的集合</p>
 <h2 id="TS基本操作符"><a href="#TS基本操作符" class="headerlink" title="TS基本操作符"></a>TS基本操作符</h2><h3 id="extends（有条件类型）"><a href="#extends（有条件类型）" class="headerlink" title="extends（有条件类型）"></a>extends（有条件类型）</h3><p>typescript 2.8引入了条件类型关键字: extends</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; extends 关键字既可以来扩展已有的类型，也可以对类型进行条件限定，进行条件限定时，用法如下：</span><br><span class="line">&#x2F;&#x2F; 若T能够赋值给U，那么类型是X，否则为Y，具体实现可以看参考阅读</span><br><span class="line">T extends U ? X : Y</span><br></pre></td></tr></table></figure>
 <p>参考阅读：<br><a target="_blank" rel="noopener" href="https://www.tslang.cn/docs/release-notes/typescript-2.8.html">typeScript有条件类型</a>   </p>
@@ -335,7 +287,22 @@
 <h3 id="Stringified（将type中的类型全部变为string）"><a href="#Stringified（将type中的类型全部变为string）" class="headerlink" title="Stringified（将type中的类型全部变为string）"></a>Stringified（将type中的类型全部变为string）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">export type Stringified&lt;ObjectType&gt; &#x3D; &#123;[KeyType in keyof ObjectType]: string&#125;;</span><br></pre></td></tr></table></figure>
 
 <h3 id="FixedLengthArray（长度不可变的数组）"><a href="#FixedLengthArray（长度不可变的数组）" class="headerlink" title="FixedLengthArray（长度不可变的数组）"></a>FixedLengthArray（长度不可变的数组）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">&#x2F;&#x2F; 需要排除的方法</span><br><span class="line">type ArrayLengthMutationKeys &#x3D; &#39;splice&#39; | &#39;push&#39; | &#39;pop&#39; | &#39;shift&#39; | &#39;unshift&#39;;</span><br><span class="line">export type FixedLengthArray&lt;Element, Length extends number, ArrayPrototype &#x3D; [Element, ...Element[]]&gt; &#x3D; Pick&lt;</span><br><span class="line">	ArrayPrototype,</span><br><span class="line">	Exclude&lt;keyof ArrayPrototype, ArrayLengthMutationKeys&gt;</span><br><span class="line">&gt; &amp; &#123;</span><br><span class="line">	[index: number]: Element;</span><br><span class="line">	[Symbol.iterator]: () &#x3D;&gt; IterableIterator&lt;Element&gt;;</span><br><span class="line">	readonly length: Length;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="/js/md5.min.js"></script>
+<script >
+var gitalk = new Gitalk({
+  clientID: '690f7443a587c05ba6f5',
+  clientSecret: '5702fe23820d4464abfd4e2f9a736da2565ae3c9',
+  repo: 'haoyanwang.github.io',
+  owner: 'haoyanwang',
+  admin: ['haoyanwang'],
+  id: md5(location.pathname),  
+  distractionFreeMode: false,
+});
+gitalk.render('gitalk-container')
+</script>
 
     </div>
 
