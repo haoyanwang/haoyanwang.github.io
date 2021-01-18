@@ -11,15 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e450d91f-da7d-4109-9ee3-f6f88fee6531" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/themes/next/layout/_custom/custom.swig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/next/layout/_partials/post/gitalk.ejs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/next/source/js/cursor/firework.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/next/source/js/md5.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/_posts/TCP-IP读书笔记.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/TCP-IP读书笔记.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/next/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/themes/next/_config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/next/layout/_layout.swig" beforeDir="false" afterPath="$PROJECT_DIR$/themes/next/layout/_layout.swig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/next/layout/_third-party/statistics/busuanzi-counter.swig" beforeDir="false" afterPath="$PROJECT_DIR$/themes/next/layout/_third-party/statistics/busuanzi-counter.swig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +19,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/themes/next" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1kvA9HkCwxZ02RW5POw550S89lO" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -100,7 +92,27 @@
       <workItem from="1609233750613" duration="3288000" />
       <workItem from="1609405526097" duration="1848000" />
       <workItem from="1609412456283" duration="696000" />
-      <workItem from="1609485220359" duration="2100000" />
+      <workItem from="1609485220359" duration="2718000" />
+      <workItem from="1609649611454" duration="5000" />
+      <workItem from="1609847897725" duration="1943000" />
+      <workItem from="1609900699293" duration="4000" />
+      <workItem from="1609920327265" duration="143000" />
+      <workItem from="1609921167113" duration="607000" />
+      <workItem from="1609922593253" duration="9714000" />
+      <workItem from="1610086254002" duration="507000" />
+      <workItem from="1610365364379" duration="131000" />
+      <workItem from="1610418245771" duration="2335000" />
+      <workItem from="1610459589468" duration="1972000" />
+      <workItem from="1610504072624" duration="6303000" />
+      <workItem from="1610526838672" duration="1850000" />
+      <workItem from="1610540495211" duration="648000" />
+      <workItem from="1610623839062" duration="4472000" />
+      <workItem from="1610679514685" duration="6623000" />
+      <workItem from="1610936209189" duration="5450000" />
+      <workItem from="1610949642244" duration="781000" />
+      <workItem from="1610951798733" duration="7000" />
+      <workItem from="1610951836000" duration="89000" />
+      <workItem from="1610951927251" duration="11000" />
     </task>
     <task id="LOCAL-00001" summary=":tada: 开始写博客～芜湖～起飞">
       <created>1606662447405</created>
@@ -151,7 +163,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609413010744</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary=":lipstick: 添加留言和鼠标点击特效">
+      <created>1609517465367</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1609517465367</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -177,7 +196,8 @@
     <MESSAGE value=":memo: update blog" />
     <MESSAGE value=":memo: 补充～" />
     <MESSAGE value=":sparkles: 浏览量统计" />
-    <option name="LAST_COMMIT_MESSAGE" value=":sparkles: 浏览量统计" />
+    <MESSAGE value=":lipstick: 添加留言和鼠标点击特效" />
+    <option name="LAST_COMMIT_MESSAGE" value=":lipstick: 添加留言和鼠标点击特效" />
   </component>
   <component name="WindowStateProjectService">
     <state x="180" y="81" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607148888031">
@@ -185,10 +205,10 @@
     </state>
     <state x="180" y="81" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.804@0.23.1440.804" timestamp="1607148888031" />
     <state x="180" y="81" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.806@0.23.1440.806" timestamp="1606662502866" />
-    <state x="548" y="306" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1609517102494">
+    <state x="548" y="306" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1610951521481">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="548" y="306" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1609517102494" />
+    <state x="548" y="306" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1610951521481" />
     <state x="974" y="467" key="#com.intellij.fileTypes.FileTypeChooser/0.23.2560.1304@0.23.2560.1304" timestamp="1607075557259" />
     <state x="347" y="106" width="747" height="690" key="find.popup" timestamp="1609517390896">
       <screen x="0" y="0" width="1440" height="900" />
