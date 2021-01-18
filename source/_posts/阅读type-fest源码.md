@@ -11,45 +11,6 @@ tags:
 categories:
 ---
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [type-fest翻译&源码](#type-fest%E7%BF%BB%E8%AF%91%E6%BA%90%E7%A0%81)
-  - [TS基本操作符](#ts%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E7%AC%A6)
-    - [extends（有条件类型）](#extends%E6%9C%89%E6%9D%A1%E4%BB%B6%E7%B1%BB%E5%9E%8B)
-    - [infer（有条件类型中的类型推断）](#infer%E6%9C%89%E6%9D%A1%E4%BB%B6%E7%B1%BB%E5%9E%8B%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD)
-    - [keyof（获取key）](#keyof%E8%8E%B7%E5%8F%96key)
-    - [typeof（获取类型）](#typeof%E8%8E%B7%E5%8F%96%E7%B1%BB%E5%9E%8B)
-  - [TS自带类](#ts%E8%87%AA%E5%B8%A6%E7%B1%BB)
-    - [Exclude（常用于去除联合类型中的一部分）](#exclude%E5%B8%B8%E7%94%A8%E4%BA%8E%E5%8E%BB%E9%99%A4%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E9%83%A8%E5%88%86)
-    - [Extract](#extract)
-    - [其他自带类（Pick，Record，Partial等）](#%E5%85%B6%E4%BB%96%E8%87%AA%E5%B8%A6%E7%B1%BBpickrecordpartial%E7%AD%89)
-  - [type-fest工具类](#type-fest%E5%B7%A5%E5%85%B7%E7%B1%BB)
-    - [Except（丢弃object type的某些keys，生成一个新的type。是更严格的Omit）](#except%E4%B8%A2%E5%BC%83object-type%E7%9A%84%E6%9F%90%E4%BA%9Bkeys%E7%94%9F%E6%88%90%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84type%E6%98%AF%E6%9B%B4%E4%B8%A5%E6%A0%BC%E7%9A%84omit)
-    - [Mutable（将原类型中的readonly属性移除，和Readonly作用相反）](#mutable%E5%B0%86%E5%8E%9F%E7%B1%BB%E5%9E%8B%E4%B8%AD%E7%9A%84readonly%E5%B1%9E%E6%80%A7%E7%A7%BB%E9%99%A4%E5%92%8Creadonly%E4%BD%9C%E7%94%A8%E7%9B%B8%E5%8F%8D)
-    - [Merge（FirstType与SecondType的融合，SecondType会覆盖重复的部分）](#mergefirsttype%E4%B8%8Esecondtype%E7%9A%84%E8%9E%8D%E5%90%88secondtype%E4%BC%9A%E8%A6%86%E7%9B%96%E9%87%8D%E5%A4%8D%E7%9A%84%E9%83%A8%E5%88%86)
-    - [MergeExclusive（限定更紧的type联合类型）](#mergeexclusive%E9%99%90%E5%AE%9A%E6%9B%B4%E7%B4%A7%E7%9A%84type%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B)
-    - [RequireAtLeastOne（根据key，使原类型中属性，任意且至少一个变为必选，剩余的变为可选）](#requireatleastone%E6%A0%B9%E6%8D%AEkey%E4%BD%BF%E5%8E%9F%E7%B1%BB%E5%9E%8B%E4%B8%AD%E5%B1%9E%E6%80%A7%E4%BB%BB%E6%84%8F%E4%B8%94%E8%87%B3%E5%B0%91%E4%B8%80%E4%B8%AA%E5%8F%98%E4%B8%BA%E5%BF%85%E9%80%89%E5%89%A9%E4%BD%99%E7%9A%84%E5%8F%98%E4%B8%BA%E5%8F%AF%E9%80%89)
-    - [RequireExactlyOne（根据key，使原类型中属性，任意且只有一个变为必选，剩余的变为不可选）](#requireexactlyone%E6%A0%B9%E6%8D%AEkey%E4%BD%BF%E5%8E%9F%E7%B1%BB%E5%9E%8B%E4%B8%AD%E5%B1%9E%E6%80%A7%E4%BB%BB%E6%84%8F%E4%B8%94%E5%8F%AA%E6%9C%89%E4%B8%80%E4%B8%AA%E5%8F%98%E4%B8%BA%E5%BF%85%E9%80%89%E5%89%A9%E4%BD%99%E7%9A%84%E5%8F%98%E4%B8%BA%E4%B8%8D%E5%8F%AF%E9%80%89)
-    - [PartialDeep（深度Partial，将基本数据类型、Map、Set等嵌套数据结构进行Partial操作）](#partialdeep%E6%B7%B1%E5%BA%A6partial%E5%B0%86%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8Bmapset%E7%AD%89%E5%B5%8C%E5%A5%97%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%BF%9B%E8%A1%8Cpartial%E6%93%8D%E4%BD%9C)
-    - [ReadonlyDeep（深度Readonly，将基本数据类型、Map、Set等嵌套数据结构进行Readonly操作）](#readonlydeep%E6%B7%B1%E5%BA%A6readonly%E5%B0%86%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8Bmapset%E7%AD%89%E5%B5%8C%E5%A5%97%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%BF%9B%E8%A1%8Creadonly%E6%93%8D%E4%BD%9C)
-    - [LiteralUnion（兼容 基本数据类型与字面量类型的联合数据类型 IDE自动提示补全）](#literalunion%E5%85%BC%E5%AE%B9-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%AD%97%E9%9D%A2%E9%87%8F%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%81%94%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-ide%E8%87%AA%E5%8A%A8%E6%8F%90%E7%A4%BA%E8%A1%A5%E5%85%A8)
-    - [Promisable（代表value以及被PromiseLike包裹的value的type）](#promisable%E4%BB%A3%E8%A1%A8value%E4%BB%A5%E5%8F%8A%E8%A2%ABpromiselike%E5%8C%85%E8%A3%B9%E7%9A%84value%E7%9A%84type)
-    - [Opaque（不透明的类型）](#opaque%E4%B8%8D%E9%80%8F%E6%98%8E%E7%9A%84%E7%B1%BB%E5%9E%8B)
-    - [SetOptional（有选择的Partial）](#setoptional%E6%9C%89%E9%80%89%E6%8B%A9%E7%9A%84partial)
-    - [SomeRequired（SetOptional的姊妹类型，使type的部分key变得必须）](#somerequiredsetoptional%E7%9A%84%E5%A7%8A%E5%A6%B9%E7%B1%BB%E5%9E%8B%E4%BD%BFtype%E7%9A%84%E9%83%A8%E5%88%86key%E5%8F%98%E5%BE%97%E5%BF%85%E9%A1%BB)
-    - [ValueOf（接受一个类型范型T，返回T的value联合类型）](#valueof%E6%8E%A5%E5%8F%97%E4%B8%80%E4%B8%AA%E7%B1%BB%E5%9E%8B%E8%8C%83%E5%9E%8Bt%E8%BF%94%E5%9B%9Et%E7%9A%84value%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B)
-    - [PromiseValue(获取promise值的type)](#promisevalue%E8%8E%B7%E5%8F%96promise%E5%80%BC%E7%9A%84type)
-    - [AsyncReturnType（获取异步函数返回值的type）](#asyncreturntype%E8%8E%B7%E5%8F%96%E5%BC%82%E6%AD%A5%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC%E7%9A%84type)
-    - [ConditionalKeys（返回符合条件的key）](#conditionalkeys%E8%BF%94%E5%9B%9E%E7%AC%A6%E5%90%88%E6%9D%A1%E4%BB%B6%E7%9A%84key)
-    - [ConditionalPick（返回符合条件的key组成的type）](#conditionalpick%E8%BF%94%E5%9B%9E%E7%AC%A6%E5%90%88%E6%9D%A1%E4%BB%B6%E7%9A%84key%E7%BB%84%E6%88%90%E7%9A%84type)
-    - [ConditionalExcept（返回不符合条件的key组成的type）](#conditionalexcept%E8%BF%94%E5%9B%9E%E4%B8%8D%E7%AC%A6%E5%90%88%E6%9D%A1%E4%BB%B6%E7%9A%84key%E7%BB%84%E6%88%90%E7%9A%84type)
-    - [UnionToIntersection（将联合类型变为交叉类型）](#uniontointersection%E5%B0%86%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B%E5%8F%98%E4%B8%BA%E4%BA%A4%E5%8F%89%E7%B1%BB%E5%9E%8B)
-    - [Stringified（将type中的类型全部变为string）](#stringified%E5%B0%86type%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%85%A8%E9%83%A8%E5%8F%98%E4%B8%BAstring)
-    - [FixedLengthArray（长度不可变的数组）](#fixedlengtharray%E9%95%BF%E5%BA%A6%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%9A%84%E6%95%B0%E7%BB%84)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # type-fest翻译&源码
 type-fest是一个typeScript类型的集合
 
