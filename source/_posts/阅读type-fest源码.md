@@ -437,3 +437,33 @@ Readonly（范型接受一个类型，将类型中的key变得只读）
     };
 ```
 
+# react类型源码
+## 工具类型
+### InferableComponentEnhancerWithProps
+```
+    // 实现
+    // Matching<TInjectedProps, GetProps<C>>，选出
+    // type是一个函数类型，参数是一个组件
+    export type InferableComponentEnhancerWithProps<TInjectedProps, TNeedsProps> =
+        <C extends ComponentType<Matching<TInjectedProps, GetProps<C>>>>(
+            component: C
+        ) => ConnectedComponentClass<C, Omit<GetProps<C>, keyof Shared<TInjectedProps, GetProps<C>>> & TNeedsProps>;
+```
+
+
+<div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="/js/md5.min.js"></script>
+<script >
+var gitalk = new Gitalk({
+  clientID: '690f7443a587c05ba6f5',
+  clientSecret: '5702fe23820d4464abfd4e2f9a736da2565ae3c9',
+  repo: 'haoyanwang.github.io',
+  owner: 'haoyanwang',
+  admin: ['haoyanwang'],
+  id: md5(location.pathname),  
+  distractionFreeMode: false,
+});
+gitalk.render('gitalk-container')
+</script>

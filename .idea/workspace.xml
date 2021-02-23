@@ -113,7 +113,21 @@
       <workItem from="1610949642244" duration="781000" />
       <workItem from="1610951798733" duration="7000" />
       <workItem from="1610951836000" duration="89000" />
-      <workItem from="1610951927251" duration="437000" />
+      <workItem from="1610951927251" duration="910000" />
+      <workItem from="1610954878279" duration="49000" />
+      <workItem from="1611056520665" duration="4722000" />
+      <workItem from="1611108676320" duration="9000" />
+      <workItem from="1612149308676" duration="22000" />
+      <workItem from="1612157279007" duration="4473000" />
+      <workItem from="1612491374932" duration="1190000" />
+      <workItem from="1612504060910" duration="1000" />
+      <workItem from="1612519616463" duration="255000" />
+      <workItem from="1612841991504" duration="2626000" />
+      <workItem from="1613215542192" duration="1497000" />
+      <workItem from="1613614507655" duration="7026000" />
+      <workItem from="1613700993464" duration="114000" />
+      <workItem from="1614058843216" duration="102000" />
+      <workItem from="1614058947212" duration="7000" />
     </task>
     <task id="LOCAL-00001" summary=":tada: 开始写博客～芜湖～起飞">
       <created>1606662447405</created>
@@ -178,7 +192,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610951992118</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary=":bug: 删除目录，感觉多余了">
+      <created>1610952541290</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1610952541290</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -206,12 +227,14 @@
     <MESSAGE value=":sparkles: 浏览量统计" />
     <MESSAGE value=":lipstick: 添加留言和鼠标点击特效" />
     <MESSAGE value=":sparkles: type-fest源码，芜湖" />
-    <option name="LAST_COMMIT_MESSAGE" value=":sparkles: type-fest源码，芜湖" />
+    <MESSAGE value=":bug: 删除目录，感觉多余了" />
+    <option name="LAST_COMMIT_MESSAGE" value=":bug: 删除目录，感觉多余了" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="180" y="81" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607148888031">
-      <screen x="0" y="23" width="1440" height="804" />
+    <state x="180" y="65" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1611057473859">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state x="180" y="65" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1611057473859" />
     <state x="180" y="81" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.804@0.23.1440.804" timestamp="1607148888031" />
     <state x="180" y="81" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.806@0.23.1440.806" timestamp="1606662502866" />
     <state x="548" y="306" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1610951521481">
@@ -228,10 +251,10 @@
     <state x="347" y="118" width="746" height="616" key="find.popup/0.23.1440.806@0.23.1440.806" timestamp="1606658428790" />
     <state x="347" y="118" width="747" height="620" key="find.popup/0.23.1440.808@0.23.1440.808" timestamp="1607139619174" />
     <state x="617" y="177" width="1327" height="997" key="find.popup/0.23.2560.1304@0.23.2560.1304" timestamp="1607079980276" />
-    <state x="535" y="0" width="1490" height="1849" key="search.everywhere.popup" timestamp="1609406304104">
+    <state x="535" y="0" width="1490" height="1849" key="search.everywhere.popup" timestamp="1612160791001">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="535" y="0" width="1490" height="1849" key="search.everywhere.popup/0.0.2560.1440@0.0.2560.1440" timestamp="1609406304104" />
+    <state x="535" y="0" width="1490" height="1849" key="search.everywhere.popup/0.0.2560.1440@0.0.2560.1440" timestamp="1612160791001" />
     <state x="301" y="23" width="838" height="1032" key="search.everywhere.popup/0.23.1440.804@0.23.1440.804" timestamp="1607237245586" />
   </component>
 </project>
