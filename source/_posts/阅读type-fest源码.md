@@ -14,6 +14,8 @@ categories:
 # type-fest翻译&源码
 type-fest是一个typeScript类型的集合
 
+test for Vercel
+
 ## TS基本操作符
 ### extends（有条件类型）
 typescript 2.8引入了条件类型关键字: extends
