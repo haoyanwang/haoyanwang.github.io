@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>阅读type-fest源码 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="type-fest翻译&amp;源码type-fest是一个typeScript类型的集合 test for Vercel TS基本操作符extends（有条件类型）typescript 2.8引入了条件类型关键字: extends 123&#x2F;&#x2F; extends 关键字既可以来扩展已有的类型，也可以对类型进行条件限定，进行条件限定时，用法如下：&#x2F;&#x2F; 若T能够赋">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阅读type-fest源码">
+<meta property="og:url" content="http://example.com/2021/01/18/%E9%98%85%E8%AF%BBtype-fest%E6%BA%90%E7%A0%81/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="type-fest翻译&amp;源码type-fest是一个typeScript类型的集合 test for Vercel TS基本操作符extends（有条件类型）typescript 2.8引入了条件类型关键字: extends 123&#x2F;&#x2F; extends 关键字既可以来扩展已有的类型，也可以对类型进行条件限定，进行条件限定时，用法如下：&#x2F;&#x2F; 若T能够赋">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-18T06:38:34.000Z">
+<meta property="article:modified_time" content="2022-03-12T03:52:49.918Z">
+<meta property="article:author" content="王皓衍">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/tags/%20%7C%7C%20tags">tags</a>
+        
+          <a class="main-nav-link" href="/categories/%20%7C%7C%20th">categories</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-阅读type-fest源码" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/18/%E9%98%85%E8%AF%BBtype-fest%E6%BA%90%E7%A0%81/" class="article-date">
+  <time datetime="2021-01-18T06:38:34.000Z" itemprop="datePublished">2021-01-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      阅读type-fest源码
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="type-fest翻译-amp-源码"><a href="#type-fest翻译-amp-源码" class="headerlink" title="type-fest翻译&amp;源码"></a>type-fest翻译&amp;源码</h1><p>type-fest是一个typeScript类型的集合</p>
+<p>test for Vercel</p>
+<h2 id="TS基本操作符"><a href="#TS基本操作符" class="headerlink" title="TS基本操作符"></a>TS基本操作符</h2><h3 id="extends（有条件类型）"><a href="#extends（有条件类型）" class="headerlink" title="extends（有条件类型）"></a>extends（有条件类型）</h3><p>typescript 2.8引入了条件类型关键字: extends</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; extends 关键字既可以来扩展已有的类型，也可以对类型进行条件限定，进行条件限定时，用法如下：</span><br><span class="line">&#x2F;&#x2F; 若T能够赋值给U，那么类型是X，否则为Y，具体实现可以看参考阅读</span><br><span class="line">T extends U ? X : Y</span><br></pre></td></tr></table></figure>
+<p>参考阅读：<br><a target="_blank" rel="noopener" href="https://www.tslang.cn/docs/release-notes/typescript-2.8.html">typeScript有条件类型</a>   </p>
+<h3 id="infer（有条件类型中的类型推断）"><a href="#infer（有条件类型中的类型推断）" class="headerlink" title="infer（有条件类型中的类型推断）"></a>infer（有条件类型中的类型推断）</h3><p>在有条件类型的extends子语句中，允许出现infer声明，它会引入一个待推断的类型变量。进行占位，对类型变量进行命名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 下面代码会提取函数类型的返回值类型</span><br><span class="line">type ReturnType&lt;T&gt; &#x3D; T extends (...args: any[]) &#x3D;&gt; infer R ? R : any;</span><br></pre></td></tr></table></figure>
+
+<h3 id="keyof（获取key）"><a href="#keyof（获取key）" class="headerlink" title="keyof（获取key）"></a>keyof（获取key）</h3><p>获取类型key的联合类型</p>
+<h3 id="typeof（获取类型）"><a href="#typeof（获取类型）" class="headerlink" title="typeof（获取类型）"></a>typeof（获取类型）</h3><p>获取类型的字面量类型</p>
+<h2 id="TS自带类"><a href="#TS自带类" class="headerlink" title="TS自带类"></a>TS自带类</h2><h3 id="Exclude（常用于去除联合类型中的一部分）"><a href="#Exclude（常用于去除联合类型中的一部分）" class="headerlink" title="Exclude（常用于去除联合类型中的一部分）"></a>Exclude（常用于去除联合类型中的一部分）</h3><p>用法：type A = Exclude&lt;T, U&gt;;<br>输入：T和U这两个范型<br>输出：一个新的type</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">export type Exclude&lt;T, U&gt; &#x3D; T extends U ? never: T;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 例子</span><br><span class="line">type A &#x3D; 1 | 2;</span><br><span class="line">type B &#x3D; 2;</span><br><span class="line">type C &#x3D; Exclude&lt;A, B&gt;;</span><br><span class="line">&#x2F;&#x2F;&#x3D;&gt; 1;</span><br></pre></td></tr></table></figure>
+<p>但是根据实现以及例子来看，type A extends type B应该为false，那么应该返回范型T（即type A本身），但结果返回了type A的子集 =&gt; 1<br>即，<br>预期：1 ｜ 2<br>结果：1<br>这是为什么呢？<br>这是因为typeScript中有一种概念叫”naked type parameter”（裸露的类型）它代表着类型没有被其他type包裹<br>其中的区别主要体现在：<br>naked type parameter会将范型拆分一个联合类型，联合类型中的每个成员都会受到影响，最终返回一个最终结果<br>因为 1 | 2，是裸露的类型，所以会依次对比并返回，但如果是非裸露的类型，就不会依次对比（例如被数组包裹）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; naked type parameter（裸露的类型）</span><br><span class="line">type NakedUsage&lt;T&gt; &#x3D; T extends boolean ? &quot;YES&quot; : &quot;NO&quot;</span><br><span class="line">&#x2F;&#x2F; non nakes（被数组包裹的非裸露类型）</span><br><span class="line">type WrappedUsage&lt;T&gt; &#x3D; [T] extends [boolean] ? &quot;YES&quot; : &quot;NO&quot;; &#x2F;&#x2F; wrapped in a tuple</span><br><span class="line"></span><br><span class="line">type Distributed &#x3D; NakedUsage&lt;number | boolean &gt; &#x2F;&#x2F; &#x3D; NakedUsage&lt;number&gt; | NakedUsage&lt;boolean&gt; &#x3D;  &quot;NO&quot; | &quot;YES&quot; </span><br><span class="line">type NotDistributed &#x3D; WrappedUsage&lt;number | boolean &gt; &#x2F;&#x2F; &quot;NO&quot;    </span><br><span class="line">type NotDistributed2 &#x3D; WrappedUsage&lt;boolean &gt; &#x2F;&#x2F; &quot;YES&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Extract"><a href="#Extract" class="headerlink" title="Extract"></a>Extract</h3><p>与Exclude相对的是Extract</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type Extract&lt;T, U&gt; &#x3D; T extends U ? T : never</span><br></pre></td></tr></table></figure>
+
+<p>参考阅读：<br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/51651499/typescript-what-is-a-naked-type-parameter/51651684#51651684">typescript: what is a “naked type parameter”</a><br><a target="_blank" rel="noopener" href="https://www.tslang.cn/docs/release-notes/typescript-2.8.html">typescript 2.8 分布式有条件类型</a></p>
+<h3 id="其他自带类（Pick，Record，Partial等）"><a href="#其他自带类（Pick，Record，Partial等）" class="headerlink" title="其他自带类（Pick，Record，Partial等）"></a>其他自带类（Pick，Record，Partial等）</h3><p>Pick（根据key返回一个子类型）<br>Omit（Pick与Exclude的组合，根据key舍弃类型，剩余的key组成一个子类型返回）<br>Record（根据key改写类型，并返回）<br>Partial（范型接受一个类型，将类型中的key变得可以缺失）<br>Required（范型接受一个类型，将类型中的key变得必须存在）<br>Readonly（范型接受一个类型，将类型中的key变得只读）</p>
+<h2 id="type-fest工具类"><a href="#type-fest工具类" class="headerlink" title="type-fest工具类"></a>type-fest工具类</h2><h3 id="Except（丢弃object-type的某些keys，生成一个新的type。是更严格的Omit）"><a href="#Except（丢弃object-type的某些keys，生成一个新的type。是更严格的Omit）" class="headerlink" title="Except（丢弃object type的某些keys，生成一个新的type。是更严格的Omit）"></a>Except（丢弃object type的某些keys，生成一个新的type。是更严格的Omit）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">export type Except&lt;ObjectType, KeysType extends keyof ObjectType&gt; &#x3D;</span><br><span class="line">Pick&lt;ObjectType, Exclude&lt;keyof ObjectType, KeysType&gt;&gt;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 例子</span><br><span class="line">type Foo &#x3D; &#123;</span><br><span class="line">	a: number;</span><br><span class="line">	b: string;</span><br><span class="line">	c: boolean;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">type FooWithoutA &#x3D; Except&lt;Foo, &#39;a&#39; | &#39;c&#39;&gt;;</span><br><span class="line">&#x2F;&#x2F;&#x3D;&gt; &#123;b: string&#125;;</span><br></pre></td></tr></table></figure>
+<p>对比实现可以发现，Except对于key的限制更紧，必须是keyof ObjectType的子集。而Omit则没有限制</p>
+<h3 id="Mutable（将原类型中的readonly属性移除，和Readonly作用相反）"><a href="#Mutable（将原类型中的readonly属性移除，和Readonly作用相反）" class="headerlink" title="Mutable（将原类型中的readonly属性移除，和Readonly作用相反）"></a>Mutable（将原类型中的readonly属性移除，和Readonly作用相反）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">export type Mutable&lt;ObjectType&gt; &#x3D; &#123;</span><br><span class="line">	-readonly [KeyType in keyof ObjectType]: ObjectType[KeyType];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 例子</span><br><span class="line">type Foo &#x3D; &#123;</span><br><span class="line">	readonly a: number;</span><br><span class="line">	readonly b: string;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const mutableFoo: Mutable&lt;Foo&gt; &#x3D; &#123;a: 1, b: &#39;2&#39;&#125;;</span><br><span class="line">mutableFoo.a &#x3D; 3;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Merge（FirstType与SecondType的融合，SecondType会覆盖重复的部分）"><a href="#Merge（FirstType与SecondType的融合，SecondType会覆盖重复的部分）" class="headerlink" title="Merge（FirstType与SecondType的融合，SecondType会覆盖重复的部分）"></a>Merge（FirstType与SecondType的融合，SecondType会覆盖重复的部分）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">export type Merge&lt;FirstType, SecondType&gt; &#x3D; </span><br><span class="line">Except&lt;FirstType, Extract&lt;keyof FirstType, keyof SecondType&gt;&gt; &amp; SecondType;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 例子</span><br><span class="line">type Foo &#x3D; &#123;</span><br><span class="line">	a: number;</span><br><span class="line">	b: string;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">type Bar &#x3D; &#123;</span><br><span class="line">	b: number;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const ab: Merge&lt;Foo, Bar&gt; &#x3D; &#123;a: 1, b: 2&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="MergeExclusive（限定更紧的type联合类型）"><a href="#MergeExclusive（限定更紧的type联合类型）" class="headerlink" title="MergeExclusive（限定更紧的type联合类型）"></a>MergeExclusive（限定更紧的type联合类型）</h3><p>如果FirstType和SecondType都是基本数据类型，则返回或的联合数据类型<br>否则使用FirstType或SecondType的联合类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 内部实现Without（将FirstType的特有属性，变成never，构成一个子类型返回）（为了方便移除特有属性）</span><br><span class="line">type Without&lt;FirstType, SecondType&gt; &#x3D; &#123;[KeyType in Exclude&lt;keyof FirstType, keyof SecondType&gt;]?: never&#125;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; MergeExclusive实现</span><br><span class="line">&#x2F;&#x2F; 注意(FirstType | SecondType)这里是一个整体、联合类型</span><br><span class="line">export type MergeExclusive&lt;FirstType, SecondType&gt; &#x3D;</span><br><span class="line">	(FirstType | SecondType) extends object ?</span><br><span class="line">		(Without&lt;FirstType, SecondType&gt; &amp; SecondType) | (Without&lt;SecondType, FirstType&gt; &amp; FirstType) :</span><br><span class="line">		FirstType | SecondType;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 例子</span><br><span class="line">interface ExclusiveVariation1 &#123;</span><br><span class="line">	exclusive1: boolean;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface ExclusiveVariation2 &#123;</span><br><span class="line">	exclusive2: string;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type ExclusiveOptions &#x3D; MergeExclusive&lt;ExclusiveVariation1, ExclusiveVariation2&gt;;</span><br><span class="line">&#x2F;&#x2F; never &amp; ExclusiveVariation2 | nerver &amp; ExclusiveVariation1</span><br><span class="line">let exclusiveOptions: ExclusiveOptions;</span><br><span class="line"></span><br><span class="line">exclusiveOptions &#x3D; &#123;exclusive1: true&#125;;</span><br><span class="line">&#x2F;&#x2F;&#x3D;&gt; Works</span><br><span class="line">exclusiveOptions &#x3D; &#123;exclusive2: &#39;hi&#39;&#125;;</span><br><span class="line">&#x2F;&#x2F;&#x3D;&gt; Works</span><br><span class="line">exclusiveOptions &#x3D; &#123;exclusive1: true, exclusive2: &#39;hi&#39;&#125;;</span><br></pre></td></tr></table></figure>
+<p>对比实现可发现，相比于普通的联合类型，MergeExclusive限定更紧，不能同时持有2个类型</p>
+<h3 id="RequireAtLeastOne（根据key，使原类型中属性，任意且至少一个变为必选，剩余的变为可选）"><a href="#RequireAtLeastOne（根据key，使原类型中属性，任意且至少一个变为必选，剩余的变为可选）" class="headerlink" title="RequireAtLeastOne（根据key，使原类型中属性，任意且至少一个变为必选，剩余的变为可选）"></a>RequireAtLeastOne（根据key，使原类型中属性，任意且至少一个变为必选，剩余的变为可选）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">&#x2F;&#x2F; 第一个参数为范型T，第二个参数是key的子集，如果不填则默认为全部的key</span><br><span class="line">export type RequireAtLeastOne&lt;</span><br><span class="line">	ObjectType,</span><br><span class="line">	KeysType extends keyof ObjectType &#x3D; keyof ObjectTypef</span><br><span class="line">&gt; &#x3D; &#123;</span><br><span class="line">    &#x2F;&#x2F; 根据key使得一个key变得必选（个人感觉 -? 在这里没有用，有知道的hxd可以评论区讨论一下）</span><br><span class="line">	[Key in KeysType]-?: Required&lt;Pick&lt;ObjectType, Key&gt;&gt; &amp;</span><br><span class="line">    &#x2F;&#x2F; 其他key变得可选</span><br><span class="line">	Partial&lt;Pick&lt;ObjectType, Exclude&lt;KeysType, Key&gt;&gt;&gt;;</span><br><span class="line">&#x2F;&#x2F; 将type对象合并为联合类型返回（这样做才能实现任意一个key）</span><br><span class="line">&#125;[KeysType] &amp;</span><br><span class="line">	&#x2F;&#x2F; 未被传入的其他的key保持不变</span><br><span class="line">	Except&lt;ObjectType, KeysType&gt;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 例子</span><br><span class="line">interface User &#123;</span><br><span class="line">  name: string;</span><br><span class="line">  age: number;</span><br><span class="line">  gender: string;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; &#x3D;&gt; </span><br><span class="line">&#x2F;&#x2F;  &#123;</span><br><span class="line">&#x2F;&#x2F;    name: string;</span><br><span class="line">&#x2F;&#x2F;    age: number;</span><br><span class="line">&#x2F;&#x2F;    gender?: string;</span><br><span class="line">&#x2F;&#x2F;  &#125; |</span><br><span class="line">&#x2F;&#x2F;  &#123;</span><br><span class="line">&#x2F;&#x2F;    name: string;</span><br><span class="line">&#x2F;&#x2F;    age: number;</span><br><span class="line">&#x2F;&#x2F;    gender?: string;</span><br><span class="line">&#x2F;&#x2F;  &#125;;</span><br><span class="line">type Test &#x3D; RequireAtLeastOne&lt;User, &#39;name&#39; | &#39;age&#39;&gt;</span><br><span class="line">&#x2F;&#x2F; 错误，name或age应该至少存在一个</span><br><span class="line">const error: Test &#x3D; &#123;</span><br><span class="line">  gender: &#39;male&#39;,</span><br><span class="line">&#125;;</span><br><span class="line">&#x2F;&#x2F; 正确，存在name</span><br><span class="line">const correct1: Test &#x3D; &#123;</span><br><span class="line">  gender: &#39;male&#39;,</span><br><span class="line">  name: &#39;correct&#39;,</span><br><span class="line">&#125;;</span><br><span class="line">&#x2F;&#x2F; 正确</span><br><span class="line">const correct2: Test &#x3D; &#123;</span><br><span class="line">  gender: &#39;male&#39;,</span><br><span class="line">  age: 1,</span><br><span class="line">  name: &#39;correct&#39;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="RequireExactlyOne（根据key，使原类型中属性，任意且只有一个变为必选，剩余的变为不可选）"><a href="#RequireExactlyOne（根据key，使原类型中属性，任意且只有一个变为必选，剩余的变为不可选）" class="headerlink" title="RequireExactlyOne（根据key，使原类型中属性，任意且只有一个变为必选，剩余的变为不可选）"></a>RequireExactlyOne（根据key，使原类型中属性，任意且只有一个变为必选，剩余的变为不可选）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">&#x2F;&#x2F; typeScript &gt;&#x3D;3.5 _Omit将被移除（ts3.5 内部实现了Omit）</span><br><span class="line">type _Omit&lt;T, K extends keyof any&gt; &#x3D; Pick&lt;T, Exclude&lt;keyof T, K&gt;&gt;;</span><br><span class="line">export type RequireExactlyOne&lt;ObjectType, KeysType extends keyof ObjectType &#x3D; keyof ObjectType&gt; &#x3D;</span><br><span class="line">	&#123;[Key in KeysType]: (</span><br><span class="line">		Required&lt;Pick&lt;ObjectType, Key&gt;&gt; &amp;</span><br><span class="line">		Partial&lt;Record&lt;Exclude&lt;KeysType, Key&gt;, never&gt;&gt;</span><br><span class="line">	)&#125;[KeysType] &amp; _Omit&lt;ObjectType, KeysType&gt;;</span><br><span class="line">&#x2F;&#x2F; 例子</span><br></pre></td></tr></table></figure>
+
+<h3 id="PartialDeep（深度Partial，将基本数据类型、Map、Set等嵌套数据结构进行Partial操作）"><a href="#PartialDeep（深度Partial，将基本数据类型、Map、Set等嵌套数据结构进行Partial操作）" class="headerlink" title="PartialDeep（深度Partial，将基本数据类型、Map、Set等嵌套数据结构进行Partial操作）"></a>PartialDeep（深度Partial，将基本数据类型、Map、Set等嵌套数据结构进行Partial操作）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;实现</span><br><span class="line">export type PartialDeep&lt;T&gt; &#x3D; T extends Primitive</span><br><span class="line">	? Partial&lt;T&gt;</span><br><span class="line">	: T extends Map&lt;infer KeyType, infer ValueType&gt;</span><br><span class="line">	? PartialMapDeep&lt;KeyType, ValueType&gt;</span><br><span class="line">	: T extends Set&lt;infer ItemType&gt;</span><br><span class="line">	? PartialSetDeep&lt;ItemType&gt;</span><br><span class="line">	: T extends ReadonlyMap&lt;infer KeyType, infer ValueType&gt;</span><br><span class="line">	? PartialReadonlyMapDeep&lt;KeyType, ValueType&gt;</span><br><span class="line">	: T extends ReadonlySet&lt;infer ItemType&gt;</span><br><span class="line">	? PartialReadonlySetDeep&lt;ItemType&gt;</span><br><span class="line">	: T extends ((...arguments: any[]) &#x3D;&gt; unknown)</span><br><span class="line">	? T | undefined</span><br><span class="line">	: T extends object</span><br><span class="line">	? PartialObjectDeep&lt;T&gt;</span><br><span class="line">	: unknown;</span><br><span class="line">&#x2F;&#x2F;例子</span><br></pre></td></tr></table></figure>
+
+<h3 id="ReadonlyDeep（深度Readonly，将基本数据类型、Map、Set等嵌套数据结构进行Readonly操作）"><a href="#ReadonlyDeep（深度Readonly，将基本数据类型、Map、Set等嵌套数据结构进行Readonly操作）" class="headerlink" title="ReadonlyDeep（深度Readonly，将基本数据类型、Map、Set等嵌套数据结构进行Readonly操作）"></a>ReadonlyDeep（深度Readonly，将基本数据类型、Map、Set等嵌套数据结构进行Readonly操作）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; ...</span><br></pre></td></tr></table></figure>
+
+<h3 id="LiteralUnion（兼容-基本数据类型与字面量类型的联合数据类型-IDE自动提示补全）"><a href="#LiteralUnion（兼容-基本数据类型与字面量类型的联合数据类型-IDE自动提示补全）" class="headerlink" title="LiteralUnion（兼容 基本数据类型与字面量类型的联合数据类型 IDE自动提示补全）"></a>LiteralUnion（兼容 基本数据类型与字面量类型的联合数据类型 IDE自动提示补全）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">export type LiteralUnion&lt;</span><br><span class="line">	LiteralType,</span><br><span class="line">	BaseType extends Primitive</span><br><span class="line">&gt; &#x3D; LiteralType | (BaseType &amp; &#123;_?: never&#125;);</span><br><span class="line">&#x2F;&#x2F; 例子（webstorm不提示，然而vscode适用）</span><br><span class="line">type Pet &#x3D; &#39;dog&#39; | &#39;cat&#39; | string;</span><br><span class="line">const pet: Pet &#x3D; &#39;&#39;; &#x2F;&#x2F; 不会自动提示dog和cat</span><br><span class="line"></span><br><span class="line">type Pet2 &#x3D; LiteralUnion&lt;&#39;dog&#39; | &#39;cat&#39;, string&gt;;</span><br><span class="line">const pet: Pet2 &#x3D; &#39;&#39;; &#x2F;&#x2F; 会自动提示dog和cat</span><br></pre></td></tr></table></figure>
+
+<h3 id="Promisable（代表value以及被PromiseLike包裹的value的type）"><a href="#Promisable（代表value以及被PromiseLike包裹的value的type）" class="headerlink" title="Promisable（代表value以及被PromiseLike包裹的value的type）"></a>Promisable（代表value以及被PromiseLike包裹的value的type）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">export type Promisable&lt;T&gt; &#x3D; T | PromiseLike&lt;T&gt;;</span><br><span class="line">&#x2F;&#x2F; PromiseLike是ts定义的interface，定义了面向Promise的结构</span><br><span class="line">&#x2F;&#x2F; 例子</span><br><span class="line">async function logger(getLogEntry: () &#x3D;&gt; Promisable&lt;string&gt;): Promise&lt;void&gt; &#123;</span><br><span class="line">    const entry &#x3D; await getLogEntry();</span><br><span class="line">    console.log(entry);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">logger(() &#x3D;&gt; &#39;foo&#39;);</span><br><span class="line">logger(() &#x3D;&gt; Promise.resolve(&#39;bar&#39;));</span><br></pre></td></tr></table></figure>
+
+<h3 id="Opaque（不透明的类型）"><a href="#Opaque（不透明的类型）" class="headerlink" title="Opaque（不透明的类型）"></a>Opaque（不透明的类型）</h3><p>感觉不太实用，加Token用来区分基本数据类型，不同Token代表不同的类型，相同的Token则可以相互赋值<br>（例如字符串代表的含义不同？名字和住址不可以相互赋值，但英文名和中文可以相互赋值）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">export type Opaque&lt;Type, Token &#x3D; unknown&gt; &#x3D; Type &amp; &#123;readonly __opaque__: Token&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="SetOptional（有选择的Partial）"><a href="#SetOptional（有选择的Partial）" class="headerlink" title="SetOptional（有选择的Partial）"></a>SetOptional（有选择的Partial）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">export type SetOptional&lt;BaseType, Keys extends keyof BaseType&gt; &#x3D;</span><br><span class="line">	Simplify&lt;</span><br><span class="line">		&#x2F;&#x2F; 必选的key组成的type</span><br><span class="line">		Except&lt;BaseType, Keys&gt; &amp;</span><br><span class="line">		&#x2F;&#x2F; 可选的key组成的type</span><br><span class="line">		Partial&lt;Pick&lt;BaseType, Keys&gt;&gt;</span><br><span class="line">	&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="SomeRequired（SetOptional的姊妹类型，使type的部分key变得必须）"><a href="#SomeRequired（SetOptional的姊妹类型，使type的部分key变得必须）" class="headerlink" title="SomeRequired（SetOptional的姊妹类型，使type的部分key变得必须）"></a>SomeRequired（SetOptional的姊妹类型，使type的部分key变得必须）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">export type SetRequired&lt;BaseType, Keys extends keyof BaseType&gt; &#x3D;</span><br><span class="line">	Simplify&lt;</span><br><span class="line">		Except&lt;BaseType, Keys&gt; &amp;</span><br><span class="line">		Required&lt;Pick&lt;BaseType, Keys&gt;&gt;</span><br><span class="line">	&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="ValueOf（接受一个类型范型T，返回T的value联合类型）"><a href="#ValueOf（接受一个类型范型T，返回T的value联合类型）" class="headerlink" title="ValueOf（接受一个类型范型T，返回T的value联合类型）"></a>ValueOf（接受一个类型范型T，返回T的value联合类型）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">export type ValueOf&lt;ObjectType, ValueType extends keyof ObjectType &#x3D; keyof ObjectType&gt; &#x3D; ObjectType[ValueType];</span><br></pre></td></tr></table></figure>
+
+<h3 id="PromiseValue-获取promise值的type"><a href="#PromiseValue-获取promise值的type" class="headerlink" title="PromiseValue(获取promise值的type)"></a>PromiseValue(获取promise值的type)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">export type PromiseValue&lt;PromiseType, Otherwise &#x3D; PromiseType&gt; &#x3D; PromiseType extends Promise&lt;infer Value&gt;</span><br><span class="line">	? &#123; 0: PromiseValue&lt;Value&gt;; 1: Value &#125;[PromiseType extends Promise&lt;unknown&gt; ? 0 : 1]</span><br><span class="line">	: Otherwise;</span><br></pre></td></tr></table></figure>
+
+<h3 id="AsyncReturnType（获取异步函数返回值的type）"><a href="#AsyncReturnType（获取异步函数返回值的type）" class="headerlink" title="AsyncReturnType（获取异步函数返回值的type）"></a>AsyncReturnType（获取异步函数返回值的type）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">&#x2F;&#x2F; ts内部实现ReturnType（获取函数返回值类型）</span><br><span class="line">type ReturnType&lt;T extends (...args: any) &#x3D;&gt; any&gt; &#x3D; T extends (...args: any) &#x3D;&gt; infer R ? R : any;</span><br><span class="line"></span><br><span class="line">export type AsyncReturnType&lt;Target extends AsyncFunction&gt; &#x3D; PromiseValue&lt;ReturnType&lt;Target&gt;&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="ConditionalKeys（返回符合条件的key）"><a href="#ConditionalKeys（返回符合条件的key）" class="headerlink" title="ConditionalKeys（返回符合条件的key）"></a>ConditionalKeys（返回符合条件的key）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">&#x2F;&#x2F; ts内部实现NonNullable（排除null和undefined）</span><br><span class="line">type NonNullable&lt;T&gt; &#x3D; T extends null | undefined ? never : T;</span><br><span class="line"></span><br><span class="line">export type ConditionalKeys&lt;Base, Condition&gt; &#x3D; NonNullable&lt;</span><br><span class="line">	&#123;</span><br><span class="line">		&#x2F;&#x2F; Map through all the keys of the given base type.</span><br><span class="line">		[Key in keyof Base]:</span><br><span class="line">			&#x2F;&#x2F; 根据Condition筛选</span><br><span class="line">			Base[Key] extends Condition</span><br><span class="line">				? Key</span><br><span class="line">				: never;</span><br><span class="line">    &#x2F;&#x2F; 将结果type转为union type</span><br><span class="line">	&#125;[keyof Base]</span><br><span class="line">&gt;;</span><br><span class="line">&#x2F;&#x2F; 例子</span><br><span class="line">interface Example &#123;</span><br><span class="line">	a: string;</span><br><span class="line">	b: string | number;</span><br><span class="line">	c?: string;</span><br><span class="line">	d: &#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line">type StringKeysOnly &#x3D; ConditionalKeys&lt;Example, string&gt;;</span><br><span class="line">&#x2F;&#x2F; 非空且类型为string的只有a  reuslt &#x3D;&gt; &#39;a&#39;</span><br></pre></td></tr></table></figure>
+
+<h3 id="ConditionalPick（返回符合条件的key组成的type）"><a href="#ConditionalPick（返回符合条件的key组成的type）" class="headerlink" title="ConditionalPick（返回符合条件的key组成的type）"></a>ConditionalPick（返回符合条件的key组成的type）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">export type ConditionalPick&lt;Base, Condition&gt; &#x3D; Pick&lt;</span><br><span class="line">	Base,</span><br><span class="line">	ConditionalKeys&lt;Base, Condition&gt;</span><br><span class="line">&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="ConditionalExcept（返回不符合条件的key组成的type）"><a href="#ConditionalExcept（返回不符合条件的key组成的type）" class="headerlink" title="ConditionalExcept（返回不符合条件的key组成的type）"></a>ConditionalExcept（返回不符合条件的key组成的type）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">export type ConditionalExcept&lt;Base, Condition&gt; &#x3D; Except&lt;</span><br><span class="line">	Base,</span><br><span class="line">	ConditionalKeys&lt;Base, Condition&gt;</span><br><span class="line">&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="UnionToIntersection（将联合类型变为交叉类型）"><a href="#UnionToIntersection（将联合类型变为交叉类型）" class="headerlink" title="UnionToIntersection（将联合类型变为交叉类型）"></a>UnionToIntersection（将联合类型变为交叉类型）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">export type UnionToIntersection&lt;Union&gt; &#x3D; (</span><br><span class="line">    &#x2F;&#x2F; extends unknown返回总是true，构造一个联合的函数类型，进而返回一个交叉类型</span><br><span class="line">	Union extends unknown</span><br><span class="line">		? (distributedUnion: Union) &#x3D;&gt; void</span><br><span class="line">		: never</span><br><span class="line">	) extends ((mergedIntersection: infer Intersection) &#x3D;&gt; void)</span><br><span class="line">        &#x2F;&#x2F; 将联合类型转为交叉类型</span><br><span class="line">		? Intersection</span><br><span class="line">		: never;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Stringified（将type中的类型全部变为string）"><a href="#Stringified（将type中的类型全部变为string）" class="headerlink" title="Stringified（将type中的类型全部变为string）"></a>Stringified（将type中的类型全部变为string）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">export type Stringified&lt;ObjectType&gt; &#x3D; &#123;[KeyType in keyof ObjectType]: string&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="FixedLengthArray（长度不可变的数组）"><a href="#FixedLengthArray（长度不可变的数组）" class="headerlink" title="FixedLengthArray（长度不可变的数组）"></a>FixedLengthArray（长度不可变的数组）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">&#x2F;&#x2F; 需要排除的方法</span><br><span class="line">type ArrayLengthMutationKeys &#x3D; &#39;splice&#39; | &#39;push&#39; | &#39;pop&#39; | &#39;shift&#39; | &#39;unshift&#39;;</span><br><span class="line">export type FixedLengthArray&lt;Element, Length extends number, ArrayPrototype &#x3D; [Element, ...Element[]]&gt; &#x3D; Pick&lt;</span><br><span class="line">	ArrayPrototype,</span><br><span class="line">	Exclude&lt;keyof ArrayPrototype, ArrayLengthMutationKeys&gt;</span><br><span class="line">&gt; &amp; &#123;</span><br><span class="line">	[index: number]: Element;</span><br><span class="line">	[Symbol.iterator]: () &#x3D;&gt; IterableIterator&lt;Element&gt;;</span><br><span class="line">	readonly length: Length;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="react类型源码"><a href="#react类型源码" class="headerlink" title="react类型源码"></a>react类型源码</h1><h2 id="工具类型"><a href="#工具类型" class="headerlink" title="工具类型"></a>工具类型</h2><h3 id="InferableComponentEnhancerWithProps"><a href="#InferableComponentEnhancerWithProps" class="headerlink" title="InferableComponentEnhancerWithProps"></a>InferableComponentEnhancerWithProps</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 实现</span><br><span class="line">&#x2F;&#x2F; Matching&lt;TInjectedProps, GetProps&lt;C&gt;&gt;，选出</span><br><span class="line">&#x2F;&#x2F; type是一个函数类型，参数是一个组件</span><br><span class="line">export type InferableComponentEnhancerWithProps&lt;TInjectedProps, TNeedsProps&gt; &#x3D;</span><br><span class="line">    &lt;C extends ComponentType&lt;Matching&lt;TInjectedProps, GetProps&lt;C&gt;&gt;&gt;&gt;(</span><br><span class="line">        component: C</span><br><span class="line">    ) &#x3D;&gt; ConnectedComponentClass&lt;C, Omit&lt;GetProps&lt;C&gt;, keyof Shared&lt;TInjectedProps, GetProps&lt;C&gt;&gt;&gt; &amp; TNeedsProps&gt;;</span><br></pre></td></tr></table></figure>
+
+
+<div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="/js/md5.min.js"></script>
+<script >
+var gitalk = new Gitalk({
+  clientID: '690f7443a587c05ba6f5',
+  clientSecret: '5702fe23820d4464abfd4e2f9a736da2565ae3c9',
+  repo: 'haoyanwang.github.io',
+  owner: 'haoyanwang',
+  admin: ['haoyanwang'],
+  id: md5(location.pathname),  
+  distractionFreeMode: false,
+});
+gitalk.render('gitalk-container')
+</script>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/01/18/%E9%98%85%E8%AF%BBtype-fest%E6%BA%90%E7%A0%81/" data-id="cl2hs9wpw0004now2elb722wy" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/02/23/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          电子邮件
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/03/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/12/TCP-IP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/02/23/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6/">电子邮件</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/18/%E9%98%85%E8%AF%BBtype-fest%E6%BA%90%E7%A0%81/">阅读type-fest源码</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 王皓衍<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags/%20%7C%7C%20tags" class="mobile-nav-link">tags</a>
+  
+    <a href="/categories/%20%7C%7C%20th" class="mobile-nav-link">categories</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>

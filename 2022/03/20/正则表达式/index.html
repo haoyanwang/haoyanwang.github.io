@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>正则表达式 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="正则表达式正则用过就忘，只有大概的印象，总结一下，做几道题目熟练熟练 涉及到的概念  常用js api 贪婪匹配 先行断言、后行断言 单词边界断言 位置断言 环视断言  常用js api str.replace(regexp, replacement)regexp可以是正则 也可以是 字面量字符串replacement可以是字符串也可以是函数replacement是字符串时， $ 字符具有特定的含">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式">
+<meta property="og:url" content="http://example.com/2022/03/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="正则表达式正则用过就忘，只有大概的印象，总结一下，做几道题目熟练熟练 涉及到的概念  常用js api 贪婪匹配 先行断言、后行断言 单词边界断言 位置断言 环视断言  常用js api str.replace(regexp, replacement)regexp可以是正则 也可以是 字面量字符串replacement可以是字符串也可以是函数replacement是字符串时， $ 字符具有特定的含">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-20T15:36:41.058Z">
+<meta property="article:modified_time" content="2022-04-27T16:17:58.965Z">
+<meta property="article:author" content="王皓衍">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/tags/%20%7C%7C%20tags">tags</a>
+        
+          <a class="main-nav-link" href="/categories/%20%7C%7C%20th">categories</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-正则表达式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/03/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="article-date">
+  <time datetime="2022-03-20T15:36:41.058Z" itemprop="datePublished">2022-03-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      正则表达式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><p>正则用过就忘，只有大概的印象，总结一下，做几道题目熟练熟练</p>
+<p>涉及到的概念</p>
+<ul>
+<li>常用js api</li>
+<li>贪婪匹配</li>
+<li>先行断言、后行断言</li>
+<li>单词边界断言</li>
+<li>位置断言</li>
+<li>环视断言</li>
+</ul>
+<h2 id="常用js-api"><a href="#常用js-api" class="headerlink" title="常用js api"></a>常用js api</h2><ol>
+<li>str.replace(regexp, replacement)<br>regexp可以是正则 也可以是 字面量字符串<br>replacement可以是字符串也可以是函数<br>replacement是字符串时， $ 字符具有特定的含义</li>
+</ol>
+<ul>
+<li>$1、$2、…、$99 表示第 1 到第 99 个子表达式相匹配的文本</li>
+<li>$&amp; 表示与 regexp 相匹配的子串</li>
+<li>$` 表示位于匹配子串左侧的文本</li>
+<li>$’ 表示位于匹配子串右侧的文本</li>
+<li>$$ 表示直接量符号<br>eg.<br>“Doe, John” =&gt; “John Doe” ： replace(/(\w+)\s*, \s*(\w+)/, “$2 $1”)<br>‘“a”, “b”‘ =&gt; ‘a, b’ ： replace(/“([^”]*)”/g, “‘$1’”)<br>replacement是函数时，返回的字符串作为替换文本，参数具有特殊含义</li>
+</ul>
+<ol start="2">
+<li>regexp.test(string)<br>字符串是否有匹配的模式，返回true or false</li>
+<li>regexp.exec(string)<br>如果字符串中有匹配的值返回匹配结果数组，否则返回 null<br>匹配结果数组包括：第一项是匹配的结果，后面分别是子表达式匹配的结果<br>数组还有index、input、groups属性，这个操作还是第一次见，不过想想也合理，毕竟array底层是object</li>
+<li>string.match(regexp)<br>找到字符串中的匹配值，返回一个结果数组</li>
+</ol>
+<h2 id="贪婪匹配"><a href="#贪婪匹配" class="headerlink" title="贪婪匹配"></a>贪婪匹配</h2><p>正则使用量词匹配时，默认趋向于更多的匹配，在量词后面加上?，则可以使用非贪婪匹配</p>
+<p>量词匹配</p>
+<ul>
+<li>{m,n} m到n个 {m,n}?尽可能接近m个</li>
+<li><ul>
+<li>任意多个 *? 尽可能少</li>
+</ul>
+</li>
+<li><ul>
+<li>一个或多个 +? 尽可能少</li>
+</ul>
+</li>
+<li>? 没有或一个 ?? 尽可能没有</li>
+</ul>
+<h2 id="先行断言、后行断言"><a href="#先行断言、后行断言" class="headerlink" title="先行断言、后行断言"></a>先行断言、后行断言</h2><p>(?=pattern) 零宽正向先行断言：代表字符串中的一个位置，紧接该位置之后的字符序列能够匹配 pattern<br>eg. 对 “a regular expression” 这个字符串，要想匹配 regular 中的 re，但不能匹配 expression 中的 re，可以用 re(?=gular)，该表达式限定了 re 右边的位置，这个位置之后是 gular，但并不消耗 gular 这些字符</p>
+<p>(?!pattern) 零宽负向先行断言：代表字符串中的一个位置，紧接该位置之后的字符序列不能匹配 pattern<br>eg. 对 “regex represents regular expression” 这个字符串，要想匹配除 regex 和 regular 之外的 re，可以用 re(?!g)，该表达式限定了 re 右边的位置，这个位置后面不是字符 g</p>
+<p>(?&lt;=pattern) 零宽正向后行断言：代表字符串中的一个位置，紧接该位置之前的字符序列能够匹配 pattern<br>eg. 对 regex represents regular expression 这个字符串，有 4 个单词，要想匹配单词内部的 re，但不匹配单词开头的 re，可以用 (?&lt;=\w)re，单词内部的 re，在 re 前面应该是一个单词字符</p>
+<p>(?&lt;!pattern) 零宽负向后行断言：代表字符串中的一个位置，紧接该位置之前的字符序列不能匹配 pattern<br>eg. 对 “regex represents regular expression” 这个字符串，要想匹配单词开头的 re，可以用 (?&lt;!\w)re。单词开头的 re，在本例中，也就是指不在单词内部的 re，即 re 前面不是单词字符。当然也可以用 \bre 来匹配</p>
+<p>在匹配过程中，不占用字符，所以被称为”零宽”</p>
+<h2 id="单词边界"><a href="#单词边界" class="headerlink" title="单词边界"></a>单词边界</h2><p>可以理解为：分割单词的位置，而不是字符。既一边是单词字符（\w可以匹配的，0-9 + 26个大小写字母），另一边不是<br>\b 表示单词边界<br>\B 表示非单词边界（不常用）</p>
+<p>eg.<br>(\b)some(\b) (\b)word(\b)<br>在这个例子中有4处单词边界<br>且并不代表任何字符<br>且不区分左右，只要满足条件就行</p>
+<p>eg.<br>隐藏手机号4-7位<br>text.replace(/\d{4}(?=\d{4}\b)/, ‘****’)</p>
+<h2 id="codeWars"><a href="#codeWars" class="headerlink" title="codeWars"></a>codeWars</h2><h3 id="8-kyu（黑铁级）"><a href="#8-kyu（黑铁级）" class="headerlink" title="8 kyu（黑铁级）"></a>8 kyu（黑铁级）</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/57e1e61ba396b3727c000251/train/javascript">https://www.codewars.com/kata/57e1e61ba396b3727c000251/train/javascript</a><br>s.replace(/\d/g,’’)</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/55ccdf1512938ce3ac000056/train/javascript">https://www.codewars.com/kata/55ccdf1512938ce3ac000056/train/javascript</a><br>我甚至没看懂这道题想干啥…</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/567bf4f7ee34510f69000032/train/javascript">https://www.codewars.com/kata/567bf4f7ee34510f69000032/train/javascript</a><br>/^\d$/.test(this)</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/56a3f08aa9a6cc9b75000023/train/javascript">https://www.codewars.com/kata/56a3f08aa9a6cc9b75000023/train/javascript</a><br>/^[0-9a-z_]{4,16}$/.test(username)</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/57a37f3cbb99449513000cd8/train/javascript">https://www.codewars.com/kata/57a37f3cbb99449513000cd8/train/javascript</a><br>Number(s.replace(/\D/g,’’))</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/56a25ba95df27b7743000016/train/javascript">https://www.codewars.com/kata/56a25ba95df27b7743000016/train/javascript</a><br>/^[123]/.test(String(code))</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/56a946cd7bd95ccab2000055/train/javascript">https://www.codewars.com/kata/56a946cd7bd95ccab2000055/train/javascript</a><br>str.match(/[a-z]/g) ? str.match(/[a-z]/g).length : 0</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-id="cl2hs9wps0001now2e6fofgrt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/03/12/TCP-IP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/03/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/12/TCP-IP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/02/23/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6/">电子邮件</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/18/%E9%98%85%E8%AF%BBtype-fest%E6%BA%90%E7%A0%81/">阅读type-fest源码</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 王皓衍<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags/%20%7C%7C%20tags" class="mobile-nav-link">tags</a>
+  
+    <a href="/categories/%20%7C%7C%20th" class="mobile-nav-link">categories</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="TCP&#x2F;IP读书笔记从小学开始就鼓捣电脑，很早就听说了类似ip、mac地址，VLAN,WLAN,猫，子网掩码，DNS地址等技术名词。上学以后也学习了计算机网络，听说了类似OSI七层模型，TCP、UDP等概念。工作以后也接触到了更多的网络知识，但一直是知其然不知其所以然，缺乏比较系统的学习，所以今天就记录一下学习的过程。 网络规则二进制数字到底经过了那些步骤，最后构成了网络世界？ OSI七层模型根据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/03/12/TCP-IP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="TCP&#x2F;IP读书笔记从小学开始就鼓捣电脑，很早就听说了类似ip、mac地址，VLAN,WLAN,猫，子网掩码，DNS地址等技术名词。上学以后也学习了计算机网络，听说了类似OSI七层模型，TCP、UDP等概念。工作以后也接触到了更多的网络知识，但一直是知其然不知其所以然，缺乏比较系统的学习，所以今天就记录一下学习的过程。 网络规则二进制数字到底经过了那些步骤，最后构成了网络世界？ OSI七层模型根据">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-12T03:52:10.322Z">
+<meta property="article:modified_time" content="2022-03-12T03:52:10.322Z">
+<meta property="article:author" content="王皓衍">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/tags/%20%7C%7C%20tags">tags</a>
+        
+          <a class="main-nav-link" href="/categories/%20%7C%7C%20th">categories</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-TCP-IP读书笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/03/12/TCP-IP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time datetime="2022-03-12T03:52:10.322Z" itemprop="datePublished">2022-03-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="TCP-IP读书笔记"><a href="#TCP-IP读书笔记" class="headerlink" title="TCP/IP读书笔记"></a>TCP/IP读书笔记</h1><p>从小学开始就鼓捣电脑，很早就听说了类似ip、mac地址，VLAN,WLAN,猫，子网掩码，DNS地址等技术名词。<br>上学以后也学习了计算机网络，听说了类似OSI七层模型，TCP、UDP等概念。<br>工作以后也接触到了更多的网络知识，但一直是知其然不知其所以然，缺乏比较系统的学习，所以今天就记录一下学习的过程。</p>
+<h2 id="网络规则"><a href="#网络规则" class="headerlink" title="网络规则"></a>网络规则</h2><p>二进制数字到底经过了那些步骤，最后构成了网络世界？</p>
+<h3 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h3><p>根据主要负责的功能不同，我们将通信过程分为7层，自下而上分别为</p>
+<ul>
+<li>物理层（数字信号）</li>
+<li>数据链路层（设备之间传输的数据帧，代表名词：以太网）</li>
+<li>网络层（地址管理和路由选择，代表名词：IP协议）</li>
+<li>传输层（负责节点之间的数据传递，代表名词：TCP，UDP）</li>
+<li>会话层</li>
+<li>表示层</li>
+<li>应用层<br>在TCP/IP五层模型中<br>会话层、表示层和应用层可统称应用层（代表名词：HTTP，HTTPS，FTP，DNS）</li>
+</ul>
+<p>TCP/IP协议其实代表的是一组协议，不仅仅代表传输层和网络层的TCP和IP协议，还包含了其他的协议，例如HTTP，TELNET，ARP等重要协议</p>
+<h3 id="物理层，数据链路层"><a href="#物理层，数据链路层" class="headerlink" title="物理层，数据链路层"></a>物理层，数据链路层</h3><p>TCP/IP中没有严格规定该层，只要求能给上层（网络层）提供一个访问接口，以太网是最常见的形式</p>
+<h4 id="以太网帧"><a href="#以太网帧" class="headerlink" title="以太网帧"></a>以太网帧</h4><p>数据链路层会将二进制数封装为以太网帧，以便上层协议使用<br>以太网帧格式：</p>
+<ul>
+<li>目的地址、源地址（解释了从哪里来，到哪里去，分别为48位的MAC地址）</li>
+<li>类型（以太网帧的类型，有数据信号和ARP握手信号）</li>
+<li>数据类型</li>
+<li>CRC校验（确认是否被破坏）</li>
+</ul>
+<h4 id="MAC地址（Media-Access-Control媒体访问控制）"><a href="#MAC地址（Media-Access-Control媒体访问控制）" class="headerlink" title="MAC地址（Media Access Control媒体访问控制）"></a>MAC地址（Media Access Control媒体访问控制）</h4><p>网卡、交换机和路由器的每个端口有一个独一无二的MAC地址，为48位二进制数，通常表示为12位16进制数</p>
+<h4 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h4><p>在网络层中，主机之间的信息传递通过IP来进行，但是对于一台主机而言，底层的硬件和IP并没有直接的关系，也就是说，当数据包到达目标机器底层时，硬件并不知道这个数据包是否属于自己<br>那么底层硬件如何判别呢？答案是：MAC地址（硬件只知道MAC地址），一台主机会通过ARP协议来了解整个以太网络<br>一台主机连接到以太网以后会发生以下事情：</p>
+<ol>
+<li>主机a发送一种类型为ARP的以太网帧。这个帧携带了a的MAC地址，IP地址以及目的地b的IP地址，并将目的地的MAC地址写为00000000，并发给以太网中所有的主机</li>
+<li>当以太网中的主机收到后，会查看自己的IP地址是否与目标地IP一致，如果一致，就将自己的MAC地址返回给a。这样a与b就互相知道了对方的IP地址与MAC地址</li>
+<li>每台主机就可以有一个地址映射表，可以不用发送ARP就可以直接进行IP通信。并且定期清楚掉不需要的数据，这样做可以让任何主机随时接入和退出以太网<br>这样，在同一个局域网内的寻址问题就解决了，那么跨局域网的寻址是如何进行的？</li>
+</ol>
+<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p>俗称IP层。IP是一个不可靠的，无连接协议，接受来自传输层的数据，将具有目的地址的分组封装后，通过路由发送给下层。IP负责分配地址并将数据以IP包的形式传送到正确的目的地</p>
+<h4 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h4><h5 id="IPv4"><a href="#IPv4" class="headerlink" title="IPv4"></a>IPv4</h5><p>IPv4地址是一个32位二进制数，用4段8位二进制数分开。<br>其中可以分为两部分：网络号和主机号<br>网络号表示ip属于互联网的哪一个网络<br>主机号表示ip属于该网络中的哪一台主机<br>根据网络号和主机号的长度以及用途，ip地址可分为A，B，C，D，E五类地址<br>A类IP：0.0.0.0<del>127.255.255.255（后24位为主机地址）（126个A类网络，可连接1677214台主机）（默认掩码255.0.0.0/8）<br>B类IP：128.0.0.0</del>191.255.255.255（后16位为主机地址）（大约16000个B类网络，可连接65534台主机）（默认掩码255.255.0.0/16）<br>C类IP：192.0.0.0<del>223.255.255.255（后8位为主机地址）（每个C类主机可连接254台主机）（默认掩码255.255.255.0/24）<br>D类IP：224.0.0.0</del>239.255.255.255（组播地址）<br>E类IP：240.0.0.0~255.255.255.255（扩展和实验开发与研究）<br>其中根据用途和安全性的不同，又可以分为公网地址和私网地址</p>
+<p>为了减少ip地址的浪费，所以使用子网掩码来将一个网络划分为多个子网<br>子网掩码（是一个32位二进制数，屏蔽ip地址的一部分用来区分网络地址和主机地址）<br>子网掩码由1和0组成，且1和0必须分别连续，例如：11111111 11111111 11111111 11100000，左边是网络位用1表示，右边是主机位用0表示<br>通过子网掩码，才能表明一台主机所在的子网与其他子网的关系，使网络正常工作，以免造成ip地址的浪费</p>
+<p>如何用子网掩码得到网络号/主机号：<br>将ip与子网掩码化为二进制，做与运算得到网络号<br>将子网掩码取反后，做与运算得到主机号<br>举例说明：<br>假设ip地址为：192.168.127.101<br>子网掩码为：255.255.255.192<br>分别转二进制后做与运算，再转为十进制得到：192.168.127.64，这便是网络号<br>子网掩码转二进制取反后做与运算，再转十进制得到：100101，十进制为37，这便是主机号<br>网络号不变，主机号全取1，便是广播地址，即192.168.127.127<br>主机号为6位二进制数，所以能容纳的主机数量为：2的6次方-2=62（去除网络号和广播地址），能容纳的主机数量为62个（实际上还要再减去一个网关的地址）</p>
+<p>VLSM（Variable Length Subnetwork Mask，可变长子网掩码）<br>指一个网络可以用多个掩码进行配置，从主机号的部分借位作为网络号（A类有24位可借，B类有16位可借，C类有8位可借），可以更方便的将一个网络划分为多个子网<br>例如：你被分配了一个C类地址，网络号为192.168.10.0,而你现在需要将其划分为三个子网,其中一个子网有100台主机,其余的两个子网有50台主机<br>这个时候VLSM就派上了用场</p>
+<p>CIDR（Classless Inter-Domain Routing，无类别域间路由选择，也称超网）<br>和VLSM刚好相反，从网络号中借位给主机号，将IP网络地址空间看成是一个整体，并划分成连续的地址块。然后，采用分块的方法进行分配<br>CIDR可以限制路由器中的路由表增大，减少路由通告<br>参考阅读：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_34080951/article/details/92511829">子网掩码快速算法及可变长掩码</a></p>
+<h5 id="NAT（Network-Address-Translation网络地址转换）"><a href="#NAT（Network-Address-Translation网络地址转换）" class="headerlink" title="NAT（Network Address Translation网络地址转换）"></a>NAT（Network Address Translation网络地址转换）</h5><p>目的：为了节省IPv4地址<br>NAT有三种机制：</p>
+<ul>
+<li>静态NAT（虚拟地址与公网地址1对1映射，无法解决ip地址紧缺对问题）</li>
+<li>动态地址NAT（内部ip临时分配外部ip，不需要长期连接到外网上）</li>
+<li>网络地址端口转换NAPT（将内部地址分配到外部地址不同的TCP端口上）（从外部看，所有信息来源与同一个ip，但又能精确识别来自那台主机）</li>
+</ul>
+<h4 id="IP包的转发规则"><a href="#IP包的转发规则" class="headerlink" title="IP包的转发规则"></a>IP包的转发规则</h4><ol>
+<li>IP包会根据目的地进行转发，如果没有明确的下一站的地址，就会按照缺省网关的路径前进（大部分为以太网的出口路由器）</li>
+<li>当IP包到达出口路由器，路由器会根据自身的路由表，将IP包通过合适的端口送出去</li>
+</ol>
+<h4 id="路由协议"><a href="#路由协议" class="headerlink" title="路由协议"></a>路由协议</h4><p>路由协议分为两种</p>
+<ul>
+<li>静态路由（手动填写，只有缺省路由表和小型网络会使用，不灵活，维护成本高）</li>
+<li>动态路由（路由和相邻的路由互相通信，交换信息，最终获得全网的路由信息）<br>动态路由协议又分为</li>
+<li>内部路由协议（距离矢量算法，链路状态算法）</li>
+<li>外部路由协议（BGP协议是唯一的外部路由协议）<br>内外是一个相对的概念，路由协议相对的是自治域（AS）来说的<br>自治域就是一张拥有独立网络调控功能，统一策略的IP网络（例如家庭企业接入网络，教育、金融专用网等等）<br>且一个自治与有且只有一个管理者（各大运营商），但一个管理者可以拥有多个自治域</li>
+</ul>
+<p>内部路由协议中的距离矢量算法和链路状态算区别是什么？</p>
+<ul>
+<li><p>距离矢量路由协议<br>交换的是相邻路由的路由表，路由器不知道完整的拓扑结构，链路发生变化后，路由条目维护成本较大，所以不适合大型网络</p>
+<h4 id="IGP（内部路由协议）"><a href="#IGP（内部路由协议）" class="headerlink" title="IGP（内部路由协议）"></a>IGP（内部路由协议）</h4><h5 id="RIP2协议"><a href="#RIP2协议" class="headerlink" title="RIP2协议"></a>RIP2协议</h5><p>RIP2是路径成本算法最简单的一个，仅仅根据路由需要经过的跳转数进行判断。如果有2条路线，一条经过5个路由器，一条经过10个路由器，RIP2算法就会选择第一条<br>因为简单，所以不会考虑阻塞程度等因素，所以适合于较小的网络结构</p>
+</li>
+<li><p>链路状态路由协议<br>路由交换链路状态，交换完成后，路由器会拥有全网的拓扑结构，再根据算法计算出路径。采用增量更新，链路发生变化，只需要告诉有关路由器。</p>
+<h5 id="IS-IS协议（主流协议）"><a href="#IS-IS协议（主流协议）" class="headerlink" title="IS-IS协议（主流协议）"></a>IS-IS协议（主流协议）</h5><p>收集网络内的节点和链路状态，构建出一个链路数据库，根据算法计算出最优路径（优先AS域内的跳转）<br>IS-IS分层：<br>L1普通区域，是区域内路由，只保留本区域的路由（村民）<br>L12，负责区域间的数据交换，通常位于区域边界上（村长）<br>L2骨干区域，是区域间路由，保存骨干区的路由（乡长）<br>工作原理：</p>
+</li>
+</ul>
+<ol>
+<li>建立连接关系（通过L12，L2互相通信）</li>
+<li>链路状态信息泛洪（将信息互相发送给邻居，达到链路状态数据库的一致性）<br>计算路径：<br>狄杰斯特拉算法（广度优先计算最短路径）</li>
+</ol>
+<h5 id="OSPF（Open-Shortest-Path-First，开放式最短路径优先协议）"><a href="#OSPF（Open-Shortest-Path-First，开放式最短路径优先协议）" class="headerlink" title="OSPF（Open Shortest Path First，开放式最短路径优先协议）"></a>OSPF（Open Shortest Path First，开放式最短路径优先协议）</h5><p>与IS-IS类似</p>
+<h4 id="EGP（外部路由协议）"><a href="#EGP（外部路由协议）" class="headerlink" title="EGP（外部路由协议）"></a>EGP（外部路由协议）</h4><h5 id="BGP（Border-Gateway-Protocol，边界网关协议）"><a href="#BGP（Border-Gateway-Protocol，边界网关协议）" class="headerlink" title="BGP（Border Gateway Protocol，边界网关协议）"></a>BGP（Border Gateway Protocol，边界网关协议）</h5><p>外部路由协议的层次更高，适用于不同AS之间的路由传播，没有发现和计算路由的功能，而是着重于控制路由传播和选择更好的路由。<br>外部协议是基于内部协议之上的，进行BGP传播的路由器首先要确保IGP可达。BGP需要人工配置，并建立在TCP协议之上，端口号为179</p>
+<h3 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h3><p>TCP和UDP协议属于该层</p>
+<h4 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h4><p>TCP为了保证可靠性，采用了数据分块，维护计时器，发送确认，校验和计算，丢弃重复数据和流量控制等方式<br>TCP是一种面向字节流的服务，它并不关心自己传送的是二进制、ASCII码还是其他的什么，连接双方的高层协议负责对数据进行解释</p>
+<h4 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h4><p>UDP擅长查询-应答服务，交换的信息量少</p>
+<h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><h4 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h4><p>HTTP1.1相较于HTTP1.0：</p>
+<ul>
+<li>更多可供选择的缓存策略</li>
+<li>带宽优化及网络连接的使用，请求头引入了range头域，它允许只请求资源的某个部分</li>
+<li>Host头处理，应对一个IP上存在的多台虚拟主机</li>
+<li>HTTP长链接，一个TCP连接传送多个HTTP请求，keep-alive<br>采用管道连接：<br>所谓请求管道，就是在HTTP响应到达之前，可以将多条请求放入队列，当第一条HTTP请求通过网络流向服务器时，第二条和第三条请求也可以开始发送了。但是服务端必须按照与请求相同的顺序回送HTTP响应<br>这也就意味着，如果一个响应返回发生了延迟，那么其后续的响应都会被延迟，直到队头的响应送达。这就是所谓的HTTP队头阻塞<br>HTTP队头阻塞的问题在HTTP/2中得到了有效的解决</li>
+</ul>
+<p>SPDY（speedy的昵音，意思是更快，Google开发的基于TCP的应用层协议，用以最小化网络延迟，提升网络速度，优化用户的网络使用体验）：</p>
+<ul>
+<li>多路复用<br>一个域只需要一次tcp连接，一个 SPDY 连接内可以有无限个并行请求，即允许多个并发HTTP 请求共用一个TCP会话</li>
+<li>请求优先级<br>它会选择性的先传输 CSS 这样更重要的资源，然后再传输网站图标之类不太重要的资源，可以避免让非关键资源占用网络通道的问题，提升 TCP 的性能</li>
+<li>header压缩<br>舍弃掉了不必要的头信息，经过压缩之后可以节省多余数据传输所带来的等待时间和带宽</li>
+<li>HTTPS</li>
+<li>服务器推送<br>服务端能通过 push 的方式将客户端需要的内容预先推送过去</li>
+</ul>
+<p>HTTP2.0（SPDY升级版）：</p>
+<ul>
+<li>支持HTTP明文传输，而SPDY强制使用HTTPS</li>
+<li>HTTP/2 消息头的压缩算法采用 HPACK，而非 SPDY 采用的 DELEFT</li>
+<li>HTTP1.x是基于文本传送，HTTP2是基于二进制传送<br>应用层(HTTP/2)和传输层(TCP or UDP)之间增加一个二进制分帧层<br>HTTP/2引入了帧、消息和数据流等概念，把HTTP消息分解为互不依赖的帧，然后乱序发送，最后再在另一端把它们重新组合起来，这样HTTP/2就解决了HTTP的队头阻塞<br>但TCP传输过程中会把数据拆分为一个个按照顺序排列的数据包，接收端再按照顺序将这些数据包组合成原始数据，如果其中的某一个数据包没有按照顺序到达，就会阻塞后续请求，就发生了TCP队头阻塞<br>HTTP/1.1规定一个域名可以有6个TCP连接，而HTTP/2中，同一个域名只是用一个TCP连接，所以，在HTTP/2中，TCP队头阻塞造成的影响会更大</li>
+</ul>
+<p>RTT（Round Trip Time，网络延迟）：<br>是指一个请求从客户端浏览器发送一个请求数据包到服务器，再从服务器得到响应数据包的这段时间。RTT 是反映网络性能的一个重要指标<br>一个纯的HTTPS需要3-4个RTT（TCP握手+TLS握手）</p>
+<p>HTTP3.0<br>上面提到的这些问题的根本原因都是因为HTTP/2是基于TPC实现导致的，而TCP协议自身的升级又是很难实现的（因为很多中间设备比较陈旧，更新换代成本巨大，这就导致TCP协议升级或者采用新的协议基本无法实现。）<br>所以google搞了一个基于UDP协议的QUIC（Quick UDP Internet Connections）协议，HTTP over QUIC，重命名为HTTP/3<br>QUIC协议特点：</p>
+<ul>
+<li>基于UDP</li>
+<li>可靠性<br>虽然UDP是不可靠传输协议，但是QUIC在UDP的基础上做了些改造，使得他提供了和TCP类似的可靠性。它提供了数据包重传、拥塞控制、调整传输节奏以及其他一些TCP中存在的特性</li>
+<li>实现了无序、并发字节流<br>单个数据流的传输是按序的，但是多个数据流中接收方收到的顺序可能与发送方的发送顺序不同</li>
+<li>快速握手<br>QUIC提供0-RTT和1-RTT的连接建立<br>QUIC 连接的建立整体流程大致为：<br>初次握手：</li>
+</ul>
+<ol>
+<li>客户端会向服务端发送一个打招呼信息(CHLO)</li>
+<li>因为是初次建立，所以，服务端会返回一个拒绝消息（REJ），表明握手未建立或者密钥已过期，这个拒绝消息中还会包含更多的信息（配置参数）</li>
+<li>在客户端接收到拒绝消息（REJ）之后，客户端会进行数据解析，签名验证等操作，之后会将必要的配置缓存下来</li>
+<li>客户端会打包一个消息包发送给服务端，为了减少RTT，客户端并不会等到服务器的响应，而是立刻会进行数据传输</li>
+<li>为了保证数据的安全性，客户端会自己的密钥和服务器返回的公钥进行运算，得到一个初始密钥（initial keys）将想要传输的信息进行加密，然后把他们安全的传输给服务端了</li>
+<li>另外一面，接收到Complete CHLO请求的服务器，通过运算，服务端就能得到一份和客户端一模一样的初始密钥（initial keys）<br>所以，从开始建立连接一直到数据传送，只消耗了初始连接连接建立的 1 RTT<br>最终（与重复）握手：<br>当下一次要重新创建连接的时候，客户端会从缓存中取出自己之前缓存下来的服务器的公钥，并重新创建一个密钥，重新生成一个初始密钥，再使用这个初始密钥对想要传输的数据进行加密，向服务器发送一个Complete CHLO 请求即可。这样就达到了0 RTT的数据传输<br>所以，如果是有缓存的长期公钥，那么数据传输就会直接进行，准备时间是0 RTT</li>
+</ol>
+<ul>
+<li>多路复用<br>QUIC的单个数据流可以保证有序交付，但多个数据流之间可能乱序。这意味着单个数据流的传输是按序的，但是多个数据流中接收方收到的顺序可能与发送方的发送顺序不同（猜测可能是通过sessionId进行区分？）</li>
+<li>连接迁移<br>对于TCP连接的识别，需要通过服务器和客户端过双方的ip和端口四个参数进行的。在网络切换的场景中，比如手机切换网络，那么自身的ip就会发生变化。这就导致之前的TCP连接就会失效，就需要重新建立<br>QUIC协议使用特有的UUID来标记每一次连接，在网络环境发生变化的时候，只要UUID不变，就能不需要握手，继续传输数据</li>
+<li>可靠性保证<br>诸如流量控制、数据重传、拥塞控制等可靠性保证</li>
+</ul>
+<p>参考阅读：<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/keva/p/spdy-protocol.html">SPDY协议</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/34074946/answer/108588042">HTTP/2</a><br><a target="_blank" rel="noopener" href="https://my.oschina.net/editorial-story/blog/3031721">HTTP协议这些年经历了些啥</a><br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/-sD504t5Ebm0Ubwalos8DA">HTTP3到底是个什么鬼？</a></p>
+<h3 id="安全机制"><a href="#安全机制" class="headerlink" title="安全机制"></a>安全机制</h3><h4 id="IP层的安全机制"><a href="#IP层的安全机制" class="headerlink" title="IP层的安全机制"></a>IP层的安全机制</h4><p>针对IP报文进行加密，有认证头（Authentication Header）以及封装安全有效负荷（Encapsulating Security Payload，ESP）<br>优点：底层加密，上层应用无感知<br>缺点：统一加密，性能下降<br>应用：IP VPN（Virtual Private Network）（在公网上封装加密数据通信隧道）</p>
+<h4 id="传输层的安全机制"><a href="#传输层的安全机制" class="headerlink" title="传输层的安全机制"></a>传输层的安全机制</h4><p>TCP：通信加密和安全认证<br>优点：基于进程和进程之间的加密<br>应用：BSD Sockets，传输层接口（TLI）<br>UDP：较难建立安全机制</p>
+<h4 id="应用层的安全机制"><a href="#应用层的安全机制" class="headerlink" title="应用层的安全机制"></a>应用层的安全机制</h4><p>IP层与传输层的安全机制之间所有的消息都要加密，无法区分不同文件的安全性要求，所以必须借助应用层的安全机制<br>应用：HTTPS</p>
+<h5 id="HTTPS（HTTP-TLS）"><a href="#HTTPS（HTTP-TLS）" class="headerlink" title="HTTPS（HTTP+TLS）"></a>HTTPS（HTTP+TLS）</h5><p>HTTPS协议通过数据加密、校验数据完整性和身份认证三种机制来保障安全<br>HTTPS协议混合对称密钥加密和非对称加密机制<br>对称加密：<br>传输双方共享相同的秘钥，通用相同的秘钥实现数据的加密和解密过程（同一把锁，传输双方拥有同样的钥匙）<br>优点：算法公开、计算量小、加密速度快、加密效率高<br>缺点：在数据传送前，发送方和接收方必须商定好秘钥，然后使双方都能保存好秘钥。其次如果一方的秘钥被泄露，那么加密信息也就不安全了<br>非对称加密：<br>非对称加密算法需要两个密钥，公钥与私钥是一对，公钥匙可以公开的，私钥需要保密，如果用公钥对数据进行加密，只有用对应的私钥才能解密<br>优点：它的安全性可靠性极高，在非对称体系下可以实现签名认证和加密传输功能<br>缺点：加密代价高<br>签名认证（解决身份认证的问题，确保内容一定是服务器加密发送的）：<br>用私钥加密的密文，只能被公钥解密，如果能解开，就能确保消息是由私钥拥有者加密的，否则消息是被其他人加密的<br>将自己的认证通过私钥加密后，附加在加密正文后，就完成了签名认证的过程</p>
+<p>加密的演变过程：</p>
+<ul>
+<li>假设Alice和Bob之间要进行通信，为了安全必须要达到：即使被中间人拦截到了，也无法得知消息的内容</li>
+<li>使用对称加密算法可以解决这个问题，消息是加密的，中间人无法解密，就无法得知消息的内容</li>
+<li>但加密算法的细节是无法通用的，如果在http中，大家都使用同样的加密算法，那等同于没有加密</li>
+<li>于是Web服务器与每个客户端使用不同的对称加密算法（随机数），客户端也不可能保存所有网站的算法，所以通过协商，服务器在通信时告诉客户端该使用哪种对称加密算法</li>
+<li>但是协商的过程也不是安全的，还是可能会被中间人拦截</li>
+<li>使用非对称加密+数字证书来确保协商过程的安全，客户端将CA证书的公钥保存起来，利用数字签名以信任证书</li>
+<li>客户端信任证书，证书信任服务端，所以客户端就信任服务端，就可以根据协商加密建立起安全的对称加密通信</li>
+<li>但是，万一中间人也注册了证书，并在客户端与证书之间拦截替换了协商内容（客户端收到了证书认证的内容，但这个内容不是这次想要的）</li>
+<li>证书会告诉客户端证书编号，客户端本地验证证书编号，来判断可靠性</li>
+</ul>
+<p>TLS握手过程：</p>
+<ul>
+<li>客户端发送ClientHello，以明文传输，包括：客户端支持的TLS版本号，安全套件（cipher suit）（密钥交换算法，签名算法/验签算法，摘要算法，对称加密算法），随机数A，压缩算法，重用握手等session id等</li>
+<li>服务端返回SeverHello，生成随机数B，确认并允许握手</li>
+<li>客户端证书校验，从证书中获取服务器的公钥，生成随机字符串（premaster secret），并用服务器公钥进行加密，发送给服务器</li>
+<li>服务器收到后，用私钥解密premaster secret，客户端与服务器使用相同的算法，随机数AB，premaster secret生成用于对称加密的规则</li>
+<li>使用对称加密互相发送finished信号</li>
+</ul>
+<h4 id="常见FQ工具的加密原理（具体源码细节日后再研究…）"><a href="#常见FQ工具的加密原理（具体源码细节日后再研究…）" class="headerlink" title="常见FQ工具的加密原理（具体源码细节日后再研究…）"></a>常见FQ工具的加密原理（具体源码细节日后再研究…）</h4><h5 id="shadowsocks"><a href="#shadowsocks" class="headerlink" title="shadowsocks"></a>shadowsocks</h5><p>shadowsocks在本地（ss local）建立socket5（位于传输层和会话层之间的通信协议）加密服务，发送给ss server后请求内容</p>
+<h5 id="V2Ray，Trojan"><a href="#V2Ray，Trojan" class="headerlink" title="V2Ray，Trojan"></a>V2Ray，Trojan</h5><p>WebSocket+TLS，模拟HTTPS</p>
+<p>（依稀记得前同事说他挖了V2Ray的bug，因为模拟浏览器数据不够严谨，所以能被识别。其他的方式还有解同步暴力拆Q的方式（不推荐），自己日后再慢慢研究<br>参考阅读：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.idleleo.com/10/4766.html">V2Ray、Trojan等主流工具安全吗？</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.idleleo.com/05/2071.html">V2Ray / SSR 传输协议哪个好? (各种协议对比)</a></li>
+<li><a target="_blank" rel="noopener" href="https://wonderkun.cc/2020/02/18/shadowsocks%E7%9A%84%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E4%BB%A5%E5%8F%8A%E6%94%BB%E5%87%BB%E6%96%B9%E6%B3%95%E5%88%86%E6%9E%90/">shadowsocks的通信原理以及攻击方法分析</a></li>
+</ul>
+<h3 id="生活中的网络"><a href="#生活中的网络" class="headerlink" title="生活中的网络"></a>生活中的网络</h3><p>从小学开始就接触电脑玩游戏，很多概念都耳熟能详，例如：拨号，宽带，猫，光纤，路由器，交换机，AP，DHCP，VLAN等等，但对于具体知识都不清楚，所以学习一下这些知识<br>网线:<br>UTP(Unshielded Twisted Pair，非屏蔽双绞线)+RJ45水晶头<br>双绞线互相绞合用于抗电磁干扰（不知道我的HDMI转Type-C是不是因为电磁干扰，天天灭屏）<br>1对2对双绞线用于电话线，4对用于以太网，25对或50对大对数电缆用于语音或数据业务的接入<br>以太网线共有5类4个线对，一共8根线，对应RJ45水晶头的8个凹槽</p>
+<p>拨号上网：<br>通过猫和一根电话线，向服务商申请上网账号后，通过拨号的方式接入到互联网中</p>
+<p>光纤（光导纤维）：<br>利用光的全反射来传递信息</p>
+<p>猫（Modem，调制解调器）：<br>传统意义的猫：可以将电话线中的模拟信号与数字信号互相转换<br>光猫：将光信号转为数字信号（自动拨号）</p>
+<p>ADSL（Asymmetric Digital Subscriber Line，非对称数字用户线路）：<br>是宽带接入技术中的一种，所谓非对称主要体现在上行速率和下行速率的非对称性上<br>特点：</p>
+<ul>
+<li>提供上、下行不对称的传输带宽，下载速度快，上传速度较慢</li>
+<li>上网、打电话互不干扰（遥想当年一打电话就断网）</li>
+</ul>
+<p>DHCP（动态主机配置协议）：<br>DHCP是基于UDP的应用层协议<br>服务器分配IP地址、子网掩码和DNS等信息</p>
+<p>VLAN（Virtual Local Area Network，虚拟局域网）：<br>将局域网从逻辑上分为一个个网段。如果所有的局域网处于同一个网段，在实际通信中，将会发生ARP泛洪，浪费了带宽也增加了CPU的负担。<br>所以通过对交换机对端口进行分组，将物理的LAN在逻辑上划分为多个广播域（VLAN）<br>不同VLAN之间无法直接通信，需要通过路由器或三层交换机<br>VLAN种类：</p>
+<ul>
+<li>基于端口的静态VLAN</li>
+<li>基于IP（子网）的动态VLAN</li>
+</ul>
+<p>交换机：<br>交换机（二层交换机）属于数据链路层即根据MAC地址进行数据转发<br>三层交换机，是具有部分路由器功能的交换机，属于网络层，目的是为了加快不同VLAN之间的通信（二层交换机做不到，路由器太慢）</p>
+<p>无线AP（Access Point）：<br>是无线路由器等设备的统称，是无线局域网的一种典型应用，在无线网络中，AP就相当于有线网络的集线器，用来中继和桥接无线信号</p>
+<div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="/js/md5.min.js"></script>
+<script >
+var gitalk = new Gitalk({
+  clientID: '690f7443a587c05ba6f5',
+  clientSecret: '5702fe23820d4464abfd4e2f9a736da2565ae3c9',
+  repo: 'haoyanwang.github.io',
+  owner: 'haoyanwang',
+  admin: ['haoyanwang'],
+  id: md5(location.pathname),  
+  distractionFreeMode: false,
+});
+gitalk.render('gitalk-container')
+</script>
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/12/TCP-IP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" data-id="cl2hs9wpu0002now2gckp86om" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/03/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          正则表达式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/02/23/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">电子邮件</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/03/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/12/TCP-IP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/02/23/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6/">电子邮件</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/18/%E9%98%85%E8%AF%BBtype-fest%E6%BA%90%E7%A0%81/">阅读type-fest源码</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 王皓衍<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags/%20%7C%7C%20tags" class="mobile-nav-link">tags</a>
+  
+    <a href="/categories/%20%7C%7C%20th" class="mobile-nav-link">categories</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>
