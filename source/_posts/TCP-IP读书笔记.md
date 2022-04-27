@@ -1,3 +1,15 @@
+---
+title: TCP/IP读书笔记
+top: false
+cover: false
+toc: true
+mathjax: true
+password:
+summary:
+tags:
+categories:
+---
+
 # TCP/IP读书笔记
 从小学开始就鼓捣电脑，很早就听说了类似ip、mac地址，VLAN,WLAN,猫，子网掩码，DNS地址等技术名词。
 上学以后也学习了计算机网络，听说了类似OSI七层模型，TCP、UDP等概念。
