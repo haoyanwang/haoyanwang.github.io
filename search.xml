@@ -10,8 +10,6 @@
 <li>贪婪匹配</li>
 <li>先行断言、后行断言</li>
 <li>单词边界断言</li>
-<li>位置断言</li>
-<li>环视断言</li>
 </ul>
 <h2 id="常用js-api"><a href="#常用js-api" class="headerlink" title="常用js api"></a>常用js api</h2><ol>
 <li>str.replace(regexp, replacement)<br>regexp可以是正则 也可以是 字面量字符串<br>replacement可以是字符串也可以是函数<br>replacement是字符串时， $ 字符具有特定的含义</li>
@@ -51,18 +49,104 @@
 <p>eg.<br>(\b)some(\b) (\b)word(\b)<br>在这个例子中有4处单词边界<br>且并不代表任何字符<br>且不区分左右，只要满足条件就行</p>
 <p>eg.<br>隐藏手机号4-7位<br>text.replace(/\d{4}(?=\d{4}\b)/, ‘****’)</p>
 <h2 id="codeWars"><a href="#codeWars" class="headerlink" title="codeWars"></a>codeWars</h2><h3 id="8-kyu（黑铁级）"><a href="#8-kyu（黑铁级）" class="headerlink" title="8 kyu（黑铁级）"></a>8 kyu（黑铁级）</h3><ol>
-<li><a href="https://www.codewars.com/kata/57e1e61ba396b3727c000251/train/javascript">https://www.codewars.com/kata/57e1e61ba396b3727c000251/train/javascript</a><br>s.replace(/\d/g,’’)</li>
-<li><a href="https://www.codewars.com/kata/55ccdf1512938ce3ac000056/train/javascript">https://www.codewars.com/kata/55ccdf1512938ce3ac000056/train/javascript</a><br>我甚至没看懂这道题想干啥…</li>
-<li><a href="https://www.codewars.com/kata/567bf4f7ee34510f69000032/train/javascript">https://www.codewars.com/kata/567bf4f7ee34510f69000032/train/javascript</a><br>/^\d$/.test(this)</li>
-<li><a href="https://www.codewars.com/kata/56a3f08aa9a6cc9b75000023/train/javascript">https://www.codewars.com/kata/56a3f08aa9a6cc9b75000023/train/javascript</a><br>/^[0-9a-z_]{4,16}$/.test(username)</li>
-<li><a href="https://www.codewars.com/kata/57a37f3cbb99449513000cd8/train/javascript">https://www.codewars.com/kata/57a37f3cbb99449513000cd8/train/javascript</a><br>Number(s.replace(/\D/g,’’))</li>
-<li><a href="https://www.codewars.com/kata/56a25ba95df27b7743000016/train/javascript">https://www.codewars.com/kata/56a25ba95df27b7743000016/train/javascript</a><br>/^[123]/.test(String(code))</li>
-<li><a href="https://www.codewars.com/kata/56a946cd7bd95ccab2000055/train/javascript">https://www.codewars.com/kata/56a946cd7bd95ccab2000055/train/javascript</a><br>str.match(/[a-z]/g) ? str.match(/[a-z]/g).length : 0</li>
+<li><a href="https://www.codewars.com/kata/57e1e61ba396b3727c000251/train/javascript">https://www.codewars.com/kata/57e1e61ba396b3727c000251/train/javascript</a><br> s.replace(/\d/g,’’)</li>
+<li><a href="https://www.codewars.com/kata/567bf4f7ee34510f69000032/train/javascript">https://www.codewars.com/kata/567bf4f7ee34510f69000032/train/javascript</a><br> /^\d$/.test(this)</li>
+<li><a href="https://www.codewars.com/kata/56a3f08aa9a6cc9b75000023/train/javascript">https://www.codewars.com/kata/56a3f08aa9a6cc9b75000023/train/javascript</a><br> /^[0-9a-z_]{4,16}$/.test(username)</li>
+<li><a href="https://www.codewars.com/kata/57a37f3cbb99449513000cd8/train/javascript">https://www.codewars.com/kata/57a37f3cbb99449513000cd8/train/javascript</a><br> Number(s.replace(/\D/g,’’))</li>
+<li><a href="https://www.codewars.com/kata/56a25ba95df27b7743000016/train/javascript">https://www.codewars.com/kata/56a25ba95df27b7743000016/train/javascript</a><br> /^[123]/.test(String(code))</li>
+<li><a href="https://www.codewars.com/kata/56a946cd7bd95ccab2000055/train/javascript">https://www.codewars.com/kata/56a946cd7bd95ccab2000055/train/javascript</a><br> str.match(/[a-z]/g) ? str.match(/[a-z]/g).length : 0</li>
+</ol>
+<h3 id="7-kyu（青铜级）"><a href="#7-kyu（青铜级）" class="headerlink" title="7 kyu（青铜级）"></a>7 kyu（青铜级）</h3><ol>
+<li><a href="https://www.codewars.com/kata/559e5b717dd758a3eb00005a/train/javascript">https://www.codewars.com/kata/559e5b717dd758a3eb00005a/train/javascript</a><br>n.replace(/[a-zA-Z]{3,}\b/g, (s) =&gt; <code>$&#123;s.slice(0,1).toUpperCase()&#125;$&#123;s.slice(1,s.length).toLowerCase()&#125;</code>)</li>
+<li><a href="https://www.codewars.com/kata/55da6c52a94744b379000036/train/javascript">https://www.codewars.com/kata/55da6c52a94744b379000036/train/javascript</a><br>str.match(/\d+(?!\d])/g) ? str.match(/\d+(?!\d])/g).map(x =&gt; Number(x)).reduce((a,b) =&gt; a + b,0) : 0</li>
+<li><a href="https://www.codewars.com/kata/585b1fafe08bae9988000314/train/javascript%EF%BC%88get%E6%98%AF%E8%87%AA%E5%B7%B1%E5%86%99%E7%9A%84%EF%BC%8C%E7%94%A8%E6%9D%A5%E5%BE%AA%E7%8E%AF%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%89">https://www.codewars.com/kata/585b1fafe08bae9988000314/train/javascript（get是自己写的，用来循环的函数）</a><br>s.match(/\d/g) ? s.match(/\d/g).map(x =&gt; get(x,Number(x))).reduce((a ,b) =&gt; a + b,’’) : ‘’</li>
+<li><a href="https://www.codewars.com/kata/55f8a9c06c018a0d6e000132/train/javascript">https://www.codewars.com/kata/55f8a9c06c018a0d6e000132/train/javascript</a><br>/^(\d{4}|\d{6})$/.test(pin)</li>
+<li><a href="https://www.codewars.com/kata/57faf32df815ebd49e000117/train/javascript">https://www.codewars.com/kata/57faf32df815ebd49e000117/train/javascript</a><br>string.replace(/(?&lt;=[a-zA-Z])!+/g,’’)</li>
+<li><a href="https://www.codewars.com/kata/568dc69683322417eb00002c/train/javascript">https://www.codewars.com/kata/568dc69683322417eb00002c/train/javascript</a><br>(/x[a-z]{0,2}/).test(str) ? str.match(/x[a-z]{0,2}/)[0] === ‘xxx’ : false</li>
+<li><a href="https://www.codewars.com/kata/5b39e91ee7a2c103300018b3/train/javascript%EF%BC%88%E6%B2%A1%E5%81%9A%E5%87%BA%E6%9D%A5%EF%BC%89">https://www.codewars.com/kata/5b39e91ee7a2c103300018b3/train/javascript（没做出来）</a><br>s.replace(/\b(\w+)\s(?=\1\b)/g,’’)</li>
+<li><a href="https://www.codewars.com/kata/5637b03c6be7e01d99000046/train/javascript">https://www.codewars.com/kata/5637b03c6be7e01d99000046/train/javascript</a><br>map是用来做替换映射的<br>phrase.match(/\w+\b/g).map(item =&gt; map[item.slice(0,1)] || item.slice(0,1)).join(‘’)</li>
+<li><a href="https://www.codewars.com/kata/588f5a38ec641b411200005b/train/javascript">https://www.codewars.com/kata/588f5a38ec641b411200005b/train/javascript</a><br>date.match(/\d+(?=/)/)</li>
+<li><a href="https://www.codewars.com/kata/52fba66badcd10859f00097e/train/javascript">https://www.codewars.com/kata/52fba66badcd10859f00097e/train/javascript</a><br>str.replace(/[aeiou]/gi,’’)</li>
+<li><a href="https://www.codewars.com/kata/5639bdcef2f9b06ce800005b/train/javascript">https://www.codewars.com/kata/5639bdcef2f9b06ce800005b/train/javascript</a><br>s.match(/[a-zA-z]+\b/g).map(item =&gt; item.slice(0,1)).join(‘’)</li>
+<li><a href="https://www.codewars.com/kata/55f9064161541a9e01000001/train/javascript">https://www.codewars.com/kata/55f9064161541a9e01000001/train/javascript</a><br>琢磨了半天，似乎是我自己想复杂了…本以为100这种也属于valid number，看了答案发现这种算invalid<br>/^[-+]?\d*.\d{2}$/.test(num)</li>
+<li><a href="https://www.codewars.com/kata/5b37a50642b27ebf2e000010/train/javascript">https://www.codewars.com/kata/5b37a50642b27ebf2e000010/train/javascript</a><br>beach.match(/Sand|Water|Fish|sun/ig) ? beach.match(/Sand|Water|Fish|sun/ig).length : 0</li>
 </ol>
 ]]></content>
   </entry>
   <entry>
-    <title></title>
+    <title>电子邮件</title>
+    <url>/2021/02/23/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6/</url>
+    <content><![CDATA[<h1 id="电子邮件"><a href="#电子邮件" class="headerlink" title="电子邮件"></a>电子邮件</h1><p>最近在发邮件服务上遇到点问题，所以深入研究一下电子邮件的原理细节（因为自己个人不经常使用，总有一种email很久远的感觉）</p>
+<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><h3 id="邮件"><a href="#邮件" class="headerlink" title="邮件"></a>邮件</h3><p>邮件是一种消息的格式，由信封、首部和正文组成。</p>
+<ul>
+<li>信封上最重要的是收信人的地址。邮件服务器用这个地址将邮件发送到收信人所在的邮件服务器上。</li>
+<li>首部是由用户代理或邮件服务器添加的一些信息。包括Received、Message-ID、From、Data、Reply-To、X-Phone、X-Mailer、To和Subject等字段。</li>
+<li>正文是是发送用户发给接收用户报文的内容。</li>
+</ul>
+<h3 id="用户代理"><a href="#用户代理" class="headerlink" title="用户代理"></a>用户代理</h3><p>用户代理UA（User Agent）是用户与电子邮件系统的交互接口，一般来说它就是我们PC机上的一个程序。Windows上常见的用户代理是Foxmail和Outlook客户端。<br>用户代理提供一个好的用户界面，它提取用户在其界面填写的各项信息，生成一封符合SMTP等邮件标准的邮件，然后采用SMTP协议将邮件发送到发送端邮件服务器。</p>
+<h3 id="邮件的收发过程"><a href="#邮件的收发过程" class="headerlink" title="邮件的收发过程"></a>邮件的收发过程</h3><p>一般情况下，一封邮件的发送和接收过程如下。</p>
+<ol>
+<li>发信人在用户代理里编辑邮件，包括填写发信人邮箱、收信人邮箱和邮件标题等等。</li>
+<li>用户代理提取发信人编辑的信息，生成一封符合邮件格式标准的邮件。</li>
+<li>用户代理用SMTP将邮件发送到发送端邮件服务器（即发信人邮箱所对应的邮件服务器）。</li>
+<li>发送端邮件服务器用SMTP将邮件发送到接收端邮件服务器（即收信人邮箱所对应的邮件服务器）。</li>
+<li>收信人调用用户代理。用户代理用POP3协议从接收端邮件服务器取回邮件。</li>
+<li>用户代理解析收到的邮件，以适当的形式呈现在收信人面前。</li>
+</ol>
+<h2 id="电子邮件相关协议"><a href="#电子邮件相关协议" class="headerlink" title="电子邮件相关协议"></a>电子邮件相关协议</h2><h3 id="SMTP协议（Simple-Mail-Transfer-Protocal）"><a href="#SMTP协议（Simple-Mail-Transfer-Protocal）" class="headerlink" title="SMTP协议（Simple Mail Transfer Protocal）"></a>SMTP协议（Simple Mail Transfer Protocal）</h3><p>SMTP协议是用于发送方的邮件服务器发送报文到接收方邮件服务器。它是一种推协议，通常它工作在两种情况下：一是邮件从客户机传输到服务器；二是从某一个服务器传输到另一个服务器。<br>SMTP协议基于 <a href="https://haoyanwang.github.io/2020/12/20/TCP-IP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/#TCP">TCP协议</a> ，监听25号端口。<br>PC通过邮件客户端使用SMTP协议将邮件，推送到邮件服务器上<br>邮件服务器再通过SMTP协议，将邮件送到对方的邮件服务器上，等到对方上网的时候，就可以收到你所寄的信<br>（个人不是很理解为什么不使用HTTP协议推送呢，也许因为当时HTTP协议还不够成熟？也有说法是HTTP是一种拉取协议，这里需要的是一种推送协议）</p>
+<p><img src="https://img-blog.csdn.net/20180720142251413?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpdW1pYW9jbg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="avatar"> </p>
+<p>一个具体的SMTP通信（如发送端邮件服务器与接收端服务器的通信）的过程如下：</p>
+<ol>
+<li>发送端邮件服务器（以下简称客户端）与接收端邮件服务器（以下简称服务器）的25号端口建立TCP连接。</li>
+<li>客户端向服务器发送各种命令，来请求各种服务（如认证、指定发送人和接收人）。</li>
+<li>服务器解析用户的命令，做出相应动作并返回给客户端一个响应。</li>
+<li>2和3交替进行，直到所有邮件都发送完或两者的连接被意外中断。<br>具体例子、命令以及响应见参考链接</li>
+</ol>
+<p>SMTP的优缺点</p>
+<ul>
+<li>邮件内容受限<br>因为SMTP协议采用ASCII码进行编码<br>二进制文件、声音和动画等其他复杂内容，实现起来将十分困难，所以RFC标准就扩展了新的电子邮件标准，MIME（Multipurpose Internet Mail Extensions，多用途互联网邮件扩展类型）<br>MIME最早应用于电子邮件系统，但后来也应用到浏览器。服务器会将它们发送的多媒体数据的类型告诉浏览器</li>
+<li>命令过于简单，没提供认证等功能<br>ESMTP是添加了用户认证功的SMTP</li>
+</ul>
+<h3 id="MIME协议"><a href="#MIME协议" class="headerlink" title="MIME协议"></a>MIME协议</h3><p>MIME协议通过改进邮件头和邮件体，试图在不改变SMTP协议和邮件格式标准的基础上，使得邮件可以传输任何二进制文件。<br>在邮件头内指定MIME-Version、Content-Type和Content-Transfer-Encoding等字段</p>
+<h4 id="Content-Type（内容类型域）"><a href="#Content-Type（内容类型域）" class="headerlink" title="Content-Type（内容类型域）"></a>Content-Type（内容类型域）</h4><p>由主类型/子类型组成，来指定邮件体的类型，常见的有text/plain（纯文本）和text/html（html邮件）</p>
+<h4 id="Content-Transfer-Encoding（传送编码域）"><a href="#Content-Transfer-Encoding（传送编码域）" class="headerlink" title="Content-Transfer-Encoding（传送编码域）"></a>Content-Transfer-Encoding（传送编码域）</h4><p>共有Base64、Quoted-printable，7bit，8bit和Binary几种类型</p>
+<h3 id="编码方式"><a href="#编码方式" class="headerlink" title="编码方式"></a>编码方式</h3><h4 id="7位ASCII码"><a href="#7位ASCII码" class="headerlink" title="7位ASCII码"></a>7位ASCII码</h4><p>由7位二进制组成，可表示128个字符，其中包括95个可打印字符和33个控制字符<br>其中48～57为0到9十个阿拉伯数字，65～90为26个大写英文字母，97～122号为26个小写英文字母，其余为一些标点符号、运算符号等。</p>
+<h4 id="Quoted-printable编码"><a href="#Quoted-printable编码" class="headerlink" title="Quoted-printable编码"></a>Quoted-printable编码</h4><p>Quoted-printable编码用一些可打印常用字符，表示一个字节（8位）中所有非打印字符方法<br>33个不可打印字符，可编码为3个字符：一个等号”=”后跟随两个十六进制数字(0–9或A–F)表示该字节的数值.例如，ASCII码换页符（十进制值为12）可以表示为”=0C”<br>详细规则见<a href="http://blog.chacuo.net/494.html">参考阅读</a></p>
+<p>例如：<br>If you believe that truth=beauty, then surely mathematics is the most beautiful branch of philosophy.<br>编码后结果是：<br>If you believe that truth=3Dbeauty, then surely=20=<br>mathematics is the most beautiful branch of philosophy.</p>
+<h4 id="Base64编码"><a href="#Base64编码" class="headerlink" title="Base64编码"></a>Base64编码</h4><p>Base64是网络上最常见的用于传输8Bit字节码的编码方式之一，Base64就是一种基于64个可打印字符来表示二进制数据的方法。<br>64个可打印字符的索引，[‘A’, ‘B’, ‘C’, … ‘a’, ‘b’, ‘c’, … ‘0’, ‘1’, … ‘+’, ‘/‘]，这是标准的Base64协议规定。<br>转换步骤：</p>
+<ol>
+<li>将待转换的字符串每三个字节分为一组，每个字节占8bit，那么共有24个二进制位。</li>
+<li>将上面的24个二进制位每6个一组，共分为4组。</li>
+<li>在每组前面添加两个0，每组由6个变为8个二进制位，总共32个二进制位，即四个字节。</li>
+<li>根据Base64映射表，获得对应的值<br>特点：</li>
+</ol>
+<ul>
+<li>大多数编码都是由字符串转化成二进制的过程，而Base64的编码则是从二进制转换为字符串。与常规恰恰相反，</li>
+<li>Base64编码主要用在传输、存储、表示二进制领域，不能算得上加密，只是无法直接看到明文。也可以通过打乱Base64编码来进行加密。</li>
+<li>中文有多种编码（比如：utf-8、gb2312、gbk等），不同编码对应Base64编码结果都不一样。</li>
+<li>上面我们已经看到了Base64就是用6位（2的6次幂就是64）表示字符，因此成为Base64。同理，Base32就是用5位，Base16就是用4位。</li>
+</ul>
+<p>具体例子和特殊情况见<a href="https://blog.csdn.net/wo541075754/article/details/81734770">参考阅读</a></p>
+<h3 id="POP3（Post-Office-Protocol-3，邮局协议版本3）"><a href="#POP3（Post-Office-Protocol-3，邮局协议版本3）" class="headerlink" title="POP3（Post Office Protocol-3，邮局协议版本3）"></a>POP3（Post Office Protocol-3，邮局协议版本3）</h3><p>邮件客户端连接邮件服务器，并下载所有未阅读的电子邮件<br>默认端口：110<br>传输协议：TCP<br>架构结构：C/S<br>访问模式：离线访问</p>
+<p>POP3有三种生命周期：</p>
+<ul>
+<li>确认</li>
+<li>操作</li>
+<li>更新</li>
+</ul>
+<p>参考链接：<br><a href="https://blog.csdn.net/liangxiaozhang/article/details/7841975?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.control">SMTP协议分析</a><br><a href="https://liumiaocn.blog.csdn.net/article/details/81131420?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-5.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-5.control">使用Telnet学习SMTP协议</a><br><a href="https://wenku.baidu.com/view/0af3cfb905087632311212be.html">MIME协议详解</a><br><a href="https://blog.csdn.net/wo541075754/article/details/81734770">Base64编码详解</a><br><a href="http://blog.chacuo.net/494.html">Quoted-printable 编码介绍、编码解码转换</a></p>
+<h2 id="编辑电子邮件"><a href="#编辑电子邮件" class="headerlink" title="编辑电子邮件"></a>编辑电子邮件</h2><h3 id="HTML格式的电子邮件"><a href="#HTML格式的电子邮件" class="headerlink" title="HTML格式的电子邮件"></a>HTML格式的电子邮件</h3><p>编写电子邮件模板不是一个愉快的体验，因为电子邮件客户端的解析引擎并不是常见的浏览器，会有各种兼容性问题<br>例如：</p>
+<ul>
+<li>需要使用Table+css的布局</li>
+<li>仅仅支持内联css，不支持style标签以及引入的css</li>
+<li>不支持min-width和max-width</li>
+<li>不支持任何margin</li>
+<li>不支持任何定位属性<br>等等一系列问题（个人感觉需要一个大手子来淘汰电子邮件的html。现在虽然有用来兼容的库，但是学习这些不同的库，了解这些问题也是需要成本的）</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>TCP/IP读书笔记</title>
     <url>/2022/03/12/TCP-IP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="TCP-IP读书笔记"><a href="#TCP-IP读书笔记" class="headerlink" title="TCP/IP读书笔记"></a>TCP/IP读书笔记</h1><p>从小学开始就鼓捣电脑，很早就听说了类似ip、mac地址，VLAN,WLAN,猫，子网掩码，DNS地址等技术名词。<br>上学以后也学习了计算机网络，听说了类似OSI七层模型，TCP、UDP等概念。<br>工作以后也接触到了更多的网络知识，但一直是知其然不知其所以然，缺乏比较系统的学习，所以今天就记录一下学习的过程。</p>
 <h2 id="网络规则"><a href="#网络规则" class="headerlink" title="网络规则"></a>网络规则</h2><p>二进制数字到底经过了那些步骤，最后构成了网络世界？</p>
@@ -243,78 +327,6 @@ gitalk.render('gitalk-container')
 </script>
 
 
-]]></content>
-  </entry>
-  <entry>
-    <title>电子邮件</title>
-    <url>/2021/02/23/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6/</url>
-    <content><![CDATA[<h1 id="电子邮件"><a href="#电子邮件" class="headerlink" title="电子邮件"></a>电子邮件</h1><p>最近在发邮件服务上遇到点问题，所以深入研究一下电子邮件的原理细节（因为自己个人不经常使用，总有一种email很久远的感觉）</p>
-<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><h3 id="邮件"><a href="#邮件" class="headerlink" title="邮件"></a>邮件</h3><p>邮件是一种消息的格式，由信封、首部和正文组成。</p>
-<ul>
-<li>信封上最重要的是收信人的地址。邮件服务器用这个地址将邮件发送到收信人所在的邮件服务器上。</li>
-<li>首部是由用户代理或邮件服务器添加的一些信息。包括Received、Message-ID、From、Data、Reply-To、X-Phone、X-Mailer、To和Subject等字段。</li>
-<li>正文是是发送用户发给接收用户报文的内容。</li>
-</ul>
-<h3 id="用户代理"><a href="#用户代理" class="headerlink" title="用户代理"></a>用户代理</h3><p>用户代理UA（User Agent）是用户与电子邮件系统的交互接口，一般来说它就是我们PC机上的一个程序。Windows上常见的用户代理是Foxmail和Outlook客户端。<br>用户代理提供一个好的用户界面，它提取用户在其界面填写的各项信息，生成一封符合SMTP等邮件标准的邮件，然后采用SMTP协议将邮件发送到发送端邮件服务器。</p>
-<h3 id="邮件的收发过程"><a href="#邮件的收发过程" class="headerlink" title="邮件的收发过程"></a>邮件的收发过程</h3><p>一般情况下，一封邮件的发送和接收过程如下。</p>
-<ol>
-<li>发信人在用户代理里编辑邮件，包括填写发信人邮箱、收信人邮箱和邮件标题等等。</li>
-<li>用户代理提取发信人编辑的信息，生成一封符合邮件格式标准的邮件。</li>
-<li>用户代理用SMTP将邮件发送到发送端邮件服务器（即发信人邮箱所对应的邮件服务器）。</li>
-<li>发送端邮件服务器用SMTP将邮件发送到接收端邮件服务器（即收信人邮箱所对应的邮件服务器）。</li>
-<li>收信人调用用户代理。用户代理用POP3协议从接收端邮件服务器取回邮件。</li>
-<li>用户代理解析收到的邮件，以适当的形式呈现在收信人面前。</li>
-</ol>
-<h2 id="电子邮件相关协议"><a href="#电子邮件相关协议" class="headerlink" title="电子邮件相关协议"></a>电子邮件相关协议</h2><h3 id="SMTP协议（Simple-Mail-Transfer-Protocal）"><a href="#SMTP协议（Simple-Mail-Transfer-Protocal）" class="headerlink" title="SMTP协议（Simple Mail Transfer Protocal）"></a>SMTP协议（Simple Mail Transfer Protocal）</h3><p>SMTP协议是用于发送方的邮件服务器发送报文到接收方邮件服务器。它是一种推协议，通常它工作在两种情况下：一是邮件从客户机传输到服务器；二是从某一个服务器传输到另一个服务器。<br>SMTP协议基于 <a href="https://haoyanwang.github.io/2020/12/20/TCP-IP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/#TCP">TCP协议</a> ，监听25号端口。<br>PC通过邮件客户端使用SMTP协议将邮件，推送到邮件服务器上<br>邮件服务器再通过SMTP协议，将邮件送到对方的邮件服务器上，等到对方上网的时候，就可以收到你所寄的信<br>（个人不是很理解为什么不使用HTTP协议推送呢，也许因为当时HTTP协议还不够成熟？也有说法是HTTP是一种拉取协议，这里需要的是一种推送协议）</p>
-<p><img src="https://img-blog.csdn.net/20180720142251413?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpdW1pYW9jbg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="avatar"> </p>
-<p>一个具体的SMTP通信（如发送端邮件服务器与接收端服务器的通信）的过程如下：</p>
-<ol>
-<li>发送端邮件服务器（以下简称客户端）与接收端邮件服务器（以下简称服务器）的25号端口建立TCP连接。</li>
-<li>客户端向服务器发送各种命令，来请求各种服务（如认证、指定发送人和接收人）。</li>
-<li>服务器解析用户的命令，做出相应动作并返回给客户端一个响应。</li>
-<li>2和3交替进行，直到所有邮件都发送完或两者的连接被意外中断。<br>具体例子、命令以及响应见参考链接</li>
-</ol>
-<p>SMTP的优缺点</p>
-<ul>
-<li>邮件内容受限<br>因为SMTP协议采用ASCII码进行编码<br>二进制文件、声音和动画等其他复杂内容，实现起来将十分困难，所以RFC标准就扩展了新的电子邮件标准，MIME（Multipurpose Internet Mail Extensions，多用途互联网邮件扩展类型）<br>MIME最早应用于电子邮件系统，但后来也应用到浏览器。服务器会将它们发送的多媒体数据的类型告诉浏览器</li>
-<li>命令过于简单，没提供认证等功能<br>ESMTP是添加了用户认证功的SMTP</li>
-</ul>
-<h3 id="MIME协议"><a href="#MIME协议" class="headerlink" title="MIME协议"></a>MIME协议</h3><p>MIME协议通过改进邮件头和邮件体，试图在不改变SMTP协议和邮件格式标准的基础上，使得邮件可以传输任何二进制文件。<br>在邮件头内指定MIME-Version、Content-Type和Content-Transfer-Encoding等字段</p>
-<h4 id="Content-Type（内容类型域）"><a href="#Content-Type（内容类型域）" class="headerlink" title="Content-Type（内容类型域）"></a>Content-Type（内容类型域）</h4><p>由主类型/子类型组成，来指定邮件体的类型，常见的有text/plain（纯文本）和text/html（html邮件）</p>
-<h4 id="Content-Transfer-Encoding（传送编码域）"><a href="#Content-Transfer-Encoding（传送编码域）" class="headerlink" title="Content-Transfer-Encoding（传送编码域）"></a>Content-Transfer-Encoding（传送编码域）</h4><p>共有Base64、Quoted-printable，7bit，8bit和Binary几种类型</p>
-<h3 id="编码方式"><a href="#编码方式" class="headerlink" title="编码方式"></a>编码方式</h3><h4 id="7位ASCII码"><a href="#7位ASCII码" class="headerlink" title="7位ASCII码"></a>7位ASCII码</h4><p>由7位二进制组成，可表示128个字符，其中包括95个可打印字符和33个控制字符<br>其中48～57为0到9十个阿拉伯数字，65～90为26个大写英文字母，97～122号为26个小写英文字母，其余为一些标点符号、运算符号等。</p>
-<h4 id="Quoted-printable编码"><a href="#Quoted-printable编码" class="headerlink" title="Quoted-printable编码"></a>Quoted-printable编码</h4><p>Quoted-printable编码用一些可打印常用字符，表示一个字节（8位）中所有非打印字符方法<br>33个不可打印字符，可编码为3个字符：一个等号”=”后跟随两个十六进制数字(0–9或A–F)表示该字节的数值.例如，ASCII码换页符（十进制值为12）可以表示为”=0C”<br>详细规则见<a href="http://blog.chacuo.net/494.html">参考阅读</a></p>
-<p>例如：<br>If you believe that truth=beauty, then surely mathematics is the most beautiful branch of philosophy.<br>编码后结果是：<br>If you believe that truth=3Dbeauty, then surely=20=<br>mathematics is the most beautiful branch of philosophy.</p>
-<h4 id="Base64编码"><a href="#Base64编码" class="headerlink" title="Base64编码"></a>Base64编码</h4><p>Base64是网络上最常见的用于传输8Bit字节码的编码方式之一，Base64就是一种基于64个可打印字符来表示二进制数据的方法。<br>64个可打印字符的索引，[‘A’, ‘B’, ‘C’, … ‘a’, ‘b’, ‘c’, … ‘0’, ‘1’, … ‘+’, ‘/‘]，这是标准的Base64协议规定。<br>转换步骤：</p>
-<ol>
-<li>将待转换的字符串每三个字节分为一组，每个字节占8bit，那么共有24个二进制位。</li>
-<li>将上面的24个二进制位每6个一组，共分为4组。</li>
-<li>在每组前面添加两个0，每组由6个变为8个二进制位，总共32个二进制位，即四个字节。</li>
-<li>根据Base64映射表，获得对应的值<br>特点：</li>
-</ol>
-<ul>
-<li>大多数编码都是由字符串转化成二进制的过程，而Base64的编码则是从二进制转换为字符串。与常规恰恰相反，</li>
-<li>Base64编码主要用在传输、存储、表示二进制领域，不能算得上加密，只是无法直接看到明文。也可以通过打乱Base64编码来进行加密。</li>
-<li>中文有多种编码（比如：utf-8、gb2312、gbk等），不同编码对应Base64编码结果都不一样。</li>
-<li>上面我们已经看到了Base64就是用6位（2的6次幂就是64）表示字符，因此成为Base64。同理，Base32就是用5位，Base16就是用4位。</li>
-</ul>
-<p>具体例子和特殊情况见<a href="https://blog.csdn.net/wo541075754/article/details/81734770">参考阅读</a></p>
-<h3 id="POP3（Post-Office-Protocol-3，邮局协议版本3）"><a href="#POP3（Post-Office-Protocol-3，邮局协议版本3）" class="headerlink" title="POP3（Post Office Protocol-3，邮局协议版本3）"></a>POP3（Post Office Protocol-3，邮局协议版本3）</h3><p>邮件客户端连接邮件服务器，并下载所有未阅读的电子邮件<br>默认端口：110<br>传输协议：TCP<br>架构结构：C/S<br>访问模式：离线访问</p>
-<p>POP3有三种生命周期：</p>
-<ul>
-<li>确认</li>
-<li>操作</li>
-<li>更新</li>
-</ul>
-<p>参考链接：<br><a href="https://blog.csdn.net/liangxiaozhang/article/details/7841975?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.control">SMTP协议分析</a><br><a href="https://liumiaocn.blog.csdn.net/article/details/81131420?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-5.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-5.control">使用Telnet学习SMTP协议</a><br><a href="https://wenku.baidu.com/view/0af3cfb905087632311212be.html">MIME协议详解</a><br><a href="https://blog.csdn.net/wo541075754/article/details/81734770">Base64编码详解</a><br><a href="http://blog.chacuo.net/494.html">Quoted-printable 编码介绍、编码解码转换</a></p>
-<h2 id="编辑电子邮件"><a href="#编辑电子邮件" class="headerlink" title="编辑电子邮件"></a>编辑电子邮件</h2><h3 id="HTML格式的电子邮件"><a href="#HTML格式的电子邮件" class="headerlink" title="HTML格式的电子邮件"></a>HTML格式的电子邮件</h3><p>编写电子邮件模板不是一个愉快的体验，因为电子邮件客户端的解析引擎并不是常见的浏览器，会有各种兼容性问题<br>例如：</p>
-<ul>
-<li>需要使用Table+css的布局</li>
-<li>仅仅支持内联css，不支持style标签以及引入的css</li>
-<li>不支持min-width和max-width</li>
-<li>不支持任何margin</li>
-<li>不支持任何定位属性<br>等等一系列问题（个人感觉需要一个大手子来淘汰电子邮件的html。现在虽然有用来兼容的库，但是学习这些不同的库，了解这些问题也是需要成本的）</li>
-</ul>
 ]]></content>
   </entry>
   <entry>

@@ -7,15 +7,15 @@
   
   <title>正则表达式 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="正则表达式正则用过就忘，只有大概的印象，总结一下，做几道题目熟练熟练 涉及到的概念  常用js api 贪婪匹配 先行断言、后行断言 单词边界断言 位置断言 环视断言  常用js api str.replace(regexp, replacement)regexp可以是正则 也可以是 字面量字符串replacement可以是字符串也可以是函数replacement是字符串时， $ 字符具有特定的含">
+  <meta name="description" content="正则表达式正则用过就忘，只有大概的印象，总结一下，做几道题目熟练熟练 涉及到的概念  常用js api 贪婪匹配 先行断言、后行断言 单词边界断言  常用js api str.replace(regexp, replacement)regexp可以是正则 也可以是 字面量字符串replacement可以是字符串也可以是函数replacement是字符串时， $ 字符具有特定的含义   $1、$2、">
 <meta property="og:type" content="article">
 <meta property="og:title" content="正则表达式">
 <meta property="og:url" content="http://example.com/2022/03/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="正则表达式正则用过就忘，只有大概的印象，总结一下，做几道题目熟练熟练 涉及到的概念  常用js api 贪婪匹配 先行断言、后行断言 单词边界断言 位置断言 环视断言  常用js api str.replace(regexp, replacement)regexp可以是正则 也可以是 字面量字符串replacement可以是字符串也可以是函数replacement是字符串时， $ 字符具有特定的含">
+<meta property="og:description" content="正则表达式正则用过就忘，只有大概的印象，总结一下，做几道题目熟练熟练 涉及到的概念  常用js api 贪婪匹配 先行断言、后行断言 单词边界断言  常用js api str.replace(regexp, replacement)regexp可以是正则 也可以是 字面量字符串replacement可以是字符串也可以是函数replacement是字符串时， $ 字符具有特定的含义   $1、$2、">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-20T15:36:41.058Z">
-<meta property="article:modified_time" content="2022-04-27T16:17:58.965Z">
+<meta property="article:modified_time" content="2022-05-12T19:00:56.059Z">
 <meta property="article:author" content="王皓衍">
 <meta name="twitter:card" content="summary">
   
@@ -99,8 +99,6 @@
 <li>贪婪匹配</li>
 <li>先行断言、后行断言</li>
 <li>单词边界断言</li>
-<li>位置断言</li>
-<li>环视断言</li>
 </ul>
 <h2 id="常用js-api"><a href="#常用js-api" class="headerlink" title="常用js api"></a>常用js api</h2><ol>
 <li>str.replace(regexp, replacement)<br>regexp可以是正则 也可以是 字面量字符串<br>replacement可以是字符串也可以是函数<br>replacement是字符串时， $ 字符具有特定的含义</li>
@@ -140,19 +138,33 @@
 <p>eg.<br>(\b)some(\b) (\b)word(\b)<br>在这个例子中有4处单词边界<br>且并不代表任何字符<br>且不区分左右，只要满足条件就行</p>
 <p>eg.<br>隐藏手机号4-7位<br>text.replace(/\d{4}(?=\d{4}\b)/, ‘****’)</p>
 <h2 id="codeWars"><a href="#codeWars" class="headerlink" title="codeWars"></a>codeWars</h2><h3 id="8-kyu（黑铁级）"><a href="#8-kyu（黑铁级）" class="headerlink" title="8 kyu（黑铁级）"></a>8 kyu（黑铁级）</h3><ol>
-<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/57e1e61ba396b3727c000251/train/javascript">https://www.codewars.com/kata/57e1e61ba396b3727c000251/train/javascript</a><br>s.replace(/\d/g,’’)</li>
-<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/55ccdf1512938ce3ac000056/train/javascript">https://www.codewars.com/kata/55ccdf1512938ce3ac000056/train/javascript</a><br>我甚至没看懂这道题想干啥…</li>
-<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/567bf4f7ee34510f69000032/train/javascript">https://www.codewars.com/kata/567bf4f7ee34510f69000032/train/javascript</a><br>/^\d$/.test(this)</li>
-<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/56a3f08aa9a6cc9b75000023/train/javascript">https://www.codewars.com/kata/56a3f08aa9a6cc9b75000023/train/javascript</a><br>/^[0-9a-z_]{4,16}$/.test(username)</li>
-<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/57a37f3cbb99449513000cd8/train/javascript">https://www.codewars.com/kata/57a37f3cbb99449513000cd8/train/javascript</a><br>Number(s.replace(/\D/g,’’))</li>
-<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/56a25ba95df27b7743000016/train/javascript">https://www.codewars.com/kata/56a25ba95df27b7743000016/train/javascript</a><br>/^[123]/.test(String(code))</li>
-<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/56a946cd7bd95ccab2000055/train/javascript">https://www.codewars.com/kata/56a946cd7bd95ccab2000055/train/javascript</a><br>str.match(/[a-z]/g) ? str.match(/[a-z]/g).length : 0</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/57e1e61ba396b3727c000251/train/javascript">https://www.codewars.com/kata/57e1e61ba396b3727c000251/train/javascript</a><br> s.replace(/\d/g,’’)</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/567bf4f7ee34510f69000032/train/javascript">https://www.codewars.com/kata/567bf4f7ee34510f69000032/train/javascript</a><br> /^\d$/.test(this)</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/56a3f08aa9a6cc9b75000023/train/javascript">https://www.codewars.com/kata/56a3f08aa9a6cc9b75000023/train/javascript</a><br> /^[0-9a-z_]{4,16}$/.test(username)</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/57a37f3cbb99449513000cd8/train/javascript">https://www.codewars.com/kata/57a37f3cbb99449513000cd8/train/javascript</a><br> Number(s.replace(/\D/g,’’))</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/56a25ba95df27b7743000016/train/javascript">https://www.codewars.com/kata/56a25ba95df27b7743000016/train/javascript</a><br> /^[123]/.test(String(code))</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/56a946cd7bd95ccab2000055/train/javascript">https://www.codewars.com/kata/56a946cd7bd95ccab2000055/train/javascript</a><br> str.match(/[a-z]/g) ? str.match(/[a-z]/g).length : 0</li>
+</ol>
+<h3 id="7-kyu（青铜级）"><a href="#7-kyu（青铜级）" class="headerlink" title="7 kyu（青铜级）"></a>7 kyu（青铜级）</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/559e5b717dd758a3eb00005a/train/javascript">https://www.codewars.com/kata/559e5b717dd758a3eb00005a/train/javascript</a><br>n.replace(/[a-zA-Z]{3,}\b/g, (s) =&gt; <code>$&#123;s.slice(0,1).toUpperCase()&#125;$&#123;s.slice(1,s.length).toLowerCase()&#125;</code>)</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/55da6c52a94744b379000036/train/javascript">https://www.codewars.com/kata/55da6c52a94744b379000036/train/javascript</a><br>str.match(/\d+(?!\d])/g) ? str.match(/\d+(?!\d])/g).map(x =&gt; Number(x)).reduce((a,b) =&gt; a + b,0) : 0</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/585b1fafe08bae9988000314/train/javascript%EF%BC%88get%E6%98%AF%E8%87%AA%E5%B7%B1%E5%86%99%E7%9A%84%EF%BC%8C%E7%94%A8%E6%9D%A5%E5%BE%AA%E7%8E%AF%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%89">https://www.codewars.com/kata/585b1fafe08bae9988000314/train/javascript（get是自己写的，用来循环的函数）</a><br>s.match(/\d/g) ? s.match(/\d/g).map(x =&gt; get(x,Number(x))).reduce((a ,b) =&gt; a + b,’’) : ‘’</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/55f8a9c06c018a0d6e000132/train/javascript">https://www.codewars.com/kata/55f8a9c06c018a0d6e000132/train/javascript</a><br>/^(\d{4}|\d{6})$/.test(pin)</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/57faf32df815ebd49e000117/train/javascript">https://www.codewars.com/kata/57faf32df815ebd49e000117/train/javascript</a><br>string.replace(/(?&lt;=[a-zA-Z])!+/g,’’)</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/568dc69683322417eb00002c/train/javascript">https://www.codewars.com/kata/568dc69683322417eb00002c/train/javascript</a><br>(/x[a-z]{0,2}/).test(str) ? str.match(/x[a-z]{0,2}/)[0] === ‘xxx’ : false</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/5b39e91ee7a2c103300018b3/train/javascript%EF%BC%88%E6%B2%A1%E5%81%9A%E5%87%BA%E6%9D%A5%EF%BC%89">https://www.codewars.com/kata/5b39e91ee7a2c103300018b3/train/javascript（没做出来）</a><br>s.replace(/\b(\w+)\s(?=\1\b)/g,’’)</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/5637b03c6be7e01d99000046/train/javascript">https://www.codewars.com/kata/5637b03c6be7e01d99000046/train/javascript</a><br>map是用来做替换映射的<br>phrase.match(/\w+\b/g).map(item =&gt; map[item.slice(0,1)] || item.slice(0,1)).join(‘’)</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/588f5a38ec641b411200005b/train/javascript">https://www.codewars.com/kata/588f5a38ec641b411200005b/train/javascript</a><br>date.match(/\d+(?=/)/)</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/52fba66badcd10859f00097e/train/javascript">https://www.codewars.com/kata/52fba66badcd10859f00097e/train/javascript</a><br>str.replace(/[aeiou]/gi,’’)</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/5639bdcef2f9b06ce800005b/train/javascript">https://www.codewars.com/kata/5639bdcef2f9b06ce800005b/train/javascript</a><br>s.match(/[a-zA-z]+\b/g).map(item =&gt; item.slice(0,1)).join(‘’)</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/55f9064161541a9e01000001/train/javascript">https://www.codewars.com/kata/55f9064161541a9e01000001/train/javascript</a><br>琢磨了半天，似乎是我自己想复杂了…本以为100这种也属于valid number，看了答案发现这种算invalid<br>/^[-+]?\d*.\d{2}$/.test(num)</li>
+<li><a target="_blank" rel="noopener" href="https://www.codewars.com/kata/5b37a50642b27ebf2e000010/train/javascript">https://www.codewars.com/kata/5b37a50642b27ebf2e000010/train/javascript</a><br>beach.match(/Sand|Water|Fish|sun/ig) ? beach.match(/Sand|Water|Fish|sun/ig).length : 0</li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/03/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-id="cl2hs9wps0001now2e6fofgrt" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/03/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-id="cl33dt9je0001scw2ajmf37mt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -164,7 +176,7 @@
   
     <a href="/2022/03/12/TCP-IP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title"></div>
+      <div class="article-nav-title">TCP/IP读书笔记</div>
     </a>
   
 </nav>
@@ -205,7 +217,7 @@
           </li>
         
           <li>
-            <a href="/2022/03/12/TCP-IP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">(no title)</a>
+            <a href="/2022/03/12/TCP-IP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">TCP/IP读书笔记</a>
           </li>
         
           <li>
