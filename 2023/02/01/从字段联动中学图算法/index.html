@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>从字段联动中学图算法 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="初识字段联动是很常见的表单需求 最基本的是主动模式联动显示，即表单项决定其他表单项的显示和隐藏，使用效果例如： 请选择您要申请的职位 - if 前端 请选择您使用的技术框架： Vue React Angular - else if 后端 请选择您使用的语言： Java Python PHP 当然除了主动模式，还有被动模式，即表单项被其他表单项决定 除了联动显示，还可能有联动禁用、联动只读等 直觉c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从字段联动中学图算法">
+<meta property="og:url" content="http://example.com/2023/02/01/%E4%BB%8E%E5%AD%97%E6%AE%B5%E8%81%94%E5%8A%A8%E4%B8%AD%E5%AD%A6%E5%9B%BE%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="初识字段联动是很常见的表单需求 最基本的是主动模式联动显示，即表单项决定其他表单项的显示和隐藏，使用效果例如： 请选择您要申请的职位 - if 前端 请选择您使用的技术框架： Vue React Angular - else if 后端 请选择您使用的语言： Java Python PHP 当然除了主动模式，还有被动模式，即表单项被其他表单项决定 除了联动显示，还可能有联动禁用、联动只读等 直觉c">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-02-01T05:42:17.000Z">
+<meta property="article:modified_time" content="2023-02-01T06:13:18.619Z">
+<meta property="article:author" content="王皓衍">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/tags/%20%7C%7C%20tags">tags</a>
+        
+          <a class="main-nav-link" href="/categories/%20%7C%7C%20th">categories</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-从字段联动中学图算法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/02/01/%E4%BB%8E%E5%AD%97%E6%AE%B5%E8%81%94%E5%8A%A8%E4%B8%AD%E5%AD%A6%E5%9B%BE%E7%AE%97%E6%B3%95/" class="article-date">
+  <time datetime="2023-02-01T05:42:17.000Z" itemprop="datePublished">2023-02-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      从字段联动中学图算法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="初识"><a href="#初识" class="headerlink" title="初识"></a>初识</h1><p>字段联动是很常见的表单需求</p>
+<p>最基本的是主动模式联动显示，即表单项决定其他表单项的显示和隐藏，使用效果例如：</p>
+<p>请选择您要申请的职位</p>
+<pre><code>- if 前端 请选择您使用的技术框架： Vue React Angular
+- else if 后端 请选择您使用的语言： Java Python PHP</code></pre>
+<p>当然除了主动模式，还有被动模式，即表单项被其他表单项决定</p>
+<p>除了联动显示，还可能有联动禁用、联动只读等</p>
+<h2 id="直觉code，best-code"><a href="#直觉code，best-code" class="headerlink" title="直觉code，best code"></a>直觉code，best code</h2><p>业务现存的表单结构为: {题目合集: [{标题、类型、结果、选项}, {标题、类型、结果、选项}]}</p>
+<p>因为数据结构为数组，所以第一反应就是遍历，根据联动关系，算出题目是隐藏还是显示。并设计出了主动模式下的联动关系的数据结构:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; - 当题目1的value为A时，显示题目2、当题目1的value为B时，显示题目3</span><br><span class="line">&#x2F;&#x2F; - 当题目2的value为A时，显示题目3</span><br><span class="line"></span><br><span class="line">[&#123;id: &#39;1&#39;, linkages: [&#123;id: &#39;2&#39;, value: A, id: &#39;3&#39;, value: B&#125;]&#125;, &#123;id: &#39;2&#39;, linkages: [&#123;id: &#39;3&#39;, value: A&#125;]&#125;]</span><br></pre></td></tr></table></figure>
+
+<p>于是便写出了第一版实现</p>
+<pre><code>1. 根据主动联动关系，计算出被动联动关系（题目2被题目1的1联动显示。题目3被题目1的2、题目2的1联动显示）
+2. 每次变化时，遍历所有的题目，根据联动关系计算出每一道题是否隐藏（invisible）（只有当有被联动关系，并且被联动关系均不满足，则这道题隐藏）</code></pre>
+<p>但是很快就遇到了问题，因为遍历是有顺序的（数组从前往后），但联动是没有顺序的，所以单纯的遍历很有可能计算出不对的结果</p>
+<pre><code>eg.
+
+有1、2、3三道题
+联动关系：
+当2选择A时，显示1
+当3选择A时，显示2、当3选择B时，显示1
+
+3(A) → 2
+3(B) → 1
+2(A) → 1
+当题目3选择A、题目2选择A时 1、2、3三道题均可见。这时将题目3改为C，题目1、2均应隐藏。
+但因遍历顺序的问题，计算到题目1的时候，题目2仍未计算，仍是可见的。则计算出了错误的结果。即题目1显示、题目2隐藏、题目3为C</code></pre>
+<p>于是为了解决上述问题，便有了第二版实现，多层级遍历</p>
+<p>即先把题目2是否显示计算出来，再进行一次遍历，将题目1是否显示计算出来。便引出了一个概念：linkageLevel，联动层级</p>
+<p>在上述问题中，题目3为1级、题目2为2级、题目1为2级（被题目3联动）或3级（被题目2联动），先计算出题目中的最大联动层级，再进行多次遍历。第一次遍历计算出题目2是否显示，第二次遍历计算出题目1是否显示</p>
+<p>但假如存在环状联动，这种方法又遇到了瓶颈，甚至可能会出现死循环</p>
+<p>时间复杂度：题目数量为n，最大联动层级为m  O(n^m) 非常恐怖的复杂度</p>
+<p>于是考虑从图算法的角度出发，利用拓扑排序去解决计算的问题</p>
+<h2 id="图论算法实现联动"><a href="#图论算法实现联动" class="headerlink" title="图论算法实现联动"></a>图论算法实现联动</h2><p>分析一下联动关系的数据结构，可以发现，其实就是一副有向有环图</p>
+<p>其中题目就是图中的节点，联动关系就是边。并且是带方向，可能存在环状的</p>
+<p>而我们的需求是，根据联动关系，计算所有题目显示或隐藏，既寻找该数据结构的拓扑排序</p>
+<p>可以参考leetcode这道题 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/course-schedule-ii/">https://leetcode.cn/problems/course-schedule-ii/</a></p>
+<p>求拓扑排序分为两种思路：BFS（广度优先遍历）、DFS（深度优先遍历）</p>
+<p>有向无环图一定存在拓扑排序，而有向有环图一定不存在拓扑排序，所以我们要先判断图是否有环</p>
+<p>广度优先：</p>
+<pre><code>在广度优先遍历中，出入度是核心概念：如果一个节点 x 有 a 条边指向别的节点，同时被 b 条边所指，则称节点 x 的出度为 a，入度为 b
+在联动关系中，入度为0表示不被联动，既无条件显示的题目
+
+算法思路：
+1. 构建一个 indegree 数组记录每个节点的入度，即 indegree[i] 记录节点 i 的入度
+2. 对 BFS 队列进行初始化，将入度为 0 的节点首先装入队列
+3. 开始执行 BFS 循环，不断弹出队列中的节点，减少相邻节点的入度，并将入度变为 0 的节点加入队列
+4.如果最终所有节点都被遍历过（count 等于节点数），则说明不存在环，反之则说明存在环
+5. 最终队列中的节点顺序就是图的拓扑排序
+6. 根据拓扑排序顺序，去求题目是否隐藏，如果有环则把环内节点跳过，并置为不显示
+
+参考资料及示意图： https://labuladong.gitee.io/algo/di-yi-zhan-da78c/shou-ba-sh-03a72/huan-jian--e36de/#环检测算法bfs-版本
+
+时间复杂度：n个节点 m条边 O(n+m)</code></pre>
+<p>深度优先：</p>
+<pre><code>环检测：从节点开始递归遍历，记录访问过的节点与当前路径。如果节点访问过，则直接跳过，如果当前路径与当前节点有重合，则存在环
+遍历思路：后序遍历反转就是拓扑排序
+个人觉得不如bfs好理解
+
+参考资料：https://labuladong.gitee.io/algo/di-yi-zhan-da78c/shou-ba-sh-03a72/huan-jian--e36de/#拓扑排序算法dfs-版本</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/02/01/%E4%BB%8E%E5%AD%97%E6%AE%B5%E8%81%94%E5%8A%A8%E4%B8%AD%E5%AD%A6%E5%9B%BE%E7%AE%97%E6%B3%95/" data-id="cldla3fg00005zsw29xai5g2p" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/03/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">正则表达式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/02/01/%E4%BB%8E%E5%AD%97%E6%AE%B5%E8%81%94%E5%8A%A8%E4%B8%AD%E5%AD%A6%E5%9B%BE%E7%AE%97%E6%B3%95/">从字段联动中学图算法</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/12/TCP-IP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">TCP/IP读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/02/23/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6/">电子邮件</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/18/%E9%98%85%E8%AF%BBtype-fest%E6%BA%90%E7%A0%81/">阅读type-fest源码</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 王皓衍<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags/%20%7C%7C%20tags" class="mobile-nav-link">tags</a>
+  
+    <a href="/categories/%20%7C%7C%20th" class="mobile-nav-link">categories</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>

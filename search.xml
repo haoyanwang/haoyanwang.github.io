@@ -1,151 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>正则表达式</title>
-    <url>/2022/03/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
-    <content><![CDATA[<h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><p>正则用过就忘，只有大概的印象，总结一下，做几道题目熟练熟练</p>
-<p>涉及到的概念</p>
-<ul>
-<li>常用js api</li>
-<li>贪婪匹配</li>
-<li>先行断言、后行断言</li>
-<li>单词边界断言</li>
-</ul>
-<h2 id="常用js-api"><a href="#常用js-api" class="headerlink" title="常用js api"></a>常用js api</h2><ol>
-<li>str.replace(regexp, replacement)<br>regexp可以是正则 也可以是 字面量字符串<br>replacement可以是字符串也可以是函数<br>replacement是字符串时， $ 字符具有特定的含义</li>
-</ol>
-<ul>
-<li>$1、$2、…、$99 表示第 1 到第 99 个子表达式相匹配的文本</li>
-<li>$&amp; 表示与 regexp 相匹配的子串</li>
-<li>$` 表示位于匹配子串左侧的文本</li>
-<li>$’ 表示位于匹配子串右侧的文本</li>
-<li>$$ 表示直接量符号<br>eg.<br>“Doe, John” =&gt; “John Doe” ： replace(/(\w+)\s*, \s*(\w+)/, “$2 $1”)<br>‘“a”, “b”‘ =&gt; ‘a, b’ ： replace(/“([^”]*)”/g, “‘$1’”)<br>replacement是函数时，返回的字符串作为替换文本，参数具有特殊含义</li>
-</ul>
-<ol start="2">
-<li>regexp.test(string)<br>字符串是否有匹配的模式，返回true or false</li>
-<li>regexp.exec(string)<br>如果字符串中有匹配的值返回匹配结果数组，否则返回 null<br>匹配结果数组包括：第一项是匹配的结果，后面分别是子表达式匹配的结果<br>数组还有index、input、groups属性，这个操作还是第一次见，不过想想也合理，毕竟array底层是object</li>
-<li>string.match(regexp)<br>找到字符串中的匹配值，返回一个结果数组</li>
-</ol>
-<h2 id="贪婪匹配"><a href="#贪婪匹配" class="headerlink" title="贪婪匹配"></a>贪婪匹配</h2><p>正则使用量词匹配时，默认趋向于更多的匹配，在量词后面加上?，则可以使用非贪婪匹配</p>
-<p>量词匹配</p>
-<ul>
-<li>{m,n} m到n个 {m,n}?尽可能接近m个</li>
-<li><ul>
-<li>任意多个 *? 尽可能少</li>
-</ul>
-</li>
-<li><ul>
-<li>一个或多个 +? 尽可能少</li>
-</ul>
-</li>
-<li>? 没有或一个 ?? 尽可能没有</li>
-</ul>
-<h2 id="先行断言、后行断言"><a href="#先行断言、后行断言" class="headerlink" title="先行断言、后行断言"></a>先行断言、后行断言</h2><p>(?=pattern) 零宽正向先行断言：代表字符串中的一个位置，紧接该位置之后的字符序列能够匹配 pattern<br>eg. 对 “a regular expression” 这个字符串，要想匹配 regular 中的 re，但不能匹配 expression 中的 re，可以用 re(?=gular)，该表达式限定了 re 右边的位置，这个位置之后是 gular，但并不消耗 gular 这些字符</p>
-<p>(?!pattern) 零宽负向先行断言：代表字符串中的一个位置，紧接该位置之后的字符序列不能匹配 pattern<br>eg. 对 “regex represents regular expression” 这个字符串，要想匹配除 regex 和 regular 之外的 re，可以用 re(?!g)，该表达式限定了 re 右边的位置，这个位置后面不是字符 g</p>
-<p>(?&lt;=pattern) 零宽正向后行断言：代表字符串中的一个位置，紧接该位置之前的字符序列能够匹配 pattern<br>eg. 对 regex represents regular expression 这个字符串，有 4 个单词，要想匹配单词内部的 re，但不匹配单词开头的 re，可以用 (?&lt;=\w)re，单词内部的 re，在 re 前面应该是一个单词字符</p>
-<p>(?&lt;!pattern) 零宽负向后行断言：代表字符串中的一个位置，紧接该位置之前的字符序列不能匹配 pattern<br>eg. 对 “regex represents regular expression” 这个字符串，要想匹配单词开头的 re，可以用 (?&lt;!\w)re。单词开头的 re，在本例中，也就是指不在单词内部的 re，即 re 前面不是单词字符。当然也可以用 \bre 来匹配</p>
-<p>在匹配过程中，不占用字符，所以被称为”零宽”</p>
-<h2 id="单词边界"><a href="#单词边界" class="headerlink" title="单词边界"></a>单词边界</h2><p>可以理解为：分割单词的位置，而不是字符。既一边是单词字符（\w可以匹配的，0-9 + 26个大小写字母），另一边不是<br>\b 表示单词边界<br>\B 表示非单词边界（不常用）</p>
-<p>eg.<br>(\b)some(\b) (\b)word(\b)<br>在这个例子中有4处单词边界<br>且并不代表任何字符<br>且不区分左右，只要满足条件就行</p>
-<p>eg.<br>隐藏手机号4-7位<br>text.replace(/\d{4}(?=\d{4}\b)/, ‘****’)</p>
-<h2 id="codeWars"><a href="#codeWars" class="headerlink" title="codeWars"></a>codeWars</h2><h3 id="8-kyu（黑铁级）"><a href="#8-kyu（黑铁级）" class="headerlink" title="8 kyu（黑铁级）"></a>8 kyu（黑铁级）</h3><ol>
-<li><a href="https://www.codewars.com/kata/57e1e61ba396b3727c000251/train/javascript">https://www.codewars.com/kata/57e1e61ba396b3727c000251/train/javascript</a><br> s.replace(/\d/g,’’)</li>
-<li><a href="https://www.codewars.com/kata/567bf4f7ee34510f69000032/train/javascript">https://www.codewars.com/kata/567bf4f7ee34510f69000032/train/javascript</a><br> /^\d$/.test(this)</li>
-<li><a href="https://www.codewars.com/kata/56a3f08aa9a6cc9b75000023/train/javascript">https://www.codewars.com/kata/56a3f08aa9a6cc9b75000023/train/javascript</a><br> /^[0-9a-z_]{4,16}$/.test(username)</li>
-<li><a href="https://www.codewars.com/kata/57a37f3cbb99449513000cd8/train/javascript">https://www.codewars.com/kata/57a37f3cbb99449513000cd8/train/javascript</a><br> Number(s.replace(/\D/g,’’))</li>
-<li><a href="https://www.codewars.com/kata/56a25ba95df27b7743000016/train/javascript">https://www.codewars.com/kata/56a25ba95df27b7743000016/train/javascript</a><br> /^[123]/.test(String(code))</li>
-<li><a href="https://www.codewars.com/kata/56a946cd7bd95ccab2000055/train/javascript">https://www.codewars.com/kata/56a946cd7bd95ccab2000055/train/javascript</a><br> str.match(/[a-z]/g) ? str.match(/[a-z]/g).length : 0</li>
-</ol>
-<h3 id="7-kyu（青铜级）"><a href="#7-kyu（青铜级）" class="headerlink" title="7 kyu（青铜级）"></a>7 kyu（青铜级）</h3><ol>
-<li><a href="https://www.codewars.com/kata/559e5b717dd758a3eb00005a/train/javascript">https://www.codewars.com/kata/559e5b717dd758a3eb00005a/train/javascript</a><br>n.replace(/[a-zA-Z]{3,}\b/g, (s) =&gt; <code>$&#123;s.slice(0,1).toUpperCase()&#125;$&#123;s.slice(1,s.length).toLowerCase()&#125;</code>)</li>
-<li><a href="https://www.codewars.com/kata/55da6c52a94744b379000036/train/javascript">https://www.codewars.com/kata/55da6c52a94744b379000036/train/javascript</a><br>str.match(/\d+(?!\d])/g) ? str.match(/\d+(?!\d])/g).map(x =&gt; Number(x)).reduce((a,b) =&gt; a + b,0) : 0</li>
-<li><a href="https://www.codewars.com/kata/585b1fafe08bae9988000314/train/javascript%EF%BC%88get%E6%98%AF%E8%87%AA%E5%B7%B1%E5%86%99%E7%9A%84%EF%BC%8C%E7%94%A8%E6%9D%A5%E5%BE%AA%E7%8E%AF%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%89">https://www.codewars.com/kata/585b1fafe08bae9988000314/train/javascript（get是自己写的，用来循环的函数）</a><br>s.match(/\d/g) ? s.match(/\d/g).map(x =&gt; get(x,Number(x))).reduce((a ,b) =&gt; a + b,’’) : ‘’</li>
-<li><a href="https://www.codewars.com/kata/55f8a9c06c018a0d6e000132/train/javascript">https://www.codewars.com/kata/55f8a9c06c018a0d6e000132/train/javascript</a><br>/^(\d{4}|\d{6})$/.test(pin)</li>
-<li><a href="https://www.codewars.com/kata/57faf32df815ebd49e000117/train/javascript">https://www.codewars.com/kata/57faf32df815ebd49e000117/train/javascript</a><br>string.replace(/(?&lt;=[a-zA-Z])!+/g,’’)</li>
-<li><a href="https://www.codewars.com/kata/568dc69683322417eb00002c/train/javascript">https://www.codewars.com/kata/568dc69683322417eb00002c/train/javascript</a><br>(/x[a-z]{0,2}/).test(str) ? str.match(/x[a-z]{0,2}/)[0] === ‘xxx’ : false</li>
-<li><a href="https://www.codewars.com/kata/5b39e91ee7a2c103300018b3/train/javascript%EF%BC%88%E6%B2%A1%E5%81%9A%E5%87%BA%E6%9D%A5%EF%BC%89">https://www.codewars.com/kata/5b39e91ee7a2c103300018b3/train/javascript（没做出来）</a><br>s.replace(/\b(\w+)\s(?=\1\b)/g,’’)</li>
-<li><a href="https://www.codewars.com/kata/5637b03c6be7e01d99000046/train/javascript">https://www.codewars.com/kata/5637b03c6be7e01d99000046/train/javascript</a><br>map是用来做替换映射的<br>phrase.match(/\w+\b/g).map(item =&gt; map[item.slice(0,1)] || item.slice(0,1)).join(‘’)</li>
-<li><a href="https://www.codewars.com/kata/588f5a38ec641b411200005b/train/javascript">https://www.codewars.com/kata/588f5a38ec641b411200005b/train/javascript</a><br>date.match(/\d+(?=/)/)</li>
-<li><a href="https://www.codewars.com/kata/52fba66badcd10859f00097e/train/javascript">https://www.codewars.com/kata/52fba66badcd10859f00097e/train/javascript</a><br>str.replace(/[aeiou]/gi,’’)</li>
-<li><a href="https://www.codewars.com/kata/5639bdcef2f9b06ce800005b/train/javascript">https://www.codewars.com/kata/5639bdcef2f9b06ce800005b/train/javascript</a><br>s.match(/[a-zA-z]+\b/g).map(item =&gt; item.slice(0,1)).join(‘’)</li>
-<li><a href="https://www.codewars.com/kata/55f9064161541a9e01000001/train/javascript">https://www.codewars.com/kata/55f9064161541a9e01000001/train/javascript</a><br>琢磨了半天，似乎是我自己想复杂了…本以为100这种也属于valid number，看了答案发现这种算invalid<br>/^[-+]?\d*.\d{2}$/.test(num)</li>
-<li><a href="https://www.codewars.com/kata/5b37a50642b27ebf2e000010/train/javascript">https://www.codewars.com/kata/5b37a50642b27ebf2e000010/train/javascript</a><br>beach.match(/Sand|Water|Fish|sun/ig) ? beach.match(/Sand|Water|Fish|sun/ig).length : 0</li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
-    <title>电子邮件</title>
-    <url>/2021/02/23/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6/</url>
-    <content><![CDATA[<h1 id="电子邮件"><a href="#电子邮件" class="headerlink" title="电子邮件"></a>电子邮件</h1><p>最近在发邮件服务上遇到点问题，所以深入研究一下电子邮件的原理细节（因为自己个人不经常使用，总有一种email很久远的感觉）</p>
-<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><h3 id="邮件"><a href="#邮件" class="headerlink" title="邮件"></a>邮件</h3><p>邮件是一种消息的格式，由信封、首部和正文组成。</p>
-<ul>
-<li>信封上最重要的是收信人的地址。邮件服务器用这个地址将邮件发送到收信人所在的邮件服务器上。</li>
-<li>首部是由用户代理或邮件服务器添加的一些信息。包括Received、Message-ID、From、Data、Reply-To、X-Phone、X-Mailer、To和Subject等字段。</li>
-<li>正文是是发送用户发给接收用户报文的内容。</li>
-</ul>
-<h3 id="用户代理"><a href="#用户代理" class="headerlink" title="用户代理"></a>用户代理</h3><p>用户代理UA（User Agent）是用户与电子邮件系统的交互接口，一般来说它就是我们PC机上的一个程序。Windows上常见的用户代理是Foxmail和Outlook客户端。<br>用户代理提供一个好的用户界面，它提取用户在其界面填写的各项信息，生成一封符合SMTP等邮件标准的邮件，然后采用SMTP协议将邮件发送到发送端邮件服务器。</p>
-<h3 id="邮件的收发过程"><a href="#邮件的收发过程" class="headerlink" title="邮件的收发过程"></a>邮件的收发过程</h3><p>一般情况下，一封邮件的发送和接收过程如下。</p>
-<ol>
-<li>发信人在用户代理里编辑邮件，包括填写发信人邮箱、收信人邮箱和邮件标题等等。</li>
-<li>用户代理提取发信人编辑的信息，生成一封符合邮件格式标准的邮件。</li>
-<li>用户代理用SMTP将邮件发送到发送端邮件服务器（即发信人邮箱所对应的邮件服务器）。</li>
-<li>发送端邮件服务器用SMTP将邮件发送到接收端邮件服务器（即收信人邮箱所对应的邮件服务器）。</li>
-<li>收信人调用用户代理。用户代理用POP3协议从接收端邮件服务器取回邮件。</li>
-<li>用户代理解析收到的邮件，以适当的形式呈现在收信人面前。</li>
-</ol>
-<h2 id="电子邮件相关协议"><a href="#电子邮件相关协议" class="headerlink" title="电子邮件相关协议"></a>电子邮件相关协议</h2><h3 id="SMTP协议（Simple-Mail-Transfer-Protocal）"><a href="#SMTP协议（Simple-Mail-Transfer-Protocal）" class="headerlink" title="SMTP协议（Simple Mail Transfer Protocal）"></a>SMTP协议（Simple Mail Transfer Protocal）</h3><p>SMTP协议是用于发送方的邮件服务器发送报文到接收方邮件服务器。它是一种推协议，通常它工作在两种情况下：一是邮件从客户机传输到服务器；二是从某一个服务器传输到另一个服务器。<br>SMTP协议基于 <a href="https://haoyanwang.github.io/2020/12/20/TCP-IP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/#TCP">TCP协议</a> ，监听25号端口。<br>PC通过邮件客户端使用SMTP协议将邮件，推送到邮件服务器上<br>邮件服务器再通过SMTP协议，将邮件送到对方的邮件服务器上，等到对方上网的时候，就可以收到你所寄的信<br>（个人不是很理解为什么不使用HTTP协议推送呢，也许因为当时HTTP协议还不够成熟？也有说法是HTTP是一种拉取协议，这里需要的是一种推送协议）</p>
-<p><img src="https://img-blog.csdn.net/20180720142251413?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpdW1pYW9jbg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="avatar"> </p>
-<p>一个具体的SMTP通信（如发送端邮件服务器与接收端服务器的通信）的过程如下：</p>
-<ol>
-<li>发送端邮件服务器（以下简称客户端）与接收端邮件服务器（以下简称服务器）的25号端口建立TCP连接。</li>
-<li>客户端向服务器发送各种命令，来请求各种服务（如认证、指定发送人和接收人）。</li>
-<li>服务器解析用户的命令，做出相应动作并返回给客户端一个响应。</li>
-<li>2和3交替进行，直到所有邮件都发送完或两者的连接被意外中断。<br>具体例子、命令以及响应见参考链接</li>
-</ol>
-<p>SMTP的优缺点</p>
-<ul>
-<li>邮件内容受限<br>因为SMTP协议采用ASCII码进行编码<br>二进制文件、声音和动画等其他复杂内容，实现起来将十分困难，所以RFC标准就扩展了新的电子邮件标准，MIME（Multipurpose Internet Mail Extensions，多用途互联网邮件扩展类型）<br>MIME最早应用于电子邮件系统，但后来也应用到浏览器。服务器会将它们发送的多媒体数据的类型告诉浏览器</li>
-<li>命令过于简单，没提供认证等功能<br>ESMTP是添加了用户认证功的SMTP</li>
-</ul>
-<h3 id="MIME协议"><a href="#MIME协议" class="headerlink" title="MIME协议"></a>MIME协议</h3><p>MIME协议通过改进邮件头和邮件体，试图在不改变SMTP协议和邮件格式标准的基础上，使得邮件可以传输任何二进制文件。<br>在邮件头内指定MIME-Version、Content-Type和Content-Transfer-Encoding等字段</p>
-<h4 id="Content-Type（内容类型域）"><a href="#Content-Type（内容类型域）" class="headerlink" title="Content-Type（内容类型域）"></a>Content-Type（内容类型域）</h4><p>由主类型/子类型组成，来指定邮件体的类型，常见的有text/plain（纯文本）和text/html（html邮件）</p>
-<h4 id="Content-Transfer-Encoding（传送编码域）"><a href="#Content-Transfer-Encoding（传送编码域）" class="headerlink" title="Content-Transfer-Encoding（传送编码域）"></a>Content-Transfer-Encoding（传送编码域）</h4><p>共有Base64、Quoted-printable，7bit，8bit和Binary几种类型</p>
-<h3 id="编码方式"><a href="#编码方式" class="headerlink" title="编码方式"></a>编码方式</h3><h4 id="7位ASCII码"><a href="#7位ASCII码" class="headerlink" title="7位ASCII码"></a>7位ASCII码</h4><p>由7位二进制组成，可表示128个字符，其中包括95个可打印字符和33个控制字符<br>其中48～57为0到9十个阿拉伯数字，65～90为26个大写英文字母，97～122号为26个小写英文字母，其余为一些标点符号、运算符号等。</p>
-<h4 id="Quoted-printable编码"><a href="#Quoted-printable编码" class="headerlink" title="Quoted-printable编码"></a>Quoted-printable编码</h4><p>Quoted-printable编码用一些可打印常用字符，表示一个字节（8位）中所有非打印字符方法<br>33个不可打印字符，可编码为3个字符：一个等号”=”后跟随两个十六进制数字(0–9或A–F)表示该字节的数值.例如，ASCII码换页符（十进制值为12）可以表示为”=0C”<br>详细规则见<a href="http://blog.chacuo.net/494.html">参考阅读</a></p>
-<p>例如：<br>If you believe that truth=beauty, then surely mathematics is the most beautiful branch of philosophy.<br>编码后结果是：<br>If you believe that truth=3Dbeauty, then surely=20=<br>mathematics is the most beautiful branch of philosophy.</p>
-<h4 id="Base64编码"><a href="#Base64编码" class="headerlink" title="Base64编码"></a>Base64编码</h4><p>Base64是网络上最常见的用于传输8Bit字节码的编码方式之一，Base64就是一种基于64个可打印字符来表示二进制数据的方法。<br>64个可打印字符的索引，[‘A’, ‘B’, ‘C’, … ‘a’, ‘b’, ‘c’, … ‘0’, ‘1’, … ‘+’, ‘/‘]，这是标准的Base64协议规定。<br>转换步骤：</p>
-<ol>
-<li>将待转换的字符串每三个字节分为一组，每个字节占8bit，那么共有24个二进制位。</li>
-<li>将上面的24个二进制位每6个一组，共分为4组。</li>
-<li>在每组前面添加两个0，每组由6个变为8个二进制位，总共32个二进制位，即四个字节。</li>
-<li>根据Base64映射表，获得对应的值<br>特点：</li>
-</ol>
-<ul>
-<li>大多数编码都是由字符串转化成二进制的过程，而Base64的编码则是从二进制转换为字符串。与常规恰恰相反，</li>
-<li>Base64编码主要用在传输、存储、表示二进制领域，不能算得上加密，只是无法直接看到明文。也可以通过打乱Base64编码来进行加密。</li>
-<li>中文有多种编码（比如：utf-8、gb2312、gbk等），不同编码对应Base64编码结果都不一样。</li>
-<li>上面我们已经看到了Base64就是用6位（2的6次幂就是64）表示字符，因此成为Base64。同理，Base32就是用5位，Base16就是用4位。</li>
-</ul>
-<p>具体例子和特殊情况见<a href="https://blog.csdn.net/wo541075754/article/details/81734770">参考阅读</a></p>
-<h3 id="POP3（Post-Office-Protocol-3，邮局协议版本3）"><a href="#POP3（Post-Office-Protocol-3，邮局协议版本3）" class="headerlink" title="POP3（Post Office Protocol-3，邮局协议版本3）"></a>POP3（Post Office Protocol-3，邮局协议版本3）</h3><p>邮件客户端连接邮件服务器，并下载所有未阅读的电子邮件<br>默认端口：110<br>传输协议：TCP<br>架构结构：C/S<br>访问模式：离线访问</p>
-<p>POP3有三种生命周期：</p>
-<ul>
-<li>确认</li>
-<li>操作</li>
-<li>更新</li>
-</ul>
-<p>参考链接：<br><a href="https://blog.csdn.net/liangxiaozhang/article/details/7841975?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.control">SMTP协议分析</a><br><a href="https://liumiaocn.blog.csdn.net/article/details/81131420?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-5.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-5.control">使用Telnet学习SMTP协议</a><br><a href="https://wenku.baidu.com/view/0af3cfb905087632311212be.html">MIME协议详解</a><br><a href="https://blog.csdn.net/wo541075754/article/details/81734770">Base64编码详解</a><br><a href="http://blog.chacuo.net/494.html">Quoted-printable 编码介绍、编码解码转换</a></p>
-<h2 id="编辑电子邮件"><a href="#编辑电子邮件" class="headerlink" title="编辑电子邮件"></a>编辑电子邮件</h2><h3 id="HTML格式的电子邮件"><a href="#HTML格式的电子邮件" class="headerlink" title="HTML格式的电子邮件"></a>HTML格式的电子邮件</h3><p>编写电子邮件模板不是一个愉快的体验，因为电子邮件客户端的解析引擎并不是常见的浏览器，会有各种兼容性问题<br>例如：</p>
-<ul>
-<li>需要使用Table+css的布局</li>
-<li>仅仅支持内联css，不支持style标签以及引入的css</li>
-<li>不支持min-width和max-width</li>
-<li>不支持任何margin</li>
-<li>不支持任何定位属性<br>等等一系列问题（个人感觉需要一个大手子来淘汰电子邮件的html。现在虽然有用来兼容的库，但是学习这些不同的库，了解这些问题也是需要成本的）</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
     <title>TCP/IP读书笔记</title>
     <url>/2022/03/12/TCP-IP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="TCP-IP读书笔记"><a href="#TCP-IP读书笔记" class="headerlink" title="TCP/IP读书笔记"></a>TCP/IP读书笔记</h1><p>从小学开始就鼓捣电脑，很早就听说了类似ip、mac地址，VLAN,WLAN,猫，子网掩码，DNS地址等技术名词。<br>上学以后也学习了计算机网络，听说了类似OSI七层模型，TCP、UDP等概念。<br>工作以后也接触到了更多的网络知识，但一直是知其然不知其所以然，缺乏比较系统的学习，所以今天就记录一下学习的过程。</p>
@@ -330,6 +185,151 @@ gitalk.render('gitalk-container')
 ]]></content>
   </entry>
   <entry>
+    <title>电子邮件</title>
+    <url>/2021/02/23/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6/</url>
+    <content><![CDATA[<h1 id="电子邮件"><a href="#电子邮件" class="headerlink" title="电子邮件"></a>电子邮件</h1><p>最近在发邮件服务上遇到点问题，所以深入研究一下电子邮件的原理细节（因为自己个人不经常使用，总有一种email很久远的感觉）</p>
+<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><h3 id="邮件"><a href="#邮件" class="headerlink" title="邮件"></a>邮件</h3><p>邮件是一种消息的格式，由信封、首部和正文组成。</p>
+<ul>
+<li>信封上最重要的是收信人的地址。邮件服务器用这个地址将邮件发送到收信人所在的邮件服务器上。</li>
+<li>首部是由用户代理或邮件服务器添加的一些信息。包括Received、Message-ID、From、Data、Reply-To、X-Phone、X-Mailer、To和Subject等字段。</li>
+<li>正文是是发送用户发给接收用户报文的内容。</li>
+</ul>
+<h3 id="用户代理"><a href="#用户代理" class="headerlink" title="用户代理"></a>用户代理</h3><p>用户代理UA（User Agent）是用户与电子邮件系统的交互接口，一般来说它就是我们PC机上的一个程序。Windows上常见的用户代理是Foxmail和Outlook客户端。<br>用户代理提供一个好的用户界面，它提取用户在其界面填写的各项信息，生成一封符合SMTP等邮件标准的邮件，然后采用SMTP协议将邮件发送到发送端邮件服务器。</p>
+<h3 id="邮件的收发过程"><a href="#邮件的收发过程" class="headerlink" title="邮件的收发过程"></a>邮件的收发过程</h3><p>一般情况下，一封邮件的发送和接收过程如下。</p>
+<ol>
+<li>发信人在用户代理里编辑邮件，包括填写发信人邮箱、收信人邮箱和邮件标题等等。</li>
+<li>用户代理提取发信人编辑的信息，生成一封符合邮件格式标准的邮件。</li>
+<li>用户代理用SMTP将邮件发送到发送端邮件服务器（即发信人邮箱所对应的邮件服务器）。</li>
+<li>发送端邮件服务器用SMTP将邮件发送到接收端邮件服务器（即收信人邮箱所对应的邮件服务器）。</li>
+<li>收信人调用用户代理。用户代理用POP3协议从接收端邮件服务器取回邮件。</li>
+<li>用户代理解析收到的邮件，以适当的形式呈现在收信人面前。</li>
+</ol>
+<h2 id="电子邮件相关协议"><a href="#电子邮件相关协议" class="headerlink" title="电子邮件相关协议"></a>电子邮件相关协议</h2><h3 id="SMTP协议（Simple-Mail-Transfer-Protocal）"><a href="#SMTP协议（Simple-Mail-Transfer-Protocal）" class="headerlink" title="SMTP协议（Simple Mail Transfer Protocal）"></a>SMTP协议（Simple Mail Transfer Protocal）</h3><p>SMTP协议是用于发送方的邮件服务器发送报文到接收方邮件服务器。它是一种推协议，通常它工作在两种情况下：一是邮件从客户机传输到服务器；二是从某一个服务器传输到另一个服务器。<br>SMTP协议基于 <a href="https://haoyanwang.github.io/2020/12/20/TCP-IP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/#TCP">TCP协议</a> ，监听25号端口。<br>PC通过邮件客户端使用SMTP协议将邮件，推送到邮件服务器上<br>邮件服务器再通过SMTP协议，将邮件送到对方的邮件服务器上，等到对方上网的时候，就可以收到你所寄的信<br>（个人不是很理解为什么不使用HTTP协议推送呢，也许因为当时HTTP协议还不够成熟？也有说法是HTTP是一种拉取协议，这里需要的是一种推送协议）</p>
+<p><img src="https://img-blog.csdn.net/20180720142251413?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpdW1pYW9jbg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="avatar"> </p>
+<p>一个具体的SMTP通信（如发送端邮件服务器与接收端服务器的通信）的过程如下：</p>
+<ol>
+<li>发送端邮件服务器（以下简称客户端）与接收端邮件服务器（以下简称服务器）的25号端口建立TCP连接。</li>
+<li>客户端向服务器发送各种命令，来请求各种服务（如认证、指定发送人和接收人）。</li>
+<li>服务器解析用户的命令，做出相应动作并返回给客户端一个响应。</li>
+<li>2和3交替进行，直到所有邮件都发送完或两者的连接被意外中断。<br>具体例子、命令以及响应见参考链接</li>
+</ol>
+<p>SMTP的优缺点</p>
+<ul>
+<li>邮件内容受限<br>因为SMTP协议采用ASCII码进行编码<br>二进制文件、声音和动画等其他复杂内容，实现起来将十分困难，所以RFC标准就扩展了新的电子邮件标准，MIME（Multipurpose Internet Mail Extensions，多用途互联网邮件扩展类型）<br>MIME最早应用于电子邮件系统，但后来也应用到浏览器。服务器会将它们发送的多媒体数据的类型告诉浏览器</li>
+<li>命令过于简单，没提供认证等功能<br>ESMTP是添加了用户认证功的SMTP</li>
+</ul>
+<h3 id="MIME协议"><a href="#MIME协议" class="headerlink" title="MIME协议"></a>MIME协议</h3><p>MIME协议通过改进邮件头和邮件体，试图在不改变SMTP协议和邮件格式标准的基础上，使得邮件可以传输任何二进制文件。<br>在邮件头内指定MIME-Version、Content-Type和Content-Transfer-Encoding等字段</p>
+<h4 id="Content-Type（内容类型域）"><a href="#Content-Type（内容类型域）" class="headerlink" title="Content-Type（内容类型域）"></a>Content-Type（内容类型域）</h4><p>由主类型/子类型组成，来指定邮件体的类型，常见的有text/plain（纯文本）和text/html（html邮件）</p>
+<h4 id="Content-Transfer-Encoding（传送编码域）"><a href="#Content-Transfer-Encoding（传送编码域）" class="headerlink" title="Content-Transfer-Encoding（传送编码域）"></a>Content-Transfer-Encoding（传送编码域）</h4><p>共有Base64、Quoted-printable，7bit，8bit和Binary几种类型</p>
+<h3 id="编码方式"><a href="#编码方式" class="headerlink" title="编码方式"></a>编码方式</h3><h4 id="7位ASCII码"><a href="#7位ASCII码" class="headerlink" title="7位ASCII码"></a>7位ASCII码</h4><p>由7位二进制组成，可表示128个字符，其中包括95个可打印字符和33个控制字符<br>其中48～57为0到9十个阿拉伯数字，65～90为26个大写英文字母，97～122号为26个小写英文字母，其余为一些标点符号、运算符号等。</p>
+<h4 id="Quoted-printable编码"><a href="#Quoted-printable编码" class="headerlink" title="Quoted-printable编码"></a>Quoted-printable编码</h4><p>Quoted-printable编码用一些可打印常用字符，表示一个字节（8位）中所有非打印字符方法<br>33个不可打印字符，可编码为3个字符：一个等号”=”后跟随两个十六进制数字(0–9或A–F)表示该字节的数值.例如，ASCII码换页符（十进制值为12）可以表示为”=0C”<br>详细规则见<a href="http://blog.chacuo.net/494.html">参考阅读</a></p>
+<p>例如：<br>If you believe that truth=beauty, then surely mathematics is the most beautiful branch of philosophy.<br>编码后结果是：<br>If you believe that truth=3Dbeauty, then surely=20=<br>mathematics is the most beautiful branch of philosophy.</p>
+<h4 id="Base64编码"><a href="#Base64编码" class="headerlink" title="Base64编码"></a>Base64编码</h4><p>Base64是网络上最常见的用于传输8Bit字节码的编码方式之一，Base64就是一种基于64个可打印字符来表示二进制数据的方法。<br>64个可打印字符的索引，[‘A’, ‘B’, ‘C’, … ‘a’, ‘b’, ‘c’, … ‘0’, ‘1’, … ‘+’, ‘/‘]，这是标准的Base64协议规定。<br>转换步骤：</p>
+<ol>
+<li>将待转换的字符串每三个字节分为一组，每个字节占8bit，那么共有24个二进制位。</li>
+<li>将上面的24个二进制位每6个一组，共分为4组。</li>
+<li>在每组前面添加两个0，每组由6个变为8个二进制位，总共32个二进制位，即四个字节。</li>
+<li>根据Base64映射表，获得对应的值<br>特点：</li>
+</ol>
+<ul>
+<li>大多数编码都是由字符串转化成二进制的过程，而Base64的编码则是从二进制转换为字符串。与常规恰恰相反，</li>
+<li>Base64编码主要用在传输、存储、表示二进制领域，不能算得上加密，只是无法直接看到明文。也可以通过打乱Base64编码来进行加密。</li>
+<li>中文有多种编码（比如：utf-8、gb2312、gbk等），不同编码对应Base64编码结果都不一样。</li>
+<li>上面我们已经看到了Base64就是用6位（2的6次幂就是64）表示字符，因此成为Base64。同理，Base32就是用5位，Base16就是用4位。</li>
+</ul>
+<p>具体例子和特殊情况见<a href="https://blog.csdn.net/wo541075754/article/details/81734770">参考阅读</a></p>
+<h3 id="POP3（Post-Office-Protocol-3，邮局协议版本3）"><a href="#POP3（Post-Office-Protocol-3，邮局协议版本3）" class="headerlink" title="POP3（Post Office Protocol-3，邮局协议版本3）"></a>POP3（Post Office Protocol-3，邮局协议版本3）</h3><p>邮件客户端连接邮件服务器，并下载所有未阅读的电子邮件<br>默认端口：110<br>传输协议：TCP<br>架构结构：C/S<br>访问模式：离线访问</p>
+<p>POP3有三种生命周期：</p>
+<ul>
+<li>确认</li>
+<li>操作</li>
+<li>更新</li>
+</ul>
+<p>参考链接：<br><a href="https://blog.csdn.net/liangxiaozhang/article/details/7841975?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.control">SMTP协议分析</a><br><a href="https://liumiaocn.blog.csdn.net/article/details/81131420?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-5.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-5.control">使用Telnet学习SMTP协议</a><br><a href="https://wenku.baidu.com/view/0af3cfb905087632311212be.html">MIME协议详解</a><br><a href="https://blog.csdn.net/wo541075754/article/details/81734770">Base64编码详解</a><br><a href="http://blog.chacuo.net/494.html">Quoted-printable 编码介绍、编码解码转换</a></p>
+<h2 id="编辑电子邮件"><a href="#编辑电子邮件" class="headerlink" title="编辑电子邮件"></a>编辑电子邮件</h2><h3 id="HTML格式的电子邮件"><a href="#HTML格式的电子邮件" class="headerlink" title="HTML格式的电子邮件"></a>HTML格式的电子邮件</h3><p>编写电子邮件模板不是一个愉快的体验，因为电子邮件客户端的解析引擎并不是常见的浏览器，会有各种兼容性问题<br>例如：</p>
+<ul>
+<li>需要使用Table+css的布局</li>
+<li>仅仅支持内联css，不支持style标签以及引入的css</li>
+<li>不支持min-width和max-width</li>
+<li>不支持任何margin</li>
+<li>不支持任何定位属性<br>等等一系列问题（个人感觉需要一个大手子来淘汰电子邮件的html。现在虽然有用来兼容的库，但是学习这些不同的库，了解这些问题也是需要成本的）</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>正则表达式</title>
+    <url>/2022/03/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><p>正则用过就忘，只有大概的印象，总结一下，做几道题目熟练熟练</p>
+<p>涉及到的概念</p>
+<ul>
+<li>常用js api</li>
+<li>贪婪匹配</li>
+<li>先行断言、后行断言</li>
+<li>单词边界断言</li>
+</ul>
+<h2 id="常用js-api"><a href="#常用js-api" class="headerlink" title="常用js api"></a>常用js api</h2><ol>
+<li>str.replace(regexp, replacement)<br>regexp可以是正则 也可以是 字面量字符串<br>replacement可以是字符串也可以是函数<br>replacement是字符串时， $ 字符具有特定的含义</li>
+</ol>
+<ul>
+<li>$1、$2、…、$99 表示第 1 到第 99 个子表达式相匹配的文本</li>
+<li>$&amp; 表示与 regexp 相匹配的子串</li>
+<li>$` 表示位于匹配子串左侧的文本</li>
+<li>$’ 表示位于匹配子串右侧的文本</li>
+<li>$$ 表示直接量符号<br>eg.<br>“Doe, John” =&gt; “John Doe” ： replace(/(\w+)\s*, \s*(\w+)/, “$2 $1”)<br>‘“a”, “b”‘ =&gt; ‘a, b’ ： replace(/“([^”]*)”/g, “‘$1’”)<br>replacement是函数时，返回的字符串作为替换文本，参数具有特殊含义</li>
+</ul>
+<ol start="2">
+<li>regexp.test(string)<br>字符串是否有匹配的模式，返回true or false</li>
+<li>regexp.exec(string)<br>如果字符串中有匹配的值返回匹配结果数组，否则返回 null<br>匹配结果数组包括：第一项是匹配的结果，后面分别是子表达式匹配的结果<br>数组还有index、input、groups属性，这个操作还是第一次见，不过想想也合理，毕竟array底层是object</li>
+<li>string.match(regexp)<br>找到字符串中的匹配值，返回一个结果数组</li>
+</ol>
+<h2 id="贪婪匹配"><a href="#贪婪匹配" class="headerlink" title="贪婪匹配"></a>贪婪匹配</h2><p>正则使用量词匹配时，默认趋向于更多的匹配，在量词后面加上?，则可以使用非贪婪匹配</p>
+<p>量词匹配</p>
+<ul>
+<li>{m,n} m到n个 {m,n}?尽可能接近m个</li>
+<li><ul>
+<li>任意多个 *? 尽可能少</li>
+</ul>
+</li>
+<li><ul>
+<li>一个或多个 +? 尽可能少</li>
+</ul>
+</li>
+<li>? 没有或一个 ?? 尽可能没有</li>
+</ul>
+<h2 id="先行断言、后行断言"><a href="#先行断言、后行断言" class="headerlink" title="先行断言、后行断言"></a>先行断言、后行断言</h2><p>(?=pattern) 零宽正向先行断言：代表字符串中的一个位置，紧接该位置之后的字符序列能够匹配 pattern<br>eg. 对 “a regular expression” 这个字符串，要想匹配 regular 中的 re，但不能匹配 expression 中的 re，可以用 re(?=gular)，该表达式限定了 re 右边的位置，这个位置之后是 gular，但并不消耗 gular 这些字符</p>
+<p>(?!pattern) 零宽负向先行断言：代表字符串中的一个位置，紧接该位置之后的字符序列不能匹配 pattern<br>eg. 对 “regex represents regular expression” 这个字符串，要想匹配除 regex 和 regular 之外的 re，可以用 re(?!g)，该表达式限定了 re 右边的位置，这个位置后面不是字符 g</p>
+<p>(?&lt;=pattern) 零宽正向后行断言：代表字符串中的一个位置，紧接该位置之前的字符序列能够匹配 pattern<br>eg. 对 regex represents regular expression 这个字符串，有 4 个单词，要想匹配单词内部的 re，但不匹配单词开头的 re，可以用 (?&lt;=\w)re，单词内部的 re，在 re 前面应该是一个单词字符</p>
+<p>(?&lt;!pattern) 零宽负向后行断言：代表字符串中的一个位置，紧接该位置之前的字符序列不能匹配 pattern<br>eg. 对 “regex represents regular expression” 这个字符串，要想匹配单词开头的 re，可以用 (?&lt;!\w)re。单词开头的 re，在本例中，也就是指不在单词内部的 re，即 re 前面不是单词字符。当然也可以用 \bre 来匹配</p>
+<p>在匹配过程中，不占用字符，所以被称为”零宽”</p>
+<h2 id="单词边界"><a href="#单词边界" class="headerlink" title="单词边界"></a>单词边界</h2><p>可以理解为：分割单词的位置，而不是字符。既一边是单词字符（\w可以匹配的，0-9 + 26个大小写字母），另一边不是<br>\b 表示单词边界<br>\B 表示非单词边界（不常用）</p>
+<p>eg.<br>(\b)some(\b) (\b)word(\b)<br>在这个例子中有4处单词边界<br>且并不代表任何字符<br>且不区分左右，只要满足条件就行</p>
+<p>eg.<br>隐藏手机号4-7位<br>text.replace(/\d{4}(?=\d{4}\b)/, ‘****’)</p>
+<h2 id="codeWars"><a href="#codeWars" class="headerlink" title="codeWars"></a>codeWars</h2><h3 id="8-kyu（黑铁级）"><a href="#8-kyu（黑铁级）" class="headerlink" title="8 kyu（黑铁级）"></a>8 kyu（黑铁级）</h3><ol>
+<li><a href="https://www.codewars.com/kata/57e1e61ba396b3727c000251/train/javascript">https://www.codewars.com/kata/57e1e61ba396b3727c000251/train/javascript</a><br> s.replace(/\d/g,’’)</li>
+<li><a href="https://www.codewars.com/kata/567bf4f7ee34510f69000032/train/javascript">https://www.codewars.com/kata/567bf4f7ee34510f69000032/train/javascript</a><br> /^\d$/.test(this)</li>
+<li><a href="https://www.codewars.com/kata/56a3f08aa9a6cc9b75000023/train/javascript">https://www.codewars.com/kata/56a3f08aa9a6cc9b75000023/train/javascript</a><br> /^[0-9a-z_]{4,16}$/.test(username)</li>
+<li><a href="https://www.codewars.com/kata/57a37f3cbb99449513000cd8/train/javascript">https://www.codewars.com/kata/57a37f3cbb99449513000cd8/train/javascript</a><br> Number(s.replace(/\D/g,’’))</li>
+<li><a href="https://www.codewars.com/kata/56a25ba95df27b7743000016/train/javascript">https://www.codewars.com/kata/56a25ba95df27b7743000016/train/javascript</a><br> /^[123]/.test(String(code))</li>
+<li><a href="https://www.codewars.com/kata/56a946cd7bd95ccab2000055/train/javascript">https://www.codewars.com/kata/56a946cd7bd95ccab2000055/train/javascript</a><br> str.match(/[a-z]/g) ? str.match(/[a-z]/g).length : 0</li>
+</ol>
+<h3 id="7-kyu（青铜级）"><a href="#7-kyu（青铜级）" class="headerlink" title="7 kyu（青铜级）"></a>7 kyu（青铜级）</h3><ol>
+<li><a href="https://www.codewars.com/kata/559e5b717dd758a3eb00005a/train/javascript">https://www.codewars.com/kata/559e5b717dd758a3eb00005a/train/javascript</a><br>n.replace(/[a-zA-Z]{3,}\b/g, (s) =&gt; <code>$&#123;s.slice(0,1).toUpperCase()&#125;$&#123;s.slice(1,s.length).toLowerCase()&#125;</code>)</li>
+<li><a href="https://www.codewars.com/kata/55da6c52a94744b379000036/train/javascript">https://www.codewars.com/kata/55da6c52a94744b379000036/train/javascript</a><br>str.match(/\d+(?!\d])/g) ? str.match(/\d+(?!\d])/g).map(x =&gt; Number(x)).reduce((a,b) =&gt; a + b,0) : 0</li>
+<li><a href="https://www.codewars.com/kata/585b1fafe08bae9988000314/train/javascript%EF%BC%88get%E6%98%AF%E8%87%AA%E5%B7%B1%E5%86%99%E7%9A%84%EF%BC%8C%E7%94%A8%E6%9D%A5%E5%BE%AA%E7%8E%AF%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%89">https://www.codewars.com/kata/585b1fafe08bae9988000314/train/javascript（get是自己写的，用来循环的函数）</a><br>s.match(/\d/g) ? s.match(/\d/g).map(x =&gt; get(x,Number(x))).reduce((a ,b) =&gt; a + b,’’) : ‘’</li>
+<li><a href="https://www.codewars.com/kata/55f8a9c06c018a0d6e000132/train/javascript">https://www.codewars.com/kata/55f8a9c06c018a0d6e000132/train/javascript</a><br>/^(\d{4}|\d{6})$/.test(pin)</li>
+<li><a href="https://www.codewars.com/kata/57faf32df815ebd49e000117/train/javascript">https://www.codewars.com/kata/57faf32df815ebd49e000117/train/javascript</a><br>string.replace(/(?&lt;=[a-zA-Z])!+/g,’’)</li>
+<li><a href="https://www.codewars.com/kata/568dc69683322417eb00002c/train/javascript">https://www.codewars.com/kata/568dc69683322417eb00002c/train/javascript</a><br>(/x[a-z]{0,2}/).test(str) ? str.match(/x[a-z]{0,2}/)[0] === ‘xxx’ : false</li>
+<li><a href="https://www.codewars.com/kata/5b39e91ee7a2c103300018b3/train/javascript%EF%BC%88%E6%B2%A1%E5%81%9A%E5%87%BA%E6%9D%A5%EF%BC%89">https://www.codewars.com/kata/5b39e91ee7a2c103300018b3/train/javascript（没做出来）</a><br>s.replace(/\b(\w+)\s(?=\1\b)/g,’’)</li>
+<li><a href="https://www.codewars.com/kata/5637b03c6be7e01d99000046/train/javascript">https://www.codewars.com/kata/5637b03c6be7e01d99000046/train/javascript</a><br>map是用来做替换映射的<br>phrase.match(/\w+\b/g).map(item =&gt; map[item.slice(0,1)] || item.slice(0,1)).join(‘’)</li>
+<li><a href="https://www.codewars.com/kata/588f5a38ec641b411200005b/train/javascript">https://www.codewars.com/kata/588f5a38ec641b411200005b/train/javascript</a><br>date.match(/\d+(?=/)/)</li>
+<li><a href="https://www.codewars.com/kata/52fba66badcd10859f00097e/train/javascript">https://www.codewars.com/kata/52fba66badcd10859f00097e/train/javascript</a><br>str.replace(/[aeiou]/gi,’’)</li>
+<li><a href="https://www.codewars.com/kata/5639bdcef2f9b06ce800005b/train/javascript">https://www.codewars.com/kata/5639bdcef2f9b06ce800005b/train/javascript</a><br>s.match(/[a-zA-z]+\b/g).map(item =&gt; item.slice(0,1)).join(‘’)</li>
+<li><a href="https://www.codewars.com/kata/55f9064161541a9e01000001/train/javascript">https://www.codewars.com/kata/55f9064161541a9e01000001/train/javascript</a><br>琢磨了半天，似乎是我自己想复杂了…本以为100这种也属于valid number，看了答案发现这种算invalid<br>/^[-+]?\d*.\d{2}$/.test(num)</li>
+<li><a href="https://www.codewars.com/kata/5b37a50642b27ebf2e000010/train/javascript">https://www.codewars.com/kata/5b37a50642b27ebf2e000010/train/javascript</a><br>beach.match(/Sand|Water|Fish|sun/ig) ? beach.match(/Sand|Water|Fish|sun/ig).length : 0</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
     <title>阅读type-fest源码</title>
     <url>/2021/01/18/%E9%98%85%E8%AF%BBtype-fest%E6%BA%90%E7%A0%81/</url>
     <content><![CDATA[<h1 id="type-fest翻译-amp-源码"><a href="#type-fest翻译-amp-源码" class="headerlink" title="type-fest翻译&amp;源码"></a>type-fest翻译&amp;源码</h1><p>type-fest是一个typeScript类型的集合</p>
@@ -417,6 +417,71 @@ var gitalk = new Gitalk({
 });
 gitalk.render('gitalk-container')
 </script>
+]]></content>
+  </entry>
+  <entry>
+    <title>从字段联动中学图算法</title>
+    <url>/2023/02/01/%E4%BB%8E%E5%AD%97%E6%AE%B5%E8%81%94%E5%8A%A8%E4%B8%AD%E5%AD%A6%E5%9B%BE%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="初识"><a href="#初识" class="headerlink" title="初识"></a>初识</h1><p>字段联动是很常见的表单需求</p>
+<p>最基本的是主动模式联动显示，即表单项决定其他表单项的显示和隐藏，使用效果例如：</p>
+<p>请选择您要申请的职位</p>
+<pre><code>- if 前端 请选择您使用的技术框架： Vue React Angular
+- else if 后端 请选择您使用的语言： Java Python PHP</code></pre>
+<p>当然除了主动模式，还有被动模式，即表单项被其他表单项决定</p>
+<p>除了联动显示，还可能有联动禁用、联动只读等</p>
+<h2 id="直觉code，best-code"><a href="#直觉code，best-code" class="headerlink" title="直觉code，best code"></a>直觉code，best code</h2><p>业务现存的表单结构为: {题目合集: [{标题、类型、结果、选项}, {标题、类型、结果、选项}]}</p>
+<p>因为数据结构为数组，所以第一反应就是遍历，根据联动关系，算出题目是隐藏还是显示。并设计出了主动模式下的联动关系的数据结构:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; - 当题目1的value为A时，显示题目2、当题目1的value为B时，显示题目3</span><br><span class="line">&#x2F;&#x2F; - 当题目2的value为A时，显示题目3</span><br><span class="line"></span><br><span class="line">[&#123;id: &#39;1&#39;, linkages: [&#123;id: &#39;2&#39;, value: A, id: &#39;3&#39;, value: B&#125;]&#125;, &#123;id: &#39;2&#39;, linkages: [&#123;id: &#39;3&#39;, value: A&#125;]&#125;]</span><br></pre></td></tr></table></figure>
+
+<p>于是便写出了第一版实现</p>
+<pre><code>1. 根据主动联动关系，计算出被动联动关系（题目2被题目1的1联动显示。题目3被题目1的2、题目2的1联动显示）
+2. 每次变化时，遍历所有的题目，根据联动关系计算出每一道题是否隐藏（invisible）（只有当有被联动关系，并且被联动关系均不满足，则这道题隐藏）</code></pre>
+<p>但是很快就遇到了问题，因为遍历是有顺序的（数组从前往后），但联动是没有顺序的，所以单纯的遍历很有可能计算出不对的结果</p>
+<pre><code>eg.
+
+有1、2、3三道题
+联动关系：
+当2选择A时，显示1
+当3选择A时，显示2、当3选择B时，显示1
+
+3(A) → 2
+3(B) → 1
+2(A) → 1
+当题目3选择A、题目2选择A时 1、2、3三道题均可见。这时将题目3改为C，题目1、2均应隐藏。
+但因遍历顺序的问题，计算到题目1的时候，题目2仍未计算，仍是可见的。则计算出了错误的结果。即题目1显示、题目2隐藏、题目3为C</code></pre>
+<p>于是为了解决上述问题，便有了第二版实现，多层级遍历</p>
+<p>即先把题目2是否显示计算出来，再进行一次遍历，将题目1是否显示计算出来。便引出了一个概念：linkageLevel，联动层级</p>
+<p>在上述问题中，题目3为1级、题目2为2级、题目1为2级（被题目3联动）或3级（被题目2联动），先计算出题目中的最大联动层级，再进行多次遍历。第一次遍历计算出题目2是否显示，第二次遍历计算出题目1是否显示</p>
+<p>但假如存在环状联动，这种方法又遇到了瓶颈，甚至可能会出现死循环</p>
+<p>时间复杂度：题目数量为n，最大联动层级为m  O(n^m) 非常恐怖的复杂度</p>
+<p>于是考虑从图算法的角度出发，利用拓扑排序去解决计算的问题</p>
+<h2 id="图论算法实现联动"><a href="#图论算法实现联动" class="headerlink" title="图论算法实现联动"></a>图论算法实现联动</h2><p>分析一下联动关系的数据结构，可以发现，其实就是一副有向有环图</p>
+<p>其中题目就是图中的节点，联动关系就是边。并且是带方向，可能存在环状的</p>
+<p>而我们的需求是，根据联动关系，计算所有题目显示或隐藏，既寻找该数据结构的拓扑排序</p>
+<p>可以参考leetcode这道题 <a href="https://leetcode.cn/problems/course-schedule-ii/">https://leetcode.cn/problems/course-schedule-ii/</a></p>
+<p>求拓扑排序分为两种思路：BFS（广度优先遍历）、DFS（深度优先遍历）</p>
+<p>有向无环图一定存在拓扑排序，而有向有环图一定不存在拓扑排序，所以我们要先判断图是否有环</p>
+<p>广度优先：</p>
+<pre><code>在广度优先遍历中，出入度是核心概念：如果一个节点 x 有 a 条边指向别的节点，同时被 b 条边所指，则称节点 x 的出度为 a，入度为 b
+在联动关系中，入度为0表示不被联动，既无条件显示的题目
+
+算法思路：
+1. 构建一个 indegree 数组记录每个节点的入度，即 indegree[i] 记录节点 i 的入度
+2. 对 BFS 队列进行初始化，将入度为 0 的节点首先装入队列
+3. 开始执行 BFS 循环，不断弹出队列中的节点，减少相邻节点的入度，并将入度变为 0 的节点加入队列
+4.如果最终所有节点都被遍历过（count 等于节点数），则说明不存在环，反之则说明存在环
+5. 最终队列中的节点顺序就是图的拓扑排序
+6. 根据拓扑排序顺序，去求题目是否隐藏，如果有环则把环内节点跳过，并置为不显示
+
+参考资料及示意图： https://labuladong.gitee.io/algo/di-yi-zhan-da78c/shou-ba-sh-03a72/huan-jian--e36de/#环检测算法bfs-版本
+
+时间复杂度：n个节点 m条边 O(n+m)</code></pre>
+<p>深度优先：</p>
+<pre><code>环检测：从节点开始递归遍历，记录访问过的节点与当前路径。如果节点访问过，则直接跳过，如果当前路径与当前节点有重合，则存在环
+遍历思路：后序遍历反转就是拓扑排序
+个人觉得不如bfs好理解
+
+参考资料：https://labuladong.gitee.io/algo/di-yi-zhan-da78c/shou-ba-sh-03a72/huan-jian--e36de/#拓扑排序算法dfs-版本</code></pre>
 ]]></content>
   </entry>
 </search>
