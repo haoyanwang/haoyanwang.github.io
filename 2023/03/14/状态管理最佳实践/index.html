@@ -5,13 +5,17 @@
   
 
   
-  <title>Hexo</title>
+  <title>状态管理最佳实践 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="状态管理最佳实践写这个的初衷是新项目中使用了 Redux Toolkit，发现自己没用过，看不懂。于是就重新学习了一下 redux 的文档，并结合自己之前做状态管理的经验，写一篇文章 前端的领域有很多，但如果是一只切图仔，那大概率接触最多的就是和各种状态打交道。所以我一直认为，高效的管理前端的状态，是一个很重要且有用的事 本篇文章会包含以下内容：  什么是 Redux、什么是 Redux Tool">
+<meta property="og:type" content="article">
+<meta property="og:title" content="状态管理最佳实践">
+<meta property="og:url" content="http://example.com/2023/03/14/%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="状态管理最佳实践写这个的初衷是新项目中使用了 Redux Toolkit，发现自己没用过，看不懂。于是就重新学习了一下 redux 的文档，并结合自己之前做状态管理的经验，写一篇文章 前端的领域有很多，但如果是一只切图仔，那大概率接触最多的就是和各种状态打交道。所以我一直认为，高效的管理前端的状态，是一个很重要且有用的事 本篇文章会包含以下内容：  什么是 Redux、什么是 Redux Tool">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-14T15:05:44.772Z">
+<meta property="article:modified_time" content="2023-03-14T15:06:01.607Z">
 <meta property="article:author" content="王皓衍">
 <meta name="twitter:card" content="summary">
   
@@ -66,9 +70,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-状态管理最佳实践" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-状态管理最佳实践" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2023/03/14/%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/" class="article-date">
   <time datetime="2023-03-14T15:05:44.772Z" itemprop="datePublished">2023-03-14</time>
@@ -81,8 +83,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/03/14/%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">状态管理最佳实践</a>
+    <h1 class="article-title" itemprop="name">
+      状态管理最佳实践
     </h1>
   
 
@@ -195,273 +197,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-从字段联动中学图算法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2023/02/01/%E4%BB%8E%E5%AD%97%E6%AE%B5%E8%81%94%E5%8A%A8%E4%B8%AD%E5%AD%A6%E5%9B%BE%E7%AE%97%E6%B3%95/" class="article-date">
-  <time datetime="2023-02-01T05:42:17.000Z" itemprop="datePublished">2023-02-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/01/%E4%BB%8E%E5%AD%97%E6%AE%B5%E8%81%94%E5%8A%A8%E4%B8%AD%E5%AD%A6%E5%9B%BE%E7%AE%97%E6%B3%95/">从字段联动中学图算法</a>
-    </h1>
+    <a href="/2023/02/01/%E4%BB%8E%E5%AD%97%E6%AE%B5%E8%81%94%E5%8A%A8%E4%B8%AD%E5%AD%A6%E5%9B%BE%E7%AE%97%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">从字段联动中学图算法</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="初识"><a href="#初识" class="headerlink" title="初识"></a>初识</h1><p>字段联动是很常见的表单需求</p>
-<p>最基本的是主动模式联动显示，即表单项决定其他表单项的显示和隐藏，使用效果例如：</p>
-<p>请选择您要申请的职位</p>
-<pre><code>- if 前端 请选择您使用的技术框架： Vue React Angular
-- else if 后端 请选择您使用的语言： Java Python PHP</code></pre>
-<p>当然除了主动模式，还有被动模式，即表单项被其他表单项决定</p>
-<p>除了联动显示，还可能有联动禁用、联动只读等</p>
-<h2 id="直觉code，best-code"><a href="#直觉code，best-code" class="headerlink" title="直觉code，best code"></a>直觉code，best code</h2><p>业务现存的表单结构为: {题目合集: [{标题、类型、结果、选项}, {标题、类型、结果、选项}]}</p>
-<p>因为数据结构为数组，所以第一反应就是遍历，根据联动关系，算出题目是隐藏还是显示。并设计出了主动模式下的联动关系的数据结构:</p>
-        
-          <p class="article-more-link">
-            <a href="/2023/02/01/%E4%BB%8E%E5%AD%97%E6%AE%B5%E8%81%94%E5%8A%A8%E4%B8%AD%E5%AD%A6%E5%9B%BE%E7%AE%97%E6%B3%95/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/01/%E4%BB%8E%E5%AD%97%E6%AE%B5%E8%81%94%E5%8A%A8%E4%B8%AD%E5%AD%A6%E5%9B%BE%E7%AE%97%E6%B3%95/" data-id="clf8e1hxh00013sw2fs3w5wyd" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-正则表达式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/03/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="article-date">
-  <time datetime="2022-03-20T15:36:41.058Z" itemprop="datePublished">2022-03-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/03/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><p>正则用过就忘，只有大概的印象，总结一下，做几道题目熟练熟练</p>
-<p>涉及到的概念</p>
-<ul>
-<li>常用js api</li>
-<li>贪婪匹配</li>
-<li>先行断言、后行断言</li>
-<li>单词边界断言</li>
-</ul>
-<h2 id="常用js-api"><a href="#常用js-api" class="headerlink" title="常用js api"></a>常用js api</h2><ol>
-<li>str.replace(regexp, replacement)<br>regexp可以是正则 也可以是 字面量字符串<br>replacement可以是字符串也可以是函数<br>replacement是字符串时， $ 字符具有特定的含义</li>
-</ol>
-<ul>
-<li>$1、$2、…、$99 表示第 1 到第 99 个子表达式相匹配的文本</li>
-<li>$&amp; 表示与 regexp 相匹配的子串</li>
-<li>$` 表示位于匹配子串左侧的文本</li>
-<li>$’ 表示位于匹配子串右侧的文本</li>
-<li>$$ 表示直接量符号<br>eg.<br>“Doe, John” =&gt; “John Doe” ： replace(/(\w+)\s*, \s*(\w+)/, “$2 $1”)<br>‘“a”, “b”‘ =&gt; ‘a, b’ ： replace(/“([^”]*)”/g, “‘$1’”)<br>replacement是函数时，返回的字符串作为替换文本，参数具有特殊含义</li>
-</ul>
-<ol start="2">
-<li>regexp.test(string)<br>字符串是否有匹配的模式，返回true or false</li>
-<li>regexp.exec(string)<br>如果字符串中有匹配的值返回匹配结果数组，否则返回 null<br>匹配结果数组包括：第一项是匹配的结果，后面分别是子表达式匹配的结果<br>数组还有index、input、groups属性，这个操作还是第一次见，不过想想也合理，毕竟array底层是object</li>
-<li>string.match(regexp)<br>找到字符串中的匹配值，返回一个结果数组</li>
-</ol>
-<h2 id="贪婪匹配"><a href="#贪婪匹配" class="headerlink" title="贪婪匹配"></a>贪婪匹配</h2><p>正则使用量词匹配时，默认趋向于更多的匹配，在量词后面加上?，则可以使用非贪婪匹配</p>
-        
-          <p class="article-more-link">
-            <a href="/2022/03/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/03/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-id="clf8e1hxl00033sw2fyua2r5b" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-TCP-IP读书笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/03/12/TCP-IP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="article-date">
-  <time datetime="2022-03-12T03:52:10.322Z" itemprop="datePublished">2022-03-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/03/12/TCP-IP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">TCP/IP读书笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="TCP-IP读书笔记"><a href="#TCP-IP读书笔记" class="headerlink" title="TCP/IP读书笔记"></a>TCP/IP读书笔记</h1><p>从小学开始就鼓捣电脑，很早就听说了类似ip、mac地址，VLAN,WLAN,猫，子网掩码，DNS地址等技术名词。<br>上学以后也学习了计算机网络，听说了类似OSI七层模型，TCP、UDP等概念。<br>工作以后也接触到了更多的网络知识，但一直是知其然不知其所以然，缺乏比较系统的学习，所以今天就记录一下学习的过程。</p>
-<h2 id="网络规则"><a href="#网络规则" class="headerlink" title="网络规则"></a>网络规则</h2><p>二进制数字到底经过了那些步骤，最后构成了网络世界？</p>
-<h3 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h3><p>根据主要负责的功能不同，我们将通信过程分为7层，自下而上分别为</p>
-<ul>
-<li>物理层（数字信号）</li>
-<li>数据链路层（设备之间传输的数据帧，代表名词：以太网）</li>
-<li>网络层（地址管理和路由选择，代表名词：IP协议）</li>
-<li>传输层（负责节点之间的数据传递，代表名词：TCP，UDP）</li>
-<li>会话层</li>
-<li>表示层</li>
-<li>应用层<br>在TCP/IP五层模型中<br>会话层、表示层和应用层可统称应用层（代表名词：HTTP，HTTPS，FTP，DNS）</li>
-</ul>
-<p>TCP/IP协议其实代表的是一组协议，不仅仅代表传输层和网络层的TCP和IP协议，还包含了其他的协议，例如HTTP，TELNET，ARP等重要协议</p>
-<h3 id="物理层，数据链路层"><a href="#物理层，数据链路层" class="headerlink" title="物理层，数据链路层"></a>物理层，数据链路层</h3><p>TCP/IP中没有严格规定该层，只要求能给上层（网络层）提供一个访问接口，以太网是最常见的形式</p>
-        
-          <p class="article-more-link">
-            <a href="/2022/03/12/TCP-IP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/03/12/TCP-IP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" data-id="clf8e1hxj00023sw2gj2184mg" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-电子邮件" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/02/23/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6/" class="article-date">
-  <time datetime="2021-02-23T05:42:17.000Z" itemprop="datePublished">2021-02-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/23/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6/">电子邮件</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="电子邮件"><a href="#电子邮件" class="headerlink" title="电子邮件"></a>电子邮件</h1><p>最近在发邮件服务上遇到点问题，所以深入研究一下电子邮件的原理细节（因为自己个人不经常使用，总有一种email很久远的感觉）</p>
-<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><h3 id="邮件"><a href="#邮件" class="headerlink" title="邮件"></a>邮件</h3><p>邮件是一种消息的格式，由信封、首部和正文组成。</p>
-<ul>
-<li>信封上最重要的是收信人的地址。邮件服务器用这个地址将邮件发送到收信人所在的邮件服务器上。</li>
-<li>首部是由用户代理或邮件服务器添加的一些信息。包括Received、Message-ID、From、Data、Reply-To、X-Phone、X-Mailer、To和Subject等字段。</li>
-<li>正文是是发送用户发给接收用户报文的内容。</li>
-</ul>
-<h3 id="用户代理"><a href="#用户代理" class="headerlink" title="用户代理"></a>用户代理</h3><p>用户代理UA（User Agent）是用户与电子邮件系统的交互接口，一般来说它就是我们PC机上的一个程序。Windows上常见的用户代理是Foxmail和Outlook客户端。<br>用户代理提供一个好的用户界面，它提取用户在其界面填写的各项信息，生成一封符合SMTP等邮件标准的邮件，然后采用SMTP协议将邮件发送到发送端邮件服务器。</p>
-<h3 id="邮件的收发过程"><a href="#邮件的收发过程" class="headerlink" title="邮件的收发过程"></a>邮件的收发过程</h3><p>一般情况下，一封邮件的发送和接收过程如下。</p>
-        
-          <p class="article-more-link">
-            <a href="/2021/02/23/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/02/23/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6/" data-id="clf8e1hxm00053sw2927se49u" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-阅读type-fest源码" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/01/18/%E9%98%85%E8%AF%BBtype-fest%E6%BA%90%E7%A0%81/" class="article-date">
-  <time datetime="2021-01-18T06:38:34.000Z" itemprop="datePublished">2021-01-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/18/%E9%98%85%E8%AF%BBtype-fest%E6%BA%90%E7%A0%81/">阅读type-fest源码</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="type-fest翻译-amp-源码"><a href="#type-fest翻译-amp-源码" class="headerlink" title="type-fest翻译&amp;源码"></a>type-fest翻译&amp;源码</h1><p>type-fest是一个typeScript类型的集合</p>
-<p>test for Vercel</p>
-<h2 id="TS基本操作符"><a href="#TS基本操作符" class="headerlink" title="TS基本操作符"></a>TS基本操作符</h2><h3 id="extends（有条件类型）"><a href="#extends（有条件类型）" class="headerlink" title="extends（有条件类型）"></a>extends（有条件类型）</h3><p>typescript 2.8引入了条件类型关键字: extends</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; extends 关键字既可以来扩展已有的类型，也可以对类型进行条件限定，进行条件限定时，用法如下：</span><br><span class="line">&#x2F;&#x2F; 若T能够赋值给U，那么类型是X，否则为Y，具体实现可以看参考阅读</span><br><span class="line">T extends U ? X : Y</span><br></pre></td></tr></table></figure>
-<p>参考阅读：<br><a target="_blank" rel="noopener" href="https://www.tslang.cn/docs/release-notes/typescript-2.8.html">typeScript有条件类型</a>   </p>
-<h3 id="infer（有条件类型中的类型推断）"><a href="#infer（有条件类型中的类型推断）" class="headerlink" title="infer（有条件类型中的类型推断）"></a>infer（有条件类型中的类型推断）</h3><p>在有条件类型的extends子语句中，允许出现infer声明，它会引入一个待推断的类型变量。进行占位，对类型变量进行命名</p>
-        
-          <p class="article-more-link">
-            <a href="/2021/01/18/%E9%98%85%E8%AF%BBtype-fest%E6%BA%90%E7%A0%81/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/01/18/%E9%98%85%E8%AF%BBtype-fest%E6%BA%90%E7%A0%81/" data-id="clf8e1hxq00063sw2bmfyep10" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
 
 </section>
         
